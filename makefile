@@ -46,7 +46,7 @@ deque.log:
 	git log > deque.log
 
 deque-tests:
-	https://github.com/cs378-summer-2015/deque-tests.git
+	git clone https://github.com/cs378-summer-2015/deque-tests.git
 
 Doxyfile:
 	doxygen -g
