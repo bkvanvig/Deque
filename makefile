@@ -38,51 +38,24 @@ clean:
 	rm -f *.gcno
 	rm -f *.gcov
 	rm -f TestDeque
-	rm -f TestDeque.out
-
-sync:
-	make clean
-	@echo `pwd`
-	@rsync -r -t -u -v --delete \
-    --include "Deque.h"         \
-    --include "makefile"        \
-    --include "TestDeque.c++"   \
-    --exclude "*"               \
-    . downing@$(CS):cs/cs378/github/c++/deque/
 
 test: TestDeque.out
 
-versions:
-	uname -a
-	@echo
-	printenv
-	@echo
-	which $(CXX)
-	@echo hi
-	$(CXX) $(CXXVER)
-	@echo hi
-	$(GTESTVER)
-	@echo
-	which $(GCOV)
-	@echo
-	$(GCOV) $(GCOVVER)
-	@echo
-	grep "#define BOOST_VERSION " $(BOOST)/version.hpp
-ifdef VALGRIND
-	@echo
-	which $(VALGRIND)
-	@echo
-	$(VALGRIND) --version
-endif
-	@echo
-	which doxygen
-	@echo
-	doxygen --version
+
+deque.log:
+	git log > deque.log
+
+deque-tests:
+	https://github.com/cs378-summer-2015/deque-tests.git
+
+Doxyfile:
+	doxygen -g
 
 TestDeque: Deque.h TestDeque.c++
 	$(CXX) $(GCOVFLAGS) $(CXXFLAGS) TestDeque.c++ -o TestDeque $(LDFLAGS)
 
 TestDeque.out: TestDeque
+	./TestDeque
 	$(VALGRIND) ./TestDeque  >  TestDeque.out 2>&1
 	$(GCOV) -b Deque.h       >> TestDeque.out
 	$(GCOV) -b TestDeque.c++ >> TestDeque.out
