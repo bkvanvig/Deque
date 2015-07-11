@@ -1,3 +1,15 @@
+FILES :=                              \
+    .travis.yml                       \
+    deque-tests/EID-TestDeque.c++ \
+    deque-tests/EID-TestDeque.out \
+    deque.h                         \
+    deque.log                       \
+    html                              \
+    TestDeque.c++                   \
+    TestDeque.out
+
+
+
 ifeq ($(shell uname), Darwin)
     CXX       := g++
     CXXVER    := --version 2>&1 | grep c++
@@ -33,7 +45,20 @@ CXXFLAGS := -pedantic -std=c++11 -Wall
 
 .PRECIOUS: %.app
 
+check:
+	@for i in $(FILES);                                         \
+	do                                                          \
+        [ -e $$i ] && echo "$$i found" || echo "$$i NOT FOUND"; \
+    done
+
 clean:
+	rm -f *.gcda
+	rm -f *.gcno
+	rm -f *.gcov
+	rm -f TestDeque
+	rm -f TestDeque.out
+
+softclean:
 	rm -f *.gcda
 	rm -f *.gcno
 	rm -f *.gcov
