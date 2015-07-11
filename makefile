@@ -41,6 +41,8 @@ clean:
 
 test: TestDeque.out
 
+html: Doxyfile Deque.h TestDeque.c++
+	doxygen Doxyfile
 
 deque.log:
 	git log > deque.log
