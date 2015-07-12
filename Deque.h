@@ -499,10 +499,20 @@ class my_deque {
         // ------------
 
         /**
-         * <your documentation>
+         * Create a my_deque
          */
         explicit my_deque (const allocator_type& a = allocator_type()) {
-            // <your code>
+            
+            
+            // std::vector<a> beginning;
+            
+            // std::vector<a> end;
+            // // Point to 1 past end
+            // std::vector<a> length;
+
+
+
+
             assert(valid());}
 
         /**
@@ -517,6 +527,8 @@ class my_deque {
          */
         my_deque (const my_deque& that) {
             // <your code>
+            
+            
             assert(valid());}
 
         // ----------
