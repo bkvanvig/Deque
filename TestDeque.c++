@@ -491,6 +491,248 @@ TYPED_TEST(Deque_Fixture, access_3){
     ASSERT_EQ(x[0], 0);
 }
 
+// -------------------
+// at ()
+// -------------------
+
+TYPED_TEST(Deque_Fixture, at_1){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    ASSERT_EQ(x.at(3), 3);
+}
+
+TYPED_TEST(Deque_Fixture, at_2){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    ASSERT_EQ(x.at(0), 0);
+}
+
+TYPED_TEST(Deque_Fixture, at_3){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(-5);
+    x.push_back(2);
+    x.push_back(-3);
+    x.push_back(4);
+    x.push_back(-5);
+
+    ASSERT_EQ(x.at(3), -3);
+}
+
+// -------------------
+// back ()
+// -------------------
+
+TYPED_TEST(Deque_Fixture, back_1){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    ASSERT_EQ(x.back(), 5);
+}
+
+TYPED_TEST(Deque_Fixture, back_2){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+ 
+
+    ASSERT_EQ(x.back(), 2);
+}
+
+TYPED_TEST(Deque_Fixture, back_3){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+    x.pop_back();
+
+    ASSERT_EQ(x.back(), 4);
+}
+
+// -------------------
+// begin ()
+// -------------------
+
+TYPED_TEST(Deque_Fixture, begin_1){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    auto y = x.begin();
+
+    ASSERT_TRUE(x.begin() == y);
+}
+
+TYPED_TEST(Deque_Fixture, begin_2){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    auto y = x.begin();
+    ASSERT_TRUE(x.begin() == y);
+}
+
+TYPED_TEST(Deque_Fixture, begin_3){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_front(0);
+    x.push_front(1);
+    auto y = x.begin();
+
+    ASSERT_TRUE(x.begin() == y);
+}
+
+// -------------------
+// clear ()
+// -------------------
+
+TYPED_TEST(Deque_Fixture, clear_1){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(1);
+    x.clear();
+
+    ASSERT_EQ(x.size(), 0);
+}
+
+TYPED_TEST(Deque_Fixture, clear_2){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.clear();
+
+    ASSERT_EQ(x.size(), 0);
+}
+
+TYPED_TEST(Deque_Fixture, clear_3){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.clear();
+
+    ASSERT_EQ(x.size(), 0);
+}
+
+// -------------------
+// empty ()
+// -------------------
+
+TYPED_TEST(Deque_Fixture, empty_1){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(1);
+    x.clear();
+
+    ASSERT_EQ(x.empty(), true);
+}
+
+TYPED_TEST(Deque_Fixture, empty_2){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    ASSERT_EQ(x.empty(), true);
+}
+
+TYPED_TEST(Deque_Fixture, empty_3){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(1);
+
+    ASSERT_EQ(x.empty(), false);
+}
+
+// -------------------
+// end ()
+// -------------------
+
+TYPED_TEST(Deque_Fixture, end_1){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    auto y = x.end();
+
+    ASSERT_TRUE(y == x.end());
+}
+
+TYPED_TEST(Deque_Fixture, end_2){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+
+    auto y = x.end();
+
+    ASSERT_TRUE(y == x.end());
+}
+
+TYPED_TEST(Deque_Fixture, end_3){
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    auto y = x.end();
+
+    ASSERT_TRUE(y == x.begin());
+}
+
+
+
+
+
+
+
 
 
 // TYPED_TEST(Deque_Fixture, iterator_test_1) {
