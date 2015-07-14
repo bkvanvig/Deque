@@ -94,7 +94,7 @@ class my_deque {
         typedef typename allocator_type::reference       reference;
         typedef typename allocator_type::const_reference const_reference;
 
-        typename A::template rebind<pointer>::other      B;
+        typedef typename A::template rebind<pointer>::other      B;
 
     public:
         // -----------
@@ -259,6 +259,7 @@ class my_deque {
                  */
                 iterator& operator ++ () {
                     // <your code>
+                    
                     assert(valid());
                     return *this;}
 
@@ -527,8 +528,8 @@ class my_deque {
          */
         my_deque (const my_deque& that) {
             // <your code>
-            
-            
+
+
             assert(valid());}
 
         // ----------

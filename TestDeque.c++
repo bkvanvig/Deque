@@ -45,32 +45,7 @@ TYPED_TEST_CASE(Deque_Fixture, deque_types);
 // -----
 // Tests
 // -----
-TYPED_TEST(Deque_Fixture, test_1) {
-    typedef typename TestFixture::deque_type deque_type;
 
-    const deque_type x;
-    ASSERT_TRUE(x.empty());
-    ASSERT_EQ(x.size(),     0);
-}
-
-TYPED_TEST(Deque_Fixture, test_2) {
-    typedef typename TestFixture::deque_type deque_type;
-    typedef typename TestFixture::value_type  value_type;
-
-    deque_type x(10);
-    ASSERT_FALSE(x.empty());
-    ASSERT_EQ(x.size(),                                10);
-
-    ASSERT_EQ(count(x.begin(), x.end(), value_type()), 10);}
-
-TYPED_TEST(Deque_Fixture, test_3) {
-    typedef typename TestFixture::deque_type deque_type;
-
-    const deque_type x(10, 2);
-    ASSERT_FALSE(x.empty());
-    ASSERT_EQ(x.size(),                     10);
-
-    ASSERT_EQ(count(x.begin(), x.end(), 2), 10);}
 TYPED_TEST(Deque_Fixture, test_5) {
     typedef typename TestFixture::deque_type deque_type;
 
@@ -321,7 +296,6 @@ TYPED_TEST(Deque_Fixture, consta_1) {
     ASSERT_TRUE(x.empty());
     ASSERT_EQ(x.size(),0);}
 	
-// These are the same...
 // TYPED_TEST(Deque_Fixture, consta_2) {
 //     typedef typename TestFixture::deque_type deque_type;
 
@@ -1147,6 +1121,7 @@ TYPED_TEST(Deque_Fixture, size_1){
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x(1000);
+
     ASSERT_EQ(x.size(), 1000);
 }
 
@@ -1154,6 +1129,7 @@ TYPED_TEST(Deque_Fixture, size_2){
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x(5, 2);
+
     ASSERT_EQ(x.size(), 5);
 }
 
@@ -1161,6 +1137,7 @@ TYPED_TEST(Deque_Fixture, size_3){
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
+
     ASSERT_EQ(x.size(), 0);
 }
 
