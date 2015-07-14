@@ -71,7 +71,7 @@ TYPED_TEST(Deque_Fixture, test_6) {
     x[0] = 2;
     x[1] = 3;
     x[2] = 4;
-    ASSERT_EQ(x[ 1], 3);
+    ASSERT_EQ(x.at(1), 3);
 //  ASSERT_EQ(x[10], 3);
     try {
         ASSERT_EQ(x.at(10), 3);
