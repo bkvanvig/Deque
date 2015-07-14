@@ -33,7 +33,8 @@ using testing::Types;
 template <typename T>
 struct Deque_Fixture : Test {
     typedef T                               deque_type;
-    typedef typename deque_type::value_type value_type;};
+    typedef typename deque_type::value_type value_type;
+    typedef typename deque_type::size_type size_type;};
 
 typedef Types<
                deque<int>,
@@ -46,113 +47,123 @@ TYPED_TEST_CASE(Deque_Fixture, deque_types);
 // Tests
 // -----
 
-TYPED_TEST(Deque_Fixture, test_5) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, test_5) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    deque_type x(10);
-    ASSERT_EQ(x.size(),     10);
+//     deque_type x(10);
+//     ASSERT_EQ(x.size(),     10);
 
-    x.resize(5);
-    ASSERT_EQ(x.size(),      5);
+//     x.resize(5);
+//     ASSERT_EQ(x.size(),      5);
 
-    x.resize(8);
-    ASSERT_EQ(x.size(),      8);
+//     x.resize(8);
+//     ASSERT_EQ(x.size(),      8);
 
-    x.resize(15);
-    ASSERT_EQ(x.size(),     15);
+//     x.resize(15);
+//     ASSERT_EQ(x.size(),     15);
 
-    x.resize(50);
-    ASSERT_EQ(x.size(),     50);}
+//     x.resize(50);
+//     ASSERT_EQ(x.size(),     50);}
 
-TYPED_TEST(Deque_Fixture, test_6) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, test_6) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    deque_type x(10);
-    x[0] = 2;
-    x[1] = 3;
-    x[2] = 4;
-    ASSERT_EQ(x.at(1), 3);
-//  ASSERT_EQ(x[10], 3);
-    try {
-        ASSERT_EQ(x.at(10), 3);
-        ASSERT_TRUE(false);}
-    catch (const out_of_range&)
-        {}}
+//     deque_type x(10);
+//     x[0] = 2;
+//     x[1] = 3;
+//     x[2] = 4;
+//     ASSERT_EQ(x.at(1), 3);
+// //  ASSERT_EQ(x[10], 3);
+//     try {
+//         ASSERT_EQ(x.at(10), 3);
+//         ASSERT_TRUE(false);}
+//     catch (const out_of_range&)
+//         {}}
 
-TYPED_TEST(Deque_Fixture, test_7) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, test_7) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    deque_type x;
-    x.push_back(2);
-    x.push_back(3);
-    x.push_back(4);
-    x.push_back(2);
-    x.push_back(3);
-    ASSERT_EQ(x.size(),     5);
+//     deque_type x;
+//     x.push_back(2);
+//     x.push_back(3);
+//     x.push_back(4);
+//     x.push_back(2);
+//     x.push_back(3);
+//     ASSERT_EQ(x.size(),     5);
 
-    x.pop_back();
-    ASSERT_EQ(x.size(),     4);}
+//     x.pop_back();
+//     ASSERT_EQ(x.size(),     4);}
 
-TYPED_TEST(Deque_Fixture, test_8) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, test_8) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    deque_type x;
-    x.push_back(2);
-    x.push_back(3);
-    x.push_back(4);
-    ASSERT_EQ(x.size(),     3);
+//     deque_type x;
+//     x.push_back(2);
+//     x.push_back(3);
+//     x.push_back(4);
+//     ASSERT_EQ(x.size(),     3);
 
-    const deque_type y(x);
-    ASSERT_EQ(y.size(),     3);
+//     const deque_type y(x);
+//     ASSERT_EQ(y.size(),     3);
 
-    ASSERT_EQ(x, y);}
+//     ASSERT_EQ(x, y);}
 
-TYPED_TEST(Deque_Fixture, test_9) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, test_9) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    const deque_type x(10, 2);
-    deque_type       y(20, 3);
-    ASSERT_EQ(y.size(),     20);
+//     const deque_type x(10, 2);
+//     deque_type       y(20, 3);
+//     ASSERT_EQ(y.size(),     20);
 
-    ASSERT_TRUE(x != y);
-    y = x;
-    ASSERT_EQ(y.size(),     10);
+//     ASSERT_TRUE(x != y);
+//     y = x;
+//     ASSERT_EQ(y.size(),     10);
 
-    ASSERT_EQ(x, y);}
+//     ASSERT_EQ(x, y);}
 
-TYPED_TEST(Deque_Fixture, test_10) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, test_10) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    const deque_type x(15, 2);
-    deque_type       y(10, 3);
-    ASSERT_EQ(y.size(),     10);
+//     const deque_type x(15, 2);
+//     deque_type       y(10, 3);
+//     ASSERT_EQ(y.size(),     10);
 
-    y.push_back(3);
-    ASSERT_EQ(y.size(),     11);
+//     y.push_back(3);
+//     ASSERT_EQ(y.size(),     11);
 
-    ASSERT_TRUE(x != y);
-    y = x;
-    ASSERT_EQ(y.size(),     15);
+//     ASSERT_TRUE(x != y);
+//     y = x;
+//     ASSERT_EQ(y.size(),     15);
 
-    ASSERT_EQ(x, y);}
+//     ASSERT_EQ(x, y);}
 
-TYPED_TEST(Deque_Fixture, test_11) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, test_11) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    const deque_type x(20, 2);
-    deque_type       y(10, 3);
-    ASSERT_EQ(y.size(),     10);
+//     const deque_type x(20, 2);
+//     deque_type       y(10, 3);
+//     ASSERT_EQ(y.size(),     10);
 
-    ASSERT_TRUE(x != y);
-    y = x;
-    ASSERT_EQ(y.size(),     20);
+//     ASSERT_TRUE(x != y);
+//     y = x;
+//     ASSERT_EQ(y.size(),     20);
 
-    ASSERT_EQ(x, y);}
+//     ASSERT_EQ(x, y);}
 
 
 // -----------------------------
 // my_deque
 // -----------------------------
+
+// ----------
+// capacity
+// ----------
+
+TEST(Deque_Fixture, capacity){
+    my_deque<int> x(10, 2);
+    ASSERT_EQ(x.capacity(), 10);
+}
+
 
 // ------------
 // operator ==
@@ -1276,15 +1287,24 @@ TYPED_TEST(Deque_Fixture, it_construct_3) {
     ++y;
     ASSERT_EQ(*y, 0);}
 
-TYPED_TEST(Deque_Fixture, iterator_test_4) {
-    typedef typename TestFixture::deque_type deque_type;
+// TYPED_TEST(Deque_Fixture, iterator_test_4) {
+//     typedef typename TestFixture::deque_type deque_type;
 
-    deque_type::iterator x(3);
-    ++x;
-    ASSERT_EQ(x, 4);
-    ++x;
-    ++x;
-    ASSERT_EQ(x, 6);}
+//     deque_type x(10);
+//     x[0] = 0;
+//     x[1] = 1;
+//     x[2] = 2;
+//     x[3] = 3;
+//     x[4] = 4;
+//     x[5] = 5;
+//     x[6] = 6;
+    
+//     typename deque_type::iterator y(&x, 3);
+//     ++y;
+//     ASSERT_EQ(*y, 4);
+//     ++y;
+//     ++y;
+//     ASSERT_EQ(*y, 6);}
 
 // -------------
 // reference *
