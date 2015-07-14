@@ -1584,12 +1584,14 @@ TYPED_TEST(Deque_Fixture, it_minuseq_3) {
 TYPED_TEST(Deque_Fixture, const_it_equal_1) {
     typedef typename TestFixture::deque_type deque_type;
 
-    const deque_type x(10, 2);
-    // x.push_back(0);
-    // x.push_back(1);
-    // x.push_back(2);
-    // x.push_back(3);
-    // x.push_back(4);
+    deque_type dummy;
+    dummy.push_back(0);
+    dummy.push_back(1);
+    dummy.push_back(2);
+    dummy.push_back(3);
+    dummy.push_back(4);
+
+    const deque_type x = dummy;
 
     typename deque_type::const_iterator y = x.begin();
     typename deque_type::const_iterator e = x.end();
@@ -1604,6 +1606,8 @@ TYPED_TEST(Deque_Fixture, const_it_equal_1) {
 
 TYPED_TEST(Deque_Fixture, const_it_equal_2) {
     typedef typename TestFixture::deque_type deque_type;
+
+
 
     const deque_type x(10,-3);
 
@@ -1643,17 +1647,26 @@ TYPED_TEST(Deque_Fixture, const_it_equal_3) {
 TYPED_TEST(Deque_Fixture, const_it_construct_1) {
     typedef typename TestFixture::deque_type deque_type;
 
-    const deque_type x(10,2);
+    deque_type dummy;
+    dummy.push_back(-4);
+    dummy.push_back(-3);
+    dummy.push_back(-2);
+    dummy.push_back(-1);
+    dummy.push_back(0);
+
+
+    const deque_type x = dummy;
 
     typename deque_type::const_iterator y = x.begin();
     typename deque_type::const_iterator e = x.end();
     typename deque_type::const_iterator copy = x.begin();
+    ASSERT_TRUE(equal(y, e, copy));
     ++y;
-    ASSERT_EQ(*y, 2);
+    ASSERT_EQ(*y, -3);
     ++y;
     ++y;
-    ASSERT_EQ(*y, 2);
-    ASSERT_TRUE(equal(y, e, copy));}
+    ASSERT_EQ(*y, -1);
+    }
 
 TYPED_TEST(Deque_Fixture, const_it_construct_2) {
     typedef typename TestFixture::deque_type deque_type;
@@ -1663,12 +1676,13 @@ TYPED_TEST(Deque_Fixture, const_it_construct_2) {
     typename deque_type::const_iterator y = x.begin();
     typename deque_type::const_iterator e = x.end();
     typename deque_type::const_iterator copy = x.begin();
+    ASSERT_TRUE(equal(y, e, copy));
     ++y;
     ASSERT_EQ(*y, -3);
     ++y;
     ++y;
     ASSERT_EQ(*y, -3);
-    ASSERT_TRUE(equal(y, e, copy));}
+    }
 
 TYPED_TEST(Deque_Fixture, const_it_construct_3) {
     typedef typename TestFixture::deque_type deque_type;
@@ -1678,12 +1692,13 @@ TYPED_TEST(Deque_Fixture, const_it_construct_3) {
     typename deque_type::const_iterator y = x.begin();
     typename deque_type::const_iterator e = x.end();
     typename deque_type::const_iterator copy = x.begin();
+    ASSERT_TRUE(equal(y, e, copy));
     ++y;
     ASSERT_EQ(*y, -134);
     ++y;
     ++y;
     ASSERT_EQ(*y, -134);
-    ASSERT_TRUE(equal(y, e, copy));}
+    }
 
 
 // -------------
