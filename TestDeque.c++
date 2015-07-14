@@ -1276,6 +1276,16 @@ TYPED_TEST(Deque_Fixture, it_construct_3) {
     ++y;
     ASSERT_EQ(*y, 0);}
 
+TYPED_TEST(Deque_Fixture, iterator_test_4) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type::iterator x(3);
+    ++x;
+    ASSERT_EQ(x, 4);
+    ++x;
+    ++x;
+    ASSERT_EQ(x, 6);}
+
 // -------------
 // reference *
 // -------------

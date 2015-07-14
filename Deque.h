@@ -94,6 +94,7 @@ class my_deque {
         typedef typename allocator_type::reference       reference;
         typedef typename allocator_type::const_reference const_reference;
 
+
         typedef typename A::template rebind<pointer>::other      B;
 
     public:
@@ -127,6 +128,10 @@ class my_deque {
         // ----
 
         allocator_type _a;
+
+        pointer _b;
+        pointer _e;
+        pointer _l;
 
         // <your data>
 
@@ -259,7 +264,6 @@ class my_deque {
                  */
                 iterator& operator ++ () {
                     // <your code>
-                    
                     assert(valid());
                     return *this;}
 
@@ -502,34 +506,37 @@ class my_deque {
         /**
          * Create a my_deque
          */
-        explicit my_deque (const allocator_type& a = allocator_type()) {
-            
-            
-            // std::vector<a> beginning;
-            
-            // std::vector<a> end;
-            // // Point to 1 past end
-            // std::vector<a> length;
+        explicit my_deque (const allocator_type& a = allocator_type()) :
 
+                 _a (a) {
+                    _b = _e = _l = 0;
+            assert(valid());}
 
+        /**
+         * <your documentation>
+         */
+        explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) :
 
+            _a (a) {
+            // <your code>
+            _b = _a.allocate(s);
+            _e = _l = _b + s;
+            uninitialized_fill(_a, begin(), end(), v);
 
             assert(valid());}
 
         /**
          * <your documentation>
          */
-        explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) {
+        my_deque (const my_deque& that) : 
+
+            _a (that._a) {
+            _b = _a.allocate(that.size());
+            _e = _l = _b + that.size();
+            uninitialized_copy(_a, that.begin(), that.end(), begin());
             // <your code>
-            assert(valid());}
-
-        /**
-         * <your documentation>
-         */
-        my_deque (const my_deque& that) {
-            // <your code>
-
-
+            
+            
             assert(valid());}
 
         // ----------
@@ -541,6 +548,9 @@ class my_deque {
          */
         ~my_deque () {
             // <your code>
+                if (!empty()) {
+                clear();
+                _a.deallocate(_b, capacity());}
             assert(valid());}
 
         // ----------
@@ -551,9 +561,26 @@ class my_deque {
          * <your documentation>
          */
         my_deque& operator = (const my_deque& rhs) {
-            // <your code>
-            assert(valid());
+            // // <your code>
+            // if (this == &rhs)
+            //     return *this;
+            // if (rhs.size() == size())
+            //     std::copy(rhs.begin(), rhs.end(), begin());
+            // else if (rhs.size() < size()) {
+            //     std::copy(rhs.begin(), rhs.end(), begin());
+            //     resize(rhs.size());}
+            // else if (rhs.size() <= capacity()) {
+            //     std::copy(rhs.begin(), rhs.begin() + size(), begin());
+            //     _e = uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
+            // else {
+            //     clear();
+            //     resize(rhs.size()); //we need to change this
+            //     _e = uninitialized_copy(_a, rhs.begin(), rhs.end(), begin());}
+            // assert(valid());
             return *this;}
+
+        size_type capacity () const {
+            return _l - _b;}
 
         // -----------
         // operator []
@@ -562,17 +589,14 @@ class my_deque {
         /**
          * <your documentation>
          */
-        reference operator [] (size_type index) {
-            // <your code>
-            // dummy is just to be able to compile the skeleton, remove it
-            static value_type dummy;
-            return dummy;}
+         reference operator [] (size_type index) {
+           return begin()[index];}
 
-        /**
-         * <your documentation>
-         */
-        const_reference operator [] (size_type index) const {
-            return const_cast<my_deque*>(this)->operator[](index);}
+        // *
+        //  * <your documentation>
+         
+         const_reference operator [] (size_type index) const {
+             return const_cast<my_deque&>(*this)[index];}
 
         // --
         // at
@@ -582,10 +606,9 @@ class my_deque {
          * <your documentation>
          */
         reference at (size_type index) {
-            // <your code>
-            // dummy is just to be able to compile the skeleton, remove it
-            static value_type dummy;
-            return dummy;}
+            if (index >= size())
+                throw std::out_of_range("deque");
+            return (*this)[index];}
 
         /**
          * <your documentation>
@@ -601,10 +624,8 @@ class my_deque {
          * <your documentation>
          */
         reference back () {
-            // <your code>
-            // dummy is just to be able to compile the skeleton, remove it
-            static value_type dummy;
-            return dummy;}
+            assert(!empty());
+            return *(end() - 1);}
 
         /**
          * <your documentation>
@@ -620,8 +641,9 @@ class my_deque {
          * <your documentation>
          */
         iterator begin () {
-            // <your code>
-            return iterator(/* <your arguments> */);}
+            return _b;
+            // return iterator(/* <your arguments> */);
+        }
 
         /**
          * <your documentation>
@@ -638,7 +660,7 @@ class my_deque {
          * <your documentation>
          */
         void clear () {
-            // <your code>
+            resize(0);
             assert(valid());}
 
         // -----
@@ -689,10 +711,8 @@ class my_deque {
          * <your documentation>
          */
         reference front () {
-            // <your code>
-            // dummy is just to be able to compile the skeleton, remove it
-            static value_type dummy;
-            return dummy;}
+            assert(!empty());
+            return *begin();}
 
         /**
          * <your documentation>
@@ -720,7 +740,8 @@ class my_deque {
          * <your documentation>
          */
         void pop_back () {
-            // <your code>
+            assert(!empty());
+            resize(size() - 1);
             assert(valid());}
 
         /**
@@ -737,14 +758,14 @@ class my_deque {
         /**
          * <your documentation>
          */
-        void push_back (const_reference) {
-            // <your code>
+        void push_back (const_reference v) {
+            resize(size() + 1, v);
             assert(valid());}
 
         /**
          * <your documentation>
          */
-        void push_front (const_reference) {
+        void push_front (const_reference v) {
             // <your code>
             assert(valid());}
 
@@ -756,7 +777,15 @@ class my_deque {
          * <your documentation>
          */
         void resize (size_type s, const_reference v = value_type()) {
-            // <your code>
+            // if (s == size())
+            //     return;
+            // if (s < size())
+            //     _e = destroy(_a, begin() + s, end());
+            // else if (s <= capacity())
+            //     _e = uninitialized_fill(_a, end(), begin() + s, v);
+            // else {
+            //     resize(std::max(2 * size(), s));
+            //     resize(s, v);}
             assert(valid());}
 
         // ----
@@ -777,8 +806,19 @@ class my_deque {
         /**
          * <your documentation>
          */
-        void swap (my_deque&) {
+        void swap (my_deque& rhs) {
             // <your code>
-            assert(valid());}};
+            if (_a == rhs._a) {
+                std::swap(_b, rhs._b);
+                std::swap(_e, rhs._e);
+                std::swap(_l, rhs._l);}
+            else {
+                my_deque x(*this);
+                *this = rhs;
+                rhs  = x;}
+            assert(valid());}
+
+
+            };
 
 #endif // Deque_h
