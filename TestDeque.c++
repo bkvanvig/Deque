@@ -1183,14 +1183,14 @@ TYPED_TEST(Deque_Fixture, swap_3){
 
 
 // -----------------------------------------
-// iterator tests
+// const_iterator tests
 // -----------------------------------------
 
 // -------
 // ==
 // -------
 
-TYPED_TEST(Deque_Fixture, it_equal_1) {
+TYPED_TEST(Deque_Fixture, const_it_equal_1) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1200,20 +1200,20 @@ TYPED_TEST(Deque_Fixture, it_equal_1) {
     x.push_back(3);
     x.push_back(4);
 
-    typename deque_type::iterator y = x.begin();
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin();
     ++y;
     ASSERT_FALSE(y==z);
     --y;
     ASSERT_TRUE(y==z);}
 
-TYPED_TEST(Deque_Fixture, it_equal_2) {
+TYPED_TEST(Deque_Fixture, const_it_equal_2) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x(10, 11);
 
-    typename deque_type::iterator y = x.begin()+5;
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin()+5;
+    typename deque_type::const_iterator z = x.begin();
     ++z;
     ++z;
     ++z;
@@ -1221,13 +1221,13 @@ TYPED_TEST(Deque_Fixture, it_equal_2) {
     ++z;
     ASSERT_TRUE(y == z);}
 
-TYPED_TEST(Deque_Fixture, it_equal_3) {
+TYPED_TEST(Deque_Fixture, const_it_equal_3) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x(10);
 
-    typename deque_type::iterator y = x.begin();
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin();
     ASSERT_TRUE(y==z);}
 
 
@@ -1235,7 +1235,7 @@ TYPED_TEST(Deque_Fixture, it_equal_3) {
 // constructor
 // -------------
 
-TYPED_TEST(Deque_Fixture, it_construct_1) {
+TYPED_TEST(Deque_Fixture, const_it_construct_1) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1245,31 +1245,31 @@ TYPED_TEST(Deque_Fixture, it_construct_1) {
     x.push_back(3);
     x.push_back(4);
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ++y;
     ASSERT_EQ(*y, 1);
     ++y;
     ++y;
     ASSERT_EQ(*y, 3);}
 
-TYPED_TEST(Deque_Fixture, it_construct_2) {
+TYPED_TEST(Deque_Fixture, const_it_construct_2) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x(10, 11);
 
-    typename deque_type::iterator y = x.begin()+5;
+    typename deque_type::const_iterator y = x.begin()+5;
     ++y;
     ASSERT_EQ(*y, 11);
     ++y;
     ++y;
     ASSERT_EQ(*y, 11);}
 
-TYPED_TEST(Deque_Fixture, it_construct_3) {
+TYPED_TEST(Deque_Fixture, const_it_construct_3) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x(10);
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ++y;
     ASSERT_EQ(*y, 0);
     ++y;
@@ -1280,7 +1280,7 @@ TYPED_TEST(Deque_Fixture, it_construct_3) {
 // reference *
 // -------------
 
-TYPED_TEST(Deque_Fixture, it_reference_1) {
+TYPED_TEST(Deque_Fixture, const_it_reference_1) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1290,13 +1290,13 @@ TYPED_TEST(Deque_Fixture, it_reference_1) {
     x.push_back(3);
     x.push_back(4);
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ASSERT_EQ(*y, 0);
     ++y;
     ++y;
     ASSERT_EQ(*y, 2);}
 
-TYPED_TEST(Deque_Fixture, it_reference_2) {
+TYPED_TEST(Deque_Fixture, const_it_reference_2) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1307,13 +1307,13 @@ TYPED_TEST(Deque_Fixture, it_reference_2) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ASSERT_EQ(*y, 0);
     ++y;
     ++y;
     ASSERT_EQ(*y, 2);}
 
-TYPED_TEST(Deque_Fixture, it_reference_3) {
+TYPED_TEST(Deque_Fixture, const_it_reference_3) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1324,7 +1324,7 @@ TYPED_TEST(Deque_Fixture, it_reference_3) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ASSERT_EQ(*y, 0);
     ++y;
     ++y;
@@ -1335,7 +1335,7 @@ TYPED_TEST(Deque_Fixture, it_reference_3) {
 // prefix ++
 // -------------
 
-TYPED_TEST(Deque_Fixture, it_incr_1) {
+TYPED_TEST(Deque_Fixture, const_it_incr_1) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1345,7 +1345,7 @@ TYPED_TEST(Deque_Fixture, it_incr_1) {
     x.push_back(1);
     x.push_back(-2);
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ASSERT_EQ(*y, 7);
     ++y;
     ++y;
@@ -1353,7 +1353,7 @@ TYPED_TEST(Deque_Fixture, it_incr_1) {
     ++y;
     ASSERT_EQ(*y, -2);}
 
-TYPED_TEST(Deque_Fixture, it_incr_2) {
+TYPED_TEST(Deque_Fixture, const_it_incr_2) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1364,13 +1364,13 @@ TYPED_TEST(Deque_Fixture, it_incr_2) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ASSERT_EQ(*y, 0);
     ++y;
     ++y;
     ASSERT_EQ(*y, 2);}
 
-TYPED_TEST(Deque_Fixture, it_incr_3) {
+TYPED_TEST(Deque_Fixture, const_it_incr_3) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1381,7 +1381,7 @@ TYPED_TEST(Deque_Fixture, it_incr_3) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin();
+    typename deque_type::const_iterator y = x.begin();
     ASSERT_EQ(*y, 0);
     ++y;
     ASSERT_EQ(*y, 1);
@@ -1398,7 +1398,7 @@ TYPED_TEST(Deque_Fixture, it_incr_3) {
 // prefix --
 // -------------
 
-TYPED_TEST(Deque_Fixture, it_decr_1) {
+TYPED_TEST(Deque_Fixture, const_it_decr_1) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1408,7 +1408,7 @@ TYPED_TEST(Deque_Fixture, it_decr_1) {
     x.push_back(1);
     x.push_back(-2);
 
-    typename deque_type::iterator y = x.end()-1;
+    typename deque_type::const_iterator y = x.end()-1;
     ASSERT_EQ(*y, -2);
     --y;
     --y;
@@ -1416,7 +1416,7 @@ TYPED_TEST(Deque_Fixture, it_decr_1) {
     --y;
     ASSERT_EQ(*y, 7);}
 
-TYPED_TEST(Deque_Fixture, it_decr_2) {
+TYPED_TEST(Deque_Fixture, const_it_decr_2) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1427,13 +1427,13 @@ TYPED_TEST(Deque_Fixture, it_decr_2) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.end()-1;
+    typename deque_type::const_iterator y = x.end()-1;
     ASSERT_EQ(*y, 4);
     --y;
     --y;
     ASSERT_EQ(*y, 2);}
 
-TYPED_TEST(Deque_Fixture, it_decr_3) {
+TYPED_TEST(Deque_Fixture, const_it_decr_3) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1444,7 +1444,7 @@ TYPED_TEST(Deque_Fixture, it_decr_3) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.end()-1;
+    typename deque_type::const_iterator y = x.end()-1;
     ASSERT_EQ(*y, 4);
     --y;
     ASSERT_EQ(*y, 3);
@@ -1459,7 +1459,7 @@ TYPED_TEST(Deque_Fixture, it_decr_3) {
 // -------------
 // +=
 // -------------
-TYPED_TEST(Deque_Fixture, it_pluseq_1) {
+TYPED_TEST(Deque_Fixture, const_it_pluseq_1) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1470,14 +1470,14 @@ TYPED_TEST(Deque_Fixture, it_pluseq_1) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin()+3;
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin()+3;
+    typename deque_type::const_iterator z = x.begin();
     z+=3;
     ASSERT_TRUE(y==z);
     
 }
 
-TYPED_TEST(Deque_Fixture, it_pluseq_2) {
+TYPED_TEST(Deque_Fixture, const_it_pluseq_2) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1488,14 +1488,14 @@ TYPED_TEST(Deque_Fixture, it_pluseq_2) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin();
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin();
     z+=0;
     ASSERT_TRUE(y==z);
     
 }
 
-TYPED_TEST(Deque_Fixture, it_pluseq_3) {
+TYPED_TEST(Deque_Fixture, const_it_pluseq_3) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1506,8 +1506,8 @@ TYPED_TEST(Deque_Fixture, it_pluseq_3) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin();
-    typename deque_type::iterator z = x.begin()+2;
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin()+2;
     z+=-2;
     ASSERT_TRUE(y==z);
     
@@ -1517,7 +1517,7 @@ TYPED_TEST(Deque_Fixture, it_pluseq_3) {
 // -------------
 // -=
 // -------------
-TYPED_TEST(Deque_Fixture, it_minuseq_1) {
+TYPED_TEST(Deque_Fixture, const_it_minuseq_1) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1528,14 +1528,14 @@ TYPED_TEST(Deque_Fixture, it_minuseq_1) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin()+3;
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin()+3;
+    typename deque_type::const_iterator z = x.begin();
     y-=3;
     ASSERT_TRUE(y==z);
     
 }
 
-TYPED_TEST(Deque_Fixture, it_minuseq_2) {
+TYPED_TEST(Deque_Fixture, const_it_minuseq_2) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1546,14 +1546,14 @@ TYPED_TEST(Deque_Fixture, it_minuseq_2) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin();
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin();
     z-=0;
     ASSERT_TRUE(y==z);
     
 }
 
-TYPED_TEST(Deque_Fixture, it_minuseq_3) {
+TYPED_TEST(Deque_Fixture, const_it_minuseq_3) {
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
@@ -1564,20 +1564,82 @@ TYPED_TEST(Deque_Fixture, it_minuseq_3) {
     x.push_back(4);
 
 
-    typename deque_type::iterator y = x.begin()+2;
-    typename deque_type::iterator z = x.begin();
+    typename deque_type::const_iterator y = x.begin()+2;
+    typename deque_type::const_iterator z = x.begin();
     z -= -2;
     ASSERT_TRUE(y==z);
     
 }
 
+
+
 // -----------------------------------------
-// const iterator tests
+// const const_iterator tests
 // -----------------------------------------
 
 // -------
 // ==
 // -------
+
+TYPED_TEST(Deque_Fixture, const_const_it_equal_1) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    typename deque_type::const_const_iterator y = x.begin();
+    typename deque_type::const_const_iterator copy = x.begin();
+    typename deque_type::const_const_iterator z = x.begin();
+    ++y;
+    ASSERT_FALSE(y==z);
+    --y;
+    ASSERT_TRUE(y==z);
+    ASSERT_TRUE(equal(y.begin(), y.end(), copy.begin());
+}
+
+TYPED_TEST(Deque_Fixture, const_const_it_equal_2) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    typename deque_type::const_const_iterator y = x.begin();
+    typename deque_type::const_const_iterator copy = x.begin();
+    typename deque_type::const_const_iterator z = x.begin();
+    ++y;
+    ASSERT_FALSE(y==z);
+    --y;
+    ASSERT_TRUE(y==z);
+    ASSERT_TRUE(equal(y.begin(), y.end(), copy.begin());
+}
+
+TYPED_TEST(Deque_Fixture, const_const_it_equal_3) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    typename deque_type::const_const_iterator y = x.begin();
+    typename deque_type::const_const_iterator copy = x.begin();
+    typename deque_type::const_const_iterator z = x.begin();
+    ++y;
+    ASSERT_FALSE(y==z);
+    --y;
+    ASSERT_TRUE(y==z);
+    ASSERT_TRUE(equal(y.begin(), y.end(), copy.begin());
+}
 
 
 
@@ -1585,25 +1647,358 @@ TYPED_TEST(Deque_Fixture, it_minuseq_3) {
 // constructor
 // -------------
 
+TYPED_TEST(Deque_Fixture, const_const_it_construct_1) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    typename deque_type::const_const_iterator y = x.begin();
+    typename deque_type::const_const_iterator copy = x.begin();
+    ++y;
+    ASSERT_EQ(*y, 1);
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, 3);
+    ASSERT_TRUE(equal(y.begin(), y.end(), copy.begin());}
+
+TYPED_TEST(Deque_Fixture, const_const_it_construct_2) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    typename deque_type::const_const_iterator y = x.begin();
+    typename deque_type::const_const_iterator copy = x.begin();
+    ++y;
+    ASSERT_EQ(*y, 1);
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, 3);
+    ASSERT_TRUE(equal(y.begin(), y.end(), copy.begin());}
+
+TYPED_TEST(Deque_Fixture, const_const_it_construct_3) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    typename deque_type::const_const_iterator y = x.begin();
+    typename deque_type::const_const_iterator copy = x.begin();
+    ++y;
+    ASSERT_EQ(*y, 1);
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, 3);
+    ASSERT_TRUE(equal(y.begin(), y.end(), copy.begin());}
+
+
 // -------------
 // reference *
 // -------------
+
+TYPED_TEST(Deque_Fixture, const_it_reference_1) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    typename deque_type::const_iterator y = x.begin();
+    ASSERT_EQ(*y, 0);
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, 2);}
+
+TYPED_TEST(Deque_Fixture, const_it_reference_2) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin();
+    ASSERT_EQ(*y, 0);
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, 2);}
+
+TYPED_TEST(Deque_Fixture, const_it_reference_3) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin();
+    ASSERT_EQ(*y, 0);
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, 2);}
+
 
 // -------------
 // prefix ++
 // -------------
 
+TYPED_TEST(Deque_Fixture, const_it_incr_1) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(7);
+    x.push_back(3);
+    x.push_back(5);
+    x.push_back(1);
+    x.push_back(-2);
+
+    typename deque_type::const_iterator y = x.begin();
+    ASSERT_EQ(*y, 7);
+    ++y;
+    ++y;
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, -2);}
+
+TYPED_TEST(Deque_Fixture, const_it_incr_2) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin();
+    ASSERT_EQ(*y, 0);
+    ++y;
+    ++y;
+    ASSERT_EQ(*y, 2);}
+
+TYPED_TEST(Deque_Fixture, const_it_incr_3) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin();
+    ASSERT_EQ(*y, 0);
+    ++y;
+    ASSERT_EQ(*y, 1);
+    ++y;
+    ASSERT_EQ(*y, 2);
+    ++y;
+    ASSERT_EQ(*y, 3);
+    ++y;
+    ASSERT_EQ(*y, 4);
+}
+
+
 // -------------
 // prefix --
 // -------------
 
+TYPED_TEST(Deque_Fixture, const_it_decr_1) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(7);
+    x.push_back(3);
+    x.push_back(5);
+    x.push_back(1);
+    x.push_back(-2);
+
+    typename deque_type::const_iterator y = x.end()-1;
+    ASSERT_EQ(*y, -2);
+    --y;
+    --y;
+    --y;
+    --y;
+    ASSERT_EQ(*y, 7);}
+
+TYPED_TEST(Deque_Fixture, const_it_decr_2) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.end()-1;
+    ASSERT_EQ(*y, 4);
+    --y;
+    --y;
+    ASSERT_EQ(*y, 2);}
+
+TYPED_TEST(Deque_Fixture, const_it_decr_3) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.end()-1;
+    ASSERT_EQ(*y, 4);
+    --y;
+    ASSERT_EQ(*y, 3);
+    --y;
+    ASSERT_EQ(*y, 2);
+    --y;
+    ASSERT_EQ(*y, 1);
+    --y;
+    ASSERT_EQ(*y, 0);
+}
+
 // -------------
 // +=
 // -------------
+TYPED_TEST(Deque_Fixture, const_it_pluseq_1) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin()+3;
+    typename deque_type::const_iterator z = x.begin();
+    z+=3;
+    ASSERT_TRUE(y==z);
+    
+}
+
+TYPED_TEST(Deque_Fixture, const_it_pluseq_2) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin();
+    z+=0;
+    ASSERT_TRUE(y==z);
+    
+}
+
+TYPED_TEST(Deque_Fixture, const_it_pluseq_3) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin()+2;
+    z+=-2;
+    ASSERT_TRUE(y==z);
+    
+}
+
 
 // -------------
 // -=
 // -------------
+TYPED_TEST(Deque_Fixture, const_it_minuseq_1) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin()+3;
+    typename deque_type::const_iterator z = x.begin();
+    y-=3;
+    ASSERT_TRUE(y==z);
+    
+}
+
+TYPED_TEST(Deque_Fixture, const_it_minuseq_2) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin();
+    typename deque_type::const_iterator z = x.begin();
+    z-=0;
+    ASSERT_TRUE(y==z);
+    
+}
+
+TYPED_TEST(Deque_Fixture, const_it_minuseq_3) {
+    typedef typename TestFixture::deque_type deque_type;
+
+    deque_type x;
+    x.push_back(0);
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+
+    typename deque_type::const_iterator y = x.begin()+2;
+    typename deque_type::const_iterator z = x.begin();
+    z -= -2;
+    ASSERT_TRUE(y==z);
+    
+}
 
 
 
