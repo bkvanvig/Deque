@@ -28,7 +28,8 @@ using std::rel_ops::operator<=;
 using std::rel_ops::operator>;
 using std::rel_ops::operator>=;
 
-#define OUTER_SIZE 9
+
+#define INNER_SIZE 100
 
 // -------
 // destroy
@@ -134,12 +135,17 @@ class my_deque {
         // ----
 
         allocator_type _a;
+        int OUTER_SIZE = 1;
 
         pointer* outer_b;
         pointer* outer_e;
+        pointer _bstart;
+        pointer _estart;
         pointer _b;
         pointer _e;
         pointer _l;
+        int _size;
+
 
         // <your data>
 
@@ -563,15 +569,21 @@ class my_deque {
             _a (a) {
 
             *outer_b = _a.allocate(OUTER_SIZE);
+            if (OUTER_SIZE == 1){
+                // We don't want _b at the very beginning of the allocated block,
+                // We want it in the middle
 
-            int half = OUTER_SIZE/2 + 1;
-
-            outer_b[half-1] = _a.allocate(s);
-            outer_b[half] = _b = _a.allocate(s);
-            outer_b[half+1] = _a.allocate(s);
+                outer_b[0] = _a.allocate(INNER_SIZE);
+                _size = s;
+                _bstart = 0;
+                _estart = 0;
+            }
+            // Need something to handle s being bigger than 100 (aka INNER_SIZE)
+            while (s > capacity()){
+                resize(3*capacity());
+            }
+            //Set _b & _e
             
-            _e = _b + s;
-            _l = outer_b[half+1]+s;
 
             uninitialized_fill(_a, begin(), end(), v);
             assert(valid());}
@@ -585,9 +597,6 @@ class my_deque {
             _b = _a.allocate(that.size());
             _e = _l = _b + that.size();
             uninitialized_copy(_a, that.begin(), that.end(), begin());
-            // <your code>
-            
-            
             assert(valid());}
 
         // ----------
@@ -625,7 +634,7 @@ class my_deque {
             //     _e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
             // else {
             //     clear();
-            //     resize(rhs.size()); //we need to change this
+            //     reserve(rhs.size()); 
             //     _e = &*uninitialized_copy(_a, rhs.begin(), rhs.end(), begin());}
             // assert(valid());
             return *this;}
@@ -751,7 +760,7 @@ class my_deque {
 
         /**
          * <your documentation>
-         */
+         */ 
         const_iterator end () const {
             // <your code>
             return const_iterator(this, 0);}
@@ -865,6 +874,7 @@ class my_deque {
             if (c > capacity()) {
                 my_deque x(*this);
                 // May need a resize here to size c
+
                 swap(x);}
             assert(valid());}
 

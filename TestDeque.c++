@@ -173,19 +173,20 @@ TYPED_TEST_CASE(Deque_Fixture, deque_types);
 TYPED_TEST(Deque_Fixture, equal_1) {
     typedef typename TestFixture::deque_type deque_type;
 
-    deque_type x;
+    deque_type x(10);
     x.push_back(1);
     x.push_back(2);
     x.push_back(3);
     x.push_back(4);
 	x.push_back(5);
 
-	deque_type y;
+	deque_type y(10);
     y.push_back(1);
     y.push_back(2);
     y.push_back(3);
     y.push_back(4);
 	y.push_back(5);
+    ASSERT_EQ(x.size(), 15);
 
 	ASSERT_TRUE(x==y);}
 
