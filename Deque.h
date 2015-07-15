@@ -111,7 +111,7 @@ class my_deque {
         friend bool operator == (const my_deque& lhs, const my_deque& rhs) {
             // <your code>
             // you must use std::equal()
-            std::cout << lhs.size() << "    " << rhs.size() << std::endl;
+            //std::cout << lhs.size() << "    " << rhs.size() << std::endl;
             return (lhs.size() == rhs.size()) && std::equal(lhs.begin(), lhs.end(), rhs.begin());
             }
 
@@ -135,8 +135,8 @@ class my_deque {
 
         allocator_type _a;
 
-        pointer outer_b;
-        pointer outer_e;
+        pointer* outer_b;
+        pointer* outer_e;
         pointer _b;
         pointer _e;
         pointer _l;
@@ -150,7 +150,8 @@ class my_deque {
 
         bool valid () const {
             // <your code>
-            return true;}
+            return (!_b && !_e && !_l) || ((_b <= _e) && (_e <= _l));
+}
 
     public:
         // --------
@@ -179,7 +180,10 @@ class my_deque {
                  */
                 friend bool operator == (const iterator& lhs, const iterator& rhs) {
                     // <your code>
-                    return true;}
+                    if ((lhs._index == rhs._index) && (*lhs == *rhs)){
+                        return true;
+                    }
+                    return false;}
 
                 /**
                  * <your documentation>
@@ -223,7 +227,10 @@ class my_deque {
 
                 bool valid () const {
                     // <your code>
-                    return true;}
+                    if (_index >= 0)
+                        return true;
+                    return false;
+            }
 
             public:
                 // -----------
@@ -233,9 +240,9 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                iterator (my_deque& d, size_type s) :
+                iterator (my_deque* d, size_type s) :
 
-                    _d (&d),
+                    _d (d),
                     _index (s){
                     // <your code>
                     assert(valid());}
@@ -367,7 +374,11 @@ class my_deque {
                  */
                 friend bool operator == (const const_iterator& lhs, const const_iterator& rhs) {
                     // <your code>
-                    return true;}
+                    if ((lhs._cindex == rhs._cindex) && (*lhs == *rhs)){
+                        return true;
+                    }
+                    return false;
+                }
 
                 /**
                  * <your documentation>
@@ -411,7 +422,10 @@ class my_deque {
 
                 bool valid () const {
                     // <your code>
-                    return true;}
+                    if (_cindex >= 0)
+                        return true;
+                    return false;
+            }
 
             public:
                 // -----------
@@ -421,7 +435,10 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                const_iterator (/* <your arguments> */) {
+                const_iterator (const my_deque* d, size_type s)  :
+
+                    _cd (d),
+                    _cindex (s){
                     // <your code>
                     assert(valid());}
 
@@ -440,8 +457,7 @@ class my_deque {
                 reference operator * () const {
                     // <your code>
                     // dummy is just to be able to compile the skeleton, remove it
-                    static value_type dummy;
-                    return dummy;}
+                    return (*_cd)[_cindex];}
 
                 // -----------
                 // operator ->
@@ -462,6 +478,7 @@ class my_deque {
                  */
                 const_iterator& operator ++ () {
                     // <your code>
+                    ++_cindex;
                     assert(valid());
                     return *this;}
 
@@ -483,6 +500,7 @@ class my_deque {
                  */
                 const_iterator& operator -- () {
                     // <your code>
+                    --_cindex;
                     assert(valid());
                     return *this;}
 
@@ -502,8 +520,9 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                const_iterator& operator += (difference_type) {
+                const_iterator& operator += (difference_type d) {
                     // <your code>
+                    _cindex+= d;
                     assert(valid());
                     return *this;}
 
@@ -514,8 +533,9 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                const_iterator& operator -= (difference_type) {
+                const_iterator& operator -= (difference_type d) {
                     // <your code>
+                    _cindex-=d;
                     assert(valid());
                     return *this;}};
 
@@ -530,7 +550,7 @@ class my_deque {
         explicit my_deque (const allocator_type& a = allocator_type()) :
 
                  _a (a) {
-                    outer_b = _a.allocate(OUTER_SIZE);
+                    *outer_b = _a.allocate(OUTER_SIZE);
                     outer_e = outer_b+OUTER_SIZE;
                     _e = _b = _l = 0;
             assert(valid());}
@@ -542,7 +562,7 @@ class my_deque {
 
             _a (a) {
 
-            outer_b = _a.allocate(OUTER_SIZE);
+            *outer_b = _a.allocate(OUTER_SIZE);
 
             int half = OUTER_SIZE/2 + 1;
 
@@ -610,9 +630,6 @@ class my_deque {
             // assert(valid());
             return *this;}
 
-        size_type capacity () const {
-            return _l - _b;}
-
         // -----------
         // operator []
         // -----------
@@ -622,7 +639,7 @@ class my_deque {
          */
          reference operator [] (size_type index) {
             if (index >= size())
-                throw std::out_of_range("deque");
+                throw std::out_of_range("Deque: []");
            return *(begin()+index);}
 
         // *
@@ -630,7 +647,7 @@ class my_deque {
          
          const_reference operator [] (size_type index) const {
             if (index >= size())
-                throw std::out_of_range("deque");
+                throw std::out_of_range("Deque: const []");
              return const_cast<my_deque&>(*this)[index];}
 
         // --
@@ -642,7 +659,7 @@ class my_deque {
          */
         reference at (size_type index) {
             if (index >= size())
-                throw std::out_of_range("deque");
+                throw std::out_of_range("Deque: at");
             return *(begin()+index);}
 
         /**
@@ -677,7 +694,7 @@ class my_deque {
          */
         iterator begin () {
             
-            return iterator(*this, 0);
+            return iterator(this, 0);
         }
 
         /**
@@ -685,7 +702,20 @@ class my_deque {
          */
         const_iterator begin () const {
             // <your code>
-            return const_iterator(/* <your arguments> */);}
+            return const_iterator(this, 0);}
+
+
+
+        //----------
+        // capacity
+        // ---------
+
+        /**
+         * Helper function for resize, reserve
+         */
+
+        size_type capacity () const {
+            return _l - _b;}
 
         // -----
         // clear
@@ -717,14 +747,14 @@ class my_deque {
          */
         iterator end () {
             // <your code>
-            return iterator(*this, 0);}
+            return iterator(this, 0);}
 
         /**
          * <your documentation>
          */
         const_iterator end () const {
             // <your code>
-            return const_iterator(/* <your arguments> */);}
+            return const_iterator(this, 0);}
 
         // -----
         // erase
@@ -736,7 +766,7 @@ class my_deque {
         iterator erase (iterator) {
             // <your code>
             assert(valid());
-            return iterator(*this, 0);}
+            return iterator(this, 0);}
 
         // -----
         // front
@@ -765,7 +795,7 @@ class my_deque {
         iterator insert (iterator, const_reference) {
             // <your code>
             assert(valid());
-            return iterator(*this, 0);}
+            return iterator(this, 0);}
 
         // ---
         // pop
@@ -820,8 +850,22 @@ class my_deque {
             else if (s <= capacity())
                 _e = &*uninitialized_fill(_a, end(), begin() + s, v);
             else {
-                //resize(std::max(2 * size(), s));
+                reserve(std::max(2 * size(), s));
                 resize(s, v);}
+            assert(valid());}
+
+        //-----------
+        // reserve
+        // ---------
+
+        /** 
+         * Helper function for resize
+         */
+         void reserve (size_type c) {
+            if (c > capacity()) {
+                my_deque x(*this);
+                // May need a resize here to size c
+                swap(x);}
             assert(valid());}
 
         // ----
@@ -833,6 +877,7 @@ class my_deque {
          */
         size_type size () const {
             // <your code>
+            std::cout << "e-b "<< _e-_b << std::endl;
             return _e - _b;}
 
         // ----

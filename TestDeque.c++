@@ -159,10 +159,10 @@ TYPED_TEST_CASE(Deque_Fixture, deque_types);
 // capacity
 // ----------
 
-TEST(Deque_Fixture, capacity){
-    my_deque<int> x(10, 2);
-    ASSERT_EQ(x.capacity(), 10);
-}
+// TEST(Deque_Fixture, capacity){
+//     my_deque<int> x(10, 2);
+//     ASSERT_EQ(x.capacity(), 10);
+// }
 
 
 // ------------
