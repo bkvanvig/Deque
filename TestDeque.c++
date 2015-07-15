@@ -299,7 +299,6 @@ TYPED_TEST(Deque_Fixture, lt_4) {
 // constructor (allocator)
 // -----------------------
 
-
 TYPED_TEST(Deque_Fixture, consta_1) {
     typedef typename TestFixture::deque_type deque_type;
 

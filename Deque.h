@@ -28,6 +28,8 @@ using std::rel_ops::operator<=;
 using std::rel_ops::operator>;
 using std::rel_ops::operator>=;
 
+#define OUTER_SIZE 9
+
 // -------
 // destroy
 // -------
@@ -133,6 +135,8 @@ class my_deque {
 
         allocator_type _a;
 
+        pointer outer_b;
+        pointer outer_e;
         pointer _b;
         pointer _e;
         pointer _l;
@@ -526,7 +530,9 @@ class my_deque {
         explicit my_deque (const allocator_type& a = allocator_type()) :
 
                  _a (a) {
-                    _b = _e = _l = 0;
+                    outer_b = _a.allocate(OUTER_SIZE);
+                    outer_e = outer_b+OUTER_SIZE;
+                    _e = _b = _l = 0;
             assert(valid());}
 
         /**
@@ -535,11 +541,19 @@ class my_deque {
         explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) :
 
             _a (a) {
-            
-            _b = _a.allocate(s);
-            _e = _l = _b + s;
-            uninitialized_fill(_a, begin(), end(), v);
 
+            outer_b = _a.allocate(OUTER_SIZE);
+
+            int half = OUTER_SIZE/2 + 1;
+
+            outer_b[half-1] = _a.allocate(s);
+            outer_b[half] = _b = _a.allocate(s);
+            outer_b[half+1] = _a.allocate(s);
+            
+            _e = _b + s;
+            _l = outer_b[half+1]+s;
+
+            uninitialized_fill(_a, begin(), end(), v);
             assert(valid());}
 
         /**
@@ -579,21 +593,21 @@ class my_deque {
          */
         my_deque& operator = (const my_deque& rhs) {
             // <your code>
-            if (this == &rhs)
-                return *this;
-            if (rhs.size() == size())
-                std::copy(rhs.begin(), rhs.end(), begin());
-            else if (rhs.size() < size()) {
-                std::copy(rhs.begin(), rhs.end(), begin());
-                resize(rhs.size());}
-            else if (rhs.size() <= capacity()) {
-                std::copy(rhs.begin(), rhs.begin() + size(), begin());
-                _e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
-            else {
-                clear();
-                resize(rhs.size()); //we need to change this
-                _e = &*uninitialized_copy(_a, rhs.begin(), rhs.end(), begin());}
-            assert(valid());
+            // if (this == &rhs)
+            //     return *this;
+            // if (rhs.size() == size())
+            //     std::copy(rhs.begin(), rhs.end(), begin());
+            // else if (rhs.size() < size()) {
+            //     std::copy(rhs.begin(), rhs.end(), begin());
+            //     resize(rhs.size());}
+            // else if (rhs.size() <= capacity()) {
+            //     std::copy(rhs.begin(), rhs.begin() + size(), begin());
+            //     _e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
+            // else {
+            //     clear();
+            //     resize(rhs.size()); //we need to change this
+            //     _e = &*uninitialized_copy(_a, rhs.begin(), rhs.end(), begin());}
+            // assert(valid());
             return *this;}
 
         size_type capacity () const {
@@ -662,7 +676,7 @@ class my_deque {
          * <your documentation>
          */
         iterator begin () {
-            //return _b;
+            
             return iterator(*this, 0);
         }
 
