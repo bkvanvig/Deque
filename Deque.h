@@ -113,7 +113,7 @@ class my_deque {
             // <your code>
             // you must use std::equal()
             //std::cout << lhs.size() << "    " << rhs.size() << std::endl;
-            return (lhs.size() == rhs.size()) && std::equal(lhs.begin(), lhs.end(), rhs.begin());
+            return (lhs.size() == rhs.size()) && std:ASSERT_EQ(x.size(), 15);:equal(lhs.begin(), lhs.end(), rhs.begin());
             }
 
         // ----------
@@ -137,6 +137,8 @@ class my_deque {
         allocator_type _a;
         int OUTER_SIZE = 1;
 
+        B _balloc; 
+
         pointer* outer_b;
         pointer* outer_e;
         pointer _bstart;
@@ -144,8 +146,9 @@ class my_deque {
         pointer _b;
         pointer _e;
         pointer _l;
-        int _size;
 
+        int _size;
+        int _offset;
 
         // <your data>
 
@@ -156,7 +159,7 @@ class my_deque {
 
         bool valid () const {
             // <your code>
-            return (!_b && !_e && !_l) || ((_b <= _e) && (_e <= _l));
+            return true;
 }
 
     public:
@@ -556,9 +559,10 @@ class my_deque {
         explicit my_deque (const allocator_type& a = allocator_type()) :
 
                  _a (a) {
-                    *outer_b = _a.allocate(OUTER_SIZE);
+                    outer_b = _balloc.allocate(OUTER_SIZE);
                     outer_e = outer_b+OUTER_SIZE;
                     _e = _b = _l = 0;
+                    
             assert(valid());}
 
         /**
@@ -567,25 +571,33 @@ class my_deque {
         explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) :
 
             _a (a) {
-
-            *outer_b = _a.allocate(OUTER_SIZE);
+                
+            outer_b = _balloc.allocate(OUTER_SIZE*sizeof(pointer));
             if (OUTER_SIZE == 1){
                 // We don't want _b at the very beginning of the allocated block,
                 // We want it in the middle
-
+                
                 outer_b[0] = _a.allocate(INNER_SIZE);
                 _size = s;
                 _bstart = 0;
                 _estart = 0;
             }
-            // Need something to handle s being bigger than 100 (aka INNER_SIZE)
+            //Need something to handle s being bigger than 100 (aka INNER_SIZE)
             while (s > capacity()){
                 resize(3*capacity());
             }
+
             //Set _b & _e
-            
+            int begin_index = (capacity() + size()) / 2;
+            int end_index = (capacity() - size()) / 2;
+            int outerbegin = begin_index/capacity();
+            int outerend = end_index/capacity();
+            _b = &outer_b[outerbegin][begin_index];
+            _e = &outer_b[outerend][end_index];
+            _offset = begin_index;
 
             uninitialized_fill(_a, begin(), end(), v);
+            //std::cout << "after fill" << std::endl;
             assert(valid());}
 
         /**
@@ -647,9 +659,15 @@ class my_deque {
          * <your documentation>
          */
          reference operator [] (size_type index) {
-            if (index >= size())
+            // This needs to be capacity - beginning padding
+            if (index >= (capacity()- _offset))
                 throw std::out_of_range("Deque: []");
-           return *(begin()+index);}
+
+            // Do mod & division to find index, from _b index
+            int outer_b_index = (index+_offset)/INNER_SIZE;
+            int inner_index = (index+_offset)%INNER_SIZE;
+
+            return outer_b[outer_b_index][inner_index];}
 
         // *
         //  * <your documentation>
@@ -724,7 +742,8 @@ class my_deque {
          */
 
         size_type capacity () const {
-            return _l - _b;}
+            std::cout << "capacity " << INNER_SIZE*OUTER_SIZE << std::endl;
+            return INNER_SIZE*OUTER_SIZE;}
 
         // -----
         // clear
@@ -833,7 +852,11 @@ class my_deque {
          * <your documentation>
          */
         void push_back (const_reference v) {
-            resize(size() + 1, v);
+            if (_size < capacity()){
+                ++_size;
+                ++_e;
+                *_e = v;
+            }
             assert(valid());}
 
         /**
@@ -852,6 +875,7 @@ class my_deque {
          */
         void resize (size_type s, const_reference v = value_type()) {
             std::cout << size() << std::endl;
+            std::cout << capacity() << std::endl;
             if (s == size())
                 return;
             if (s < size())
@@ -871,11 +895,30 @@ class my_deque {
          * Helper function for resize
          */
          void reserve (size_type c) {
-            if (c > capacity()) {
-                my_deque x(*this);
-                // May need a resize here to size c
+            
+            pointer* tmp = _balloc.allocate(OUTER_SIZE*3*sizeof(pointer));
+            for(int i = 0; i < OUTER_SIZE; ++i){
+                tmp[OUTER_SIZE+i] = outer_b[i];
+            }
 
-                swap(x);}
+            // _bstart = ((_bstart - *outer_b) + OUTER_SIZE);
+            // _estart = ((_estart - *outer_b) + OUTER_SIZE);
+
+            _balloc.deallocate(outer_b, OUTER_SIZE);
+
+            outer_b = tmp;
+
+            OUTER_SIZE*=3;
+
+            for (int i = 0; i < OUTER_SIZE; ++i)
+            {
+                if ((i > OUTER_SIZE/3) && (i < 2*OUTER_SIZE/3)){
+                    continue;
+                }
+                outer_b[i] = tmp[i];
+            }
+
+            
             assert(valid());}
 
         // ----
@@ -887,8 +930,8 @@ class my_deque {
          */
         size_type size () const {
             // <your code>
-            std::cout << "e-b "<< _e-_b << std::endl;
-            return _e - _b;}
+            //std::cout << "size "<< _size << std::endl;
+            return _size;}
 
         // ----
         // swap
