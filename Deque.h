@@ -12,7 +12,7 @@
 // --------
 
 #include <algorithm> // copy, equal, lexicographical_compare, max, swap
-#include <iostream>
+#include <iostream>  // cout, endls
 #include <cassert>   // assert
 #include <iterator>  // iterator, bidirectional_iterator_tag
 #include <memory>    // allocator
@@ -112,8 +112,9 @@ class my_deque {
         friend bool operator == (const my_deque& lhs, const my_deque& rhs) {
             // <your code>
             // you must use std::equal()
-            //std::cout << lhs.size() << "    " << rhs.size() << std::endl;
-            return (lhs.size() == rhs.size()) && std:ASSERT_EQ(x.size(), 15);:equal(lhs.begin(), lhs.end(), rhs.begin());
+            // The equals is calling the wrong begin & end
+            std::cout << lhs.size() << "    " << rhs.size() << std::endl;
+            return (lhs.size() == rhs.size()) && std::equal(lhs.begin(), lhs.end(), rhs.begin());
             }
 
         // ----------
@@ -135,7 +136,7 @@ class my_deque {
         // ----
 
         allocator_type _a;
-        int OUTER_SIZE = 1;
+        int OUTER_SIZE;
 
         B _balloc; 
 
@@ -189,7 +190,8 @@ class my_deque {
                  */
                 friend bool operator == (const iterator& lhs, const iterator& rhs) {
                     // <your code>
-                    if ((lhs._index == rhs._index) && (*lhs == *rhs)){
+                    if ((lhs._index == rhs._index))
+                    {
                         return true;
                     }
                     return false;}
@@ -270,7 +272,6 @@ class my_deque {
                  */
                 reference operator * () const {
                     // <your code>
-                    // dummy is just to be able to compile the skeleton, remove it
                     
                     return (*_d)[_index];}
 
@@ -559,9 +560,20 @@ class my_deque {
         explicit my_deque (const allocator_type& a = allocator_type()) :
 
                  _a (a) {
+                    OUTER_SIZE = 1;
                     outer_b = _balloc.allocate(OUTER_SIZE);
                     outer_e = outer_b+OUTER_SIZE;
-                    _e = _b = _l = 0;
+                    outer_b[0] = _a.allocate(INNER_SIZE);
+                    _size = 0;
+                    _bstart = 0;
+                    _estart = 0;
+                    int begin_index = (capacity() + size()) / 2;
+                    int end_index = (capacity() - size()) / 2;
+                    int outerbegin = begin_index/capacity();
+                    int outerend = end_index/capacity();
+                    _b = &outer_b[outerbegin][begin_index];
+                    _e = &outer_b[outerend][end_index];
+                    _offset = begin_index;
                     
             assert(valid());}
 
@@ -571,12 +583,13 @@ class my_deque {
         explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) :
 
             _a (a) {
-                
+            OUTER_SIZE = 1;
             outer_b = _balloc.allocate(OUTER_SIZE*sizeof(pointer));
+
             if (OUTER_SIZE == 1){
                 // We don't want _b at the very beginning of the allocated block,
                 // We want it in the middle
-                
+                // This should be always true
                 outer_b[0] = _a.allocate(INNER_SIZE);
                 _size = s;
                 _bstart = 0;
@@ -606,6 +619,7 @@ class my_deque {
         my_deque (const my_deque& that) : 
 
             _a (that._a) {
+                OUTER_SIZE = 1;
             _b = _a.allocate(that.size());
             _e = _l = _b + that.size();
             uninitialized_copy(_a, that.begin(), that.end(), begin());
@@ -619,10 +633,14 @@ class my_deque {
          * <your documentation>
          */
         ~my_deque () {
-            // <your code>
-                if (!empty()) {
-                clear();
-                _a.deallocate(_b, capacity());}
+                // This deallocate is wrong
+                // 
+            for (int i = 0; i < OUTER_SIZE; ++i)
+            {
+                /* code */
+                _a.deallocate(outer_b[i], INNER_SIZE);
+            }
+            _balloc.deallocate(outer_b, OUTER_SIZE);
             assert(valid());}
 
         // ----------
@@ -673,7 +691,7 @@ class my_deque {
         //  * <your documentation>
          
          const_reference operator [] (size_type index) const {
-            if (index >= size())
+            if (index >= (capacity()- _offset))
                 throw std::out_of_range("Deque: const []");
              return const_cast<my_deque&>(*this)[index];}
 
@@ -685,7 +703,7 @@ class my_deque {
          * <your documentation>
          */
         reference at (size_type index) {
-            if (index >= size())
+            if (index >= (capacity()- _offset))
                 throw std::out_of_range("Deque: at");
             return *(begin()+index);}
 
@@ -720,7 +738,6 @@ class my_deque {
          * <your documentation>
          */
         iterator begin () {
-            
             return iterator(this, 0);
         }
 
@@ -742,7 +759,7 @@ class my_deque {
          */
 
         size_type capacity () const {
-            std::cout << "capacity " << INNER_SIZE*OUTER_SIZE << std::endl;
+            //std::cout << "capacity " << INNER_SIZE*OUTER_SIZE << std::endl;
             return INNER_SIZE*OUTER_SIZE;}
 
         // -----
@@ -775,14 +792,14 @@ class my_deque {
          */
         iterator end () {
             // <your code>
-            return iterator(this, 0);}
+            return iterator(this, _size);}
 
         /**
          * <your documentation>
          */ 
         const_iterator end () const {
             // <your code>
-            return const_iterator(this, 0);}
+            return const_iterator(this, _size);}
 
         // -----
         // erase
@@ -834,7 +851,9 @@ class my_deque {
          */
         void pop_back () {
             assert(!empty());
-            resize(size() - 1);
+            //resize(size() - 1);
+            --_e;
+            --_size;
             assert(valid());}
 
         /**
@@ -842,6 +861,9 @@ class my_deque {
          */
         void pop_front () {
             // <your code>
+            ++_offset;
+            --_b;
+            --_size;
             assert(valid());}
 
         // ----
@@ -864,6 +886,12 @@ class my_deque {
          */
         void push_front (const_reference v) {
             // <your code>
+            if (_size < capacity()){
+                ++_size;
+                --_b;
+                --_offset;
+                *_b = v;
+            }
             assert(valid());}
 
         // ------
@@ -875,14 +903,16 @@ class my_deque {
          */
         void resize (size_type s, const_reference v = value_type()) {
             std::cout << size() << std::endl;
+            std::cout << s << std::endl;
             std::cout << capacity() << std::endl;
-            if (s == size())
-                return;
+            // if (s == size())
+            //     return;
             if (s < size())
                 _e = &*destroy(_a, begin() + s, end());
             else if (s <= capacity())
                 _e = &*uninitialized_fill(_a, end(), begin() + s, v);
             else {
+                std::cout << "else reserve" << std::endl;
                 reserve(std::max(2 * size(), s));
                 resize(s, v);}
             assert(valid());}
@@ -895,7 +925,7 @@ class my_deque {
          * Helper function for resize
          */
          void reserve (size_type c) {
-            
+            std::cout << "reserve" << std::endl;
             pointer* tmp = _balloc.allocate(OUTER_SIZE*3*sizeof(pointer));
             for(int i = 0; i < OUTER_SIZE; ++i){
                 tmp[OUTER_SIZE+i] = outer_b[i];
