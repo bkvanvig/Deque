@@ -777,9 +777,9 @@ TYPED_TEST(Deque_Fixture, erase_2){
 TYPED_TEST(Deque_Fixture, erase_3){
     typedef typename TestFixture::deque_type deque_type;
 
-    deque_type x;
-    x.push_back(-1000);
-    x.erase(x.end());
+    deque_type x(1);
+
+    x.erase(x.end()-1);
 
     ASSERT_EQ(x.size(), 0);
 }

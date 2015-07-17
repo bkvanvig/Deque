@@ -128,8 +128,9 @@ class my_deque {
         friend bool operator < (const my_deque& lhs, const my_deque& rhs) {
             // <your code>
             // you must use std::lexicographical_compare()
-            if (lhs.size() > rhs.size())
-                return std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+            //std::cout << lhs.size() << "    " << rhs.size() << std::endl;
+            // if (lhs.size() > rhs.size())
+            //     return std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
             return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
             }
 
@@ -651,7 +652,6 @@ class my_deque {
             
             
             //std::cout<<"_e " << *_e << std::endl;
-            
 
            // std::cout<<"offset " << _offset << std::endl;
 
@@ -770,7 +770,8 @@ class my_deque {
             int inner_index = (index)%INNER_SIZE;
             //std::cout << "inner_index " << inner_index << std::endl;
 
-            return outer_b[outer_b_index][inner_index];}
+            return outer_b[outer_b_index][inner_index];
+        }
 
         // *
         //  * <your documentation>
@@ -893,10 +894,19 @@ class my_deque {
         /**
          * Change return
          */
-        iterator erase (iterator) {
+        iterator erase (iterator it) {
             // <your code>
+            auto curr = it;
+            auto next = ++it;
+            auto end = iterator(this, _offset+_size);
+            while(next != end){
+                *curr = *next;
+                ++next;
+                ++curr;
+            }
+            pop_back();
             assert(valid());
-            return iterator(this, 0);}
+            return curr;}
 
         // -----
         // front
@@ -922,10 +932,24 @@ class my_deque {
         /**
          * Change return
          */
-        iterator insert (iterator, const_reference) {
+        iterator insert (iterator it, const_reference val) {
             // <your code>
+            auto curr = it;
+            auto next = ++it;
+            auto end = iterator(this, _offset+_size);
+            auto tmp = *it;
+            while(next != end){
+                tmp = *next;
+                *next = *curr;
+                ++next;
+                ++curr;
+            }
+            push_back(tmp);
+            --it;
+            *it = val;
             assert(valid());
-            return iterator(this, 0);}
+            return it;
+}
 
         // ---
         // pop
@@ -1093,15 +1117,10 @@ class my_deque {
          */
         void swap (my_deque& rhs) {
             // <your code>
-            if (_a == rhs._a) {
-                std::swap(_b, rhs._b);
-                std::swap(_e, rhs._e);
-                //std::swap(_l, rhs._l);
-            }
-            else {
-                my_deque x(*this);
-                *this = rhs;
-                rhs  = x;}
+            my_deque tmp;
+            tmp = *this;
+            *this = rhs;
+            rhs = tmp;
             assert(valid());}
 
 
