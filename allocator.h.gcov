@@ -115,25 +115,25 @@
         -:  110:      typedef true_type propagate_on_container_move_assignment;
         -:  111:#endif
         -:  112:
-function _ZNSaIPiEC2Ev called 270 returned 100% blocks executed 100%
-function _ZNSaIiEC2Ev called 496 returned 100% blocks executed 100%
-      766:  113:      allocator() throw() { }
+function _ZNSaIPiEC2Ev called 292 returned 100% blocks executed 100%
+function _ZNSaIiEC2Ev called 536 returned 100% blocks executed 100%
+      828:  113:      allocator() throw() { }
 call    0 returned 100%
 call    1 returned 100%
         -:  114:
-function _ZNSaIiEC2ERKS_ called 360 returned 100% blocks executed 100%
-      360:  115:      allocator(const allocator& __a) throw()
-      360:  116:      : __allocator_base<_Tp>(__a) { }
+function _ZNSaIiEC2ERKS_ called 396 returned 100% blocks executed 100%
+      396:  115:      allocator(const allocator& __a) throw()
+      396:  116:      : __allocator_base<_Tp>(__a) { }
 call    0 returned 100%
         -:  117:
         -:  118:      template<typename _Tp1>
-function _ZNSaIPiEC2IiEERKSaIT_E called 528 returned 100% blocks executed 100%
-      528:  119:        allocator(const allocator<_Tp1>&) throw() { }
+function _ZNSaIPiEC2IiEERKSaIT_E called 572 returned 100% blocks executed 100%
+      572:  119:        allocator(const allocator<_Tp1>&) throw() { }
 call    0 returned 100%
         -:  120:
-function _ZNSaIPiED2Ev called 798 returned 100% blocks executed 100%
-function _ZNSaIiED2Ev called 856 returned 100% blocks executed 100%
-     1654:  121:      ~allocator() throw() { }
+function _ZNSaIPiED2Ev called 864 returned 100% blocks executed 100%
+function _ZNSaIiED2Ev called 932 returned 100% blocks executed 100%
+     1796:  121:      ~allocator() throw() { }
 call    0 returned 100%
 call    1 returned 100%
         -:  122:
@@ -147,9 +147,9 @@ call    1 returned 100%
         -:  130:
         -:  131:  template<typename _Tp>
         -:  132:    inline bool
-function _ZSteqIcEbRKSaIT_ES3_ called 462 returned 100% blocks executed 100%
-      462:  133:    operator==(const allocator<_Tp>&, const allocator<_Tp>&)
-      462:  134:    { return true; }
+function _ZSteqIcEbRKSaIT_ES3_ called 490 returned 100% blocks executed 100%
+      490:  133:    operator==(const allocator<_Tp>&, const allocator<_Tp>&)
+      490:  134:    { return true; }
         -:  135:
         -:  136:  template<typename _T1, typename _T2>
         -:  137:    inline bool

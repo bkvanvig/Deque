@@ -202,7 +202,7 @@ class my_deque {
                  */
                 friend bool operator == (const iterator& lhs, const iterator& rhs) {
                     // <your code>
-                    if ((lhs._index == rhs._index))
+                    if ((lhs._index == rhs._index) && (lhs._d == rhs._d))
                     {
                         return true;
                     }
@@ -805,8 +805,11 @@ class my_deque {
                 std::copy(rhs.begin(), rhs.end(), begin());
                 _size = rhs.size();}
             else if (rhs.size() <= capacity()) {
-                std::copy(rhs.begin(), rhs.begin() + size(), begin());
-                _e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
+                _size = rhs.size();
+                _e = &*std::copy(rhs.begin(), rhs.begin() + rhs.size(), begin());
+                
+                //_e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());
+            }
             else {
                 clear();
                 reserve(rhs.size());
@@ -858,7 +861,7 @@ class my_deque {
          * @return the reference to that index
          */
         reference at (size_type index) {
-            if (index >= (capacity()- _offset))
+            if (index >= (_size ) || (index < 0))
                 throw std::out_of_range("Deque: at");
             return *(begin()+index);}
 
@@ -1008,6 +1011,12 @@ class my_deque {
          */
         iterator insert (iterator it, const_reference val) {
             // <your code>
+            if (it == begin()){
+                push_front(val);
+                return --it;}
+            if (it == end()) {
+                push_back(val);
+                return ++it;}
             auto curr = it;
             auto next = ++it;
             auto end = iterator(this, _size);
@@ -1021,6 +1030,7 @@ class my_deque {
             push_back(tmp);
             --it;
             *it = val;
+
             assert(valid());
 
 

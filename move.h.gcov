@@ -78,10 +78,10 @@
         -:   73:   */
         -:   74:  template<typename _Tp>
         -:   75:    constexpr _Tp&&
-function _ZSt7forwardIRKiEOT_RNSt16remove_referenceIS2_E4typeE called 25732 returned 100% blocks executed 100%
-function _ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE called 1950 returned 100% blocks executed 100%
-    27682:   76:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-    27682:   77:    { return static_cast<_Tp&&>(__t); }
+function _ZSt7forwardIRKiEOT_RNSt16remove_referenceIS2_E4typeE called 25948 returned 100% blocks executed 100%
+function _ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE called 1986 returned 100% blocks executed 100%
+    27934:   76:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+    27934:   77:    { return static_cast<_Tp&&>(__t); }
         -:   78:
         -:   79:  /**
         -:   80:   *  @brief  Forward an rvalue.
@@ -108,11 +108,11 @@ function _ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE called 1950 returne
 function _ZSt4moveIRmEONSt16remove_referenceIT_E4typeEOS2_ called 18 returned 100% blocks executed 100%
 function _ZSt4moveIRPPiEONSt16remove_referenceIT_E4typeEOS4_ called 18 returned 100% blocks executed 100%
 function _ZSt4moveIRSt15_Deque_iteratorIiRiPiEEONSt16remove_referenceIT_E4typeEOS6_ called 36 returned 100% blocks executed 100%
-function _ZSt4moveIRiEONSt16remove_referenceIT_E4typeEOS2_ called 974 returned 100% blocks executed 100%
+function _ZSt4moveIRiEONSt16remove_referenceIT_E4typeEOS2_ called 992 returned 100% blocks executed 100%
 function _ZSt4moveIR8my_dequeIiSaIiEEEONSt16remove_referenceIT_E4typeEOS5_ called 12 returned 100% blocks executed 100%
-function _ZSt4moveIRSsEONSt16remove_referenceIT_E4typeEOS2_ called 1808 returned 100% blocks executed 100%
-     2866:  101:    move(_Tp&& __t) noexcept
-     2866:  102:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+function _ZSt4moveIRSsEONSt16remove_referenceIT_E4typeEOS2_ called 1920 returned 100% blocks executed 100%
+     2996:  101:    move(_Tp&& __t) noexcept
+     2996:  102:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
         -:  103:
         -:  104:
         -:  105:  template<typename _Tp>

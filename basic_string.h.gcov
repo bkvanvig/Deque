@@ -2464,16 +2464,16 @@ branch  5 never executed
         -: 2439:
         -: 2440:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 2441:    inline basic_string<_CharT, _Traits, _Alloc>
-function _ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EOS6_S7_ called 452 returned 100% blocks executed 65%
-      452: 2442:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+function _ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EOS6_S7_ called 480 returned 100% blocks executed 65%
+      480: 2442:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
         -: 2443:	      basic_string<_CharT, _Traits, _Alloc>&& __rhs)
         -: 2444:    {
-      452: 2445:      const auto __size = __lhs.size() + __rhs.size();
+      480: 2445:      const auto __size = __lhs.size() + __rhs.size();
 call    0 returned 100%
 call    1 returned 100%
-      452: 2446:      const bool __cond = (__size > __lhs.capacity()
+      480: 2446:      const bool __cond = (__size > __lhs.capacity()
 call    0 returned 100%
-      452: 2447:			   && __size <= __rhs.capacity());
+      480: 2447:			   && __size <= __rhs.capacity());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -2482,7 +2482,7 @@ branch  4 never executed
     #####: 2448:      return __cond ? std::move(__rhs.insert(0, __lhs))
 call    0 never executed
 call    1 never executed
-      452: 2449:	            : std::move(__lhs.append(__rhs));
+      480: 2449:	            : std::move(__lhs.append(__rhs));
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -2505,10 +2505,10 @@ call    5 returned 100%
         -: 2463:
         -: 2464:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 2465:    inline basic_string<_CharT, _Traits, _Alloc>
-function _ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EOS6_PKS3_ called 1356 returned 100% blocks executed 100%
-     1356: 2466:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+function _ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EOS6_PKS3_ called 1440 returned 100% blocks executed 100%
+     1440: 2466:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
         -: 2467:	      const _CharT* __rhs)
-     1356: 2468:    { return std::move(__lhs.append(__rhs)); }
+     1440: 2468:    { return std::move(__lhs.append(__rhs)); }
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%

@@ -93,14 +93,21 @@
         -:   88:    {
         -:   89:      template<typename _InputIterator, typename _ForwardIterator>
         -:   90:        static _ForwardIterator
-function _ZNSt20__uninitialized_copyILb1EE13__uninit_copyISt15_Deque_iteratorIiRKiPS3_ES2_IiRiPiEEET0_T_SB_SA_ called 16 returned 100% blocks executed 100%
-       16:   91:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+function _ZNSt20__uninitialized_copyILb1EE13__uninit_copyISt13move_iteratorISt15_Deque_iteratorIiRiPiEES6_EET0_T_S9_S8_ called 0 returned 0% blocks executed 0%
+function _ZNSt20__uninitialized_copyILb1EE13__uninit_copyISt15_Deque_iteratorIiRKiPS3_ES2_IiRiPiEEET0_T_SB_SA_ called 22 returned 100% blocks executed 100%
+       22:   91:        __uninit_copy(_InputIterator __first, _InputIterator __last,
         -:   92:		      _ForwardIterator __result)
-       16:   93:        { return std::copy(__first, __last, __result); }
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 100% (fallthrough)
-branch  3 taken 0% (throw)
+       22:   93:        { return std::copy(__first, __last, __result); }
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
         -:   94:    };
         -:   95:
         -:   96:  /**
@@ -114,8 +121,9 @@ branch  3 taken 0% (throw)
         -:  104:  */
         -:  105:  template<typename _InputIterator, typename _ForwardIterator>
         -:  106:    inline _ForwardIterator
-function _ZSt18uninitialized_copyISt15_Deque_iteratorIiRKiPS1_ES0_IiRiPiEET0_T_S9_S8_ called 16 returned 100% blocks executed 100%
-       16:  107:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
+function _ZSt18uninitialized_copyISt13move_iteratorISt15_Deque_iteratorIiRiPiEES4_ET0_T_S7_S6_ called 0 returned 0% blocks executed 0%
+function _ZSt18uninitialized_copyISt15_Deque_iteratorIiRKiPS1_ES0_IiRiPiEET0_T_S9_S8_ called 22 returned 100% blocks executed 100%
+       22:  107:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
         -:  108:		       _ForwardIterator __result)
         -:  109:    {
         -:  110:      typedef typename iterator_traits<_InputIterator>::value_type
@@ -125,11 +133,17 @@ function _ZSt18uninitialized_copyISt15_Deque_iteratorIiRKiPS1_ES0_IiRiPiEET0_T_S
         -:  114:
         -:  115:      return std::__uninitialized_copy<(__is_trivial(_ValueType1)
         -:  116:					&& __is_trivial(_ValueType2))>::
-       16:  117:	__uninit_copy(__first, __last, __result);
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 100% (fallthrough)
-branch  3 taken 0% (throw)
+       22:  117:	__uninit_copy(__first, __last, __result);
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
         -:  118:    }
         -:  119:
         -:  120:
@@ -160,10 +174,10 @@ branch  3 taken 0% (throw)
         -:  145:    {
         -:  146:      template<typename _ForwardIterator, typename _Tp>
         -:  147:        static void
-function _ZNSt20__uninitialized_fillILb1EE13__uninit_fillIPiiEEvT_S3_RKT0_ called 146 returned 100% blocks executed 100%
-      146:  148:        __uninit_fill(_ForwardIterator __first, _ForwardIterator __last,
+function _ZNSt20__uninitialized_fillILb1EE13__uninit_fillIPiiEEvT_S3_RKT0_ called 158 returned 100% blocks executed 100%
+      158:  148:        __uninit_fill(_ForwardIterator __first, _ForwardIterator __last,
         -:  149:		      const _Tp& __x)
-      146:  150:        { std::fill(__first, __last, __x); }
+      158:  150:        { std::fill(__first, __last, __x); }
 call    0 returned 100%
         -:  151:    };
         -:  152:
@@ -178,17 +192,17 @@ call    0 returned 100%
         -:  161:  */
         -:  162:  template<typename _ForwardIterator, typename _Tp>
         -:  163:    inline void
-function _ZSt18uninitialized_fillIPiiEvT_S1_RKT0_ called 146 returned 100% blocks executed 100%
-      146:  164:    uninitialized_fill(_ForwardIterator __first, _ForwardIterator __last,
+function _ZSt18uninitialized_fillIPiiEvT_S1_RKT0_ called 158 returned 100% blocks executed 100%
+      158:  164:    uninitialized_fill(_ForwardIterator __first, _ForwardIterator __last,
         -:  165:		       const _Tp& __x)
         -:  166:    {
         -:  167:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  168:	_ValueType;
         -:  169:
-      146:  170:      std::__uninitialized_fill<__is_trivial(_ValueType)>::
+      158:  170:      std::__uninitialized_fill<__is_trivial(_ValueType)>::
 call    0 returned 100%
         -:  171:	__uninit_fill(__first, __last, __x);
-      146:  172:    }
+      158:  172:    }
         -:  173:
         -:  174:
         -:  175:  template<bool _TrivialValueType>
@@ -272,24 +286,44 @@ call    0 returned 100%
         -:  253:
         -:  254:  template<typename _InputIterator, typename _ForwardIterator, typename _Tp>
         -:  255:    inline _ForwardIterator
-function _ZSt22__uninitialized_copy_aISt15_Deque_iteratorIiRKiPS1_ES0_IiRiPiEiET0_T_S9_S8_RSaIT1_E called 16 returned 100% blocks executed 100%
-       16:  256:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
+function _ZSt22__uninitialized_copy_aISt13move_iteratorISt15_Deque_iteratorIiRiPiEES4_iET0_T_S7_S6_RSaIT1_E called 0 returned 0% blocks executed 0%
+function _ZSt22__uninitialized_copy_aISt15_Deque_iteratorIiRKiPS1_ES0_IiRiPiEiET0_T_S9_S8_RSaIT1_E called 22 returned 100% blocks executed 100%
+       22:  256:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
         -:  257:			   _ForwardIterator __result, allocator<_Tp>&)
-       16:  258:    { return std::uninitialized_copy(__first, __last, __result); }
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 100% (fallthrough)
-branch  3 taken 0% (throw)
+       22:  258:    { return std::uninitialized_copy(__first, __last, __result); }
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
         -:  259:
         -:  260:  template<typename _InputIterator, typename _ForwardIterator,
         -:  261:	   typename _Allocator>
         -:  262:    inline _ForwardIterator
-        -:  263:    __uninitialized_move_a(_InputIterator __first, _InputIterator __last,
+function _ZSt22__uninitialized_move_aISt15_Deque_iteratorIiRiPiES3_SaIiEET0_T_S6_S5_RT1_ called 0 returned 0% blocks executed 0%
+    #####:  263:    __uninitialized_move_a(_InputIterator __first, _InputIterator __last,
         -:  264:			   _ForwardIterator __result, _Allocator& __alloc)
         -:  265:    {
         -:  266:      return std::__uninitialized_copy_a(_GLIBCXX_MAKE_MOVE_ITERATOR(__first),
         -:  267:					 _GLIBCXX_MAKE_MOVE_ITERATOR(__last),
-        -:  268:					 __result, __alloc);
+    #####:  268:					 __result, __alloc);
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+call    5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
         -:  269:    }
         -:  270:
         -:  271:  template<typename _InputIterator, typename _ForwardIterator,
@@ -326,10 +360,10 @@ branch  3 taken 0% (throw)
         -:  302:
         -:  303:  template<typename _ForwardIterator, typename _Tp, typename _Tp2>
         -:  304:    inline void
-function _ZSt22__uninitialized_fill_aIPiiiEvT_S1_RKT0_RSaIT1_E called 146 returned 100% blocks executed 100%
-      146:  305:    __uninitialized_fill_a(_ForwardIterator __first, _ForwardIterator __last,
+function _ZSt22__uninitialized_fill_aIPiiiEvT_S1_RKT0_RSaIT1_E called 158 returned 100% blocks executed 100%
+      158:  305:    __uninitialized_fill_a(_ForwardIterator __first, _ForwardIterator __last,
         -:  306:			   const _Tp& __x, allocator<_Tp2>&)
-      146:  307:    { std::uninitialized_fill(__first, __last, __x); }
+      158:  307:    { std::uninitialized_fill(__first, __last, __x); }
 call    0 returned 100%
         -:  308:
         -:  309:  template<typename _ForwardIterator, typename _Size, typename _Tp,
@@ -372,7 +406,8 @@ call    0 returned 100%
         -:  346:  template<typename _InputIterator1, typename _InputIterator2,
         -:  347:	   typename _ForwardIterator, typename _Allocator>
         -:  348:    inline _ForwardIterator
-        -:  349:    __uninitialized_copy_move(_InputIterator1 __first1,
+function _ZSt25__uninitialized_copy_moveISt15_Deque_iteratorIiRKiPS1_ES0_IiRiPiES7_SaIiEET1_T_SA_T0_SB_S9_RT2_ called 0 returned 0% blocks executed 0%
+    #####:  349:    __uninitialized_copy_move(_InputIterator1 __first1,
         -:  350:			      _InputIterator1 __last1,
         -:  351:			      _InputIterator2 __first2,
         -:  352:			      _InputIterator2 __last2,
@@ -381,15 +416,33 @@ call    0 returned 100%
         -:  355:    {
         -:  356:      _ForwardIterator __mid = std::__uninitialized_copy_a(__first1, __last1,
         -:  357:							   __result,
-        -:  358:							   __alloc);
+    #####:  358:							   __alloc);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
         -:  359:      __try
         -:  360:	{
-        -:  361:	  return std::__uninitialized_move_a(__first2, __last2, __mid, __alloc);
+    #####:  361:	  return std::__uninitialized_move_a(__first2, __last2, __mid, __alloc);
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
         -:  362:	}
-        -:  363:      __catch(...)
+    =====:  363:      __catch(...)
+call    0 never executed
+call    1 never executed
         -:  364:	{
-        -:  365:	  std::_Destroy(__result, __mid, __alloc);
-        -:  366:	  __throw_exception_again;
+    =====:  365:	  std::_Destroy(__result, __mid, __alloc);
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    =====:  366:	  __throw_exception_again;
+call    0 never executed
         -:  367:	}
         -:  368:    }
         -:  369:
@@ -400,7 +453,8 @@ call    0 returned 100%
         -:  374:  template<typename _InputIterator1, typename _InputIterator2,
         -:  375:	   typename _ForwardIterator, typename _Allocator>
         -:  376:    inline _ForwardIterator
-        -:  377:    __uninitialized_move_copy(_InputIterator1 __first1,
+function _ZSt25__uninitialized_move_copyISt15_Deque_iteratorIiRiPiES0_IiRKiPS4_ES3_SaIiEET1_T_SA_T0_SB_S9_RT2_ called 0 returned 0% blocks executed 0%
+    #####:  377:    __uninitialized_move_copy(_InputIterator1 __first1,
         -:  378:			      _InputIterator1 __last1,
         -:  379:			      _InputIterator2 __first2,
         -:  380:			      _InputIterator2 __last2,
@@ -409,15 +463,33 @@ call    0 returned 100%
         -:  383:    {
         -:  384:      _ForwardIterator __mid = std::__uninitialized_move_a(__first1, __last1,
         -:  385:							   __result,
-        -:  386:							   __alloc);
+    #####:  386:							   __alloc);
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
         -:  387:      __try
         -:  388:	{
-        -:  389:	  return std::__uninitialized_copy_a(__first2, __last2, __mid, __alloc);
+    #####:  389:	  return std::__uninitialized_copy_a(__first2, __last2, __mid, __alloc);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
         -:  390:	}
-        -:  391:      __catch(...)
+    =====:  391:      __catch(...)
+call    0 never executed
+call    1 never executed
         -:  392:	{
-        -:  393:	  std::_Destroy(__result, __mid, __alloc);
-        -:  394:	  __throw_exception_again;
+    =====:  393:	  std::_Destroy(__result, __mid, __alloc);
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    =====:  394:	  __throw_exception_again;
+call    0 never executed
         -:  395:	}
         -:  396:    }
         -:  397:  
@@ -498,14 +570,14 @@ call    0 returned 100%
         -:  472:    {
         -:  473:      template<typename _ForwardIterator>
         -:  474:        static void
-function _ZNSt25__uninitialized_default_1ILb1EE16__uninit_defaultISt15_Deque_iteratorIiRiPiEEEvT_S6_ called 2 returned 100% blocks executed 71%
-function _ZNSt25__uninitialized_default_1ILb1EE16__uninit_defaultIPiEEvT_S3_ called 92 returned 100% blocks executed 100%
-       94:  475:        __uninit_default(_ForwardIterator __first, _ForwardIterator __last)
+function _ZNSt25__uninitialized_default_1ILb1EE16__uninit_defaultISt15_Deque_iteratorIiRiPiEEEvT_S6_ called 8 returned 100% blocks executed 71%
+function _ZNSt25__uninitialized_default_1ILb1EE16__uninit_defaultIPiEEvT_S3_ called 96 returned 100% blocks executed 100%
+      104:  475:        __uninit_default(_ForwardIterator __first, _ForwardIterator __last)
         -:  476:        {
         -:  477:	  typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  478:	    _ValueType;
         -:  479:
-       94:  480:	  std::fill(__first, __last, _ValueType());
+      104:  480:	  std::fill(__first, __last, _ValueType());
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -514,7 +586,7 @@ branch  4 taken 0% (throw)
 call    5 returned 100%
 branch  6 taken 100% (fallthrough)
 branch  7 taken 0% (throw)
-       94:  481:	}
+      104:  481:	}
         -:  482:    };
         -:  483:
         -:  484:  template<bool _TrivialValueType>
@@ -557,23 +629,23 @@ branch  7 taken 0% (throw)
         -:  521:  // constructed value_types(s).
         -:  522:  template<typename _ForwardIterator>
         -:  523:    inline void
-function _ZSt23__uninitialized_defaultISt15_Deque_iteratorIiRiPiEEvT_S4_ called 2 returned 100% blocks executed 83%
-function _ZSt23__uninitialized_defaultIPiEvT_S1_ called 92 returned 100% blocks executed 100%
-       94:  524:    __uninitialized_default(_ForwardIterator __first,
+function _ZSt23__uninitialized_defaultISt15_Deque_iteratorIiRiPiEEvT_S4_ called 8 returned 100% blocks executed 83%
+function _ZSt23__uninitialized_defaultIPiEvT_S1_ called 96 returned 100% blocks executed 100%
+      104:  524:    __uninitialized_default(_ForwardIterator __first,
         -:  525:			    _ForwardIterator __last)
         -:  526:    {
         -:  527:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  528:	_ValueType;
         -:  529:
-       94:  530:      std::__uninitialized_default_1<__is_trivial(_ValueType)>::
+      104:  530:      std::__uninitialized_default_1<__is_trivial(_ValueType)>::
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
 call    3 returned 100%
-        4:  531:	__uninit_default(__first, __last);
+       16:  531:	__uninit_default(__first, __last);
 call    0 returned 100%
 call    1 returned 100%
-       94:  532:    }
+      104:  532:    }
         -:  533:
         -:  534:  // __uninitialized_default_n
         -:  535:  // Fills [first, first + n) with n default constructed value_type(s).
@@ -614,12 +686,12 @@ call    1 returned 100%
         -:  570:
         -:  571:  template<typename _ForwardIterator, typename _Tp>
         -:  572:    inline void
-function _ZSt25__uninitialized_default_aISt15_Deque_iteratorIiRiPiEiEvT_S4_RSaIT0_E called 2 returned 100% blocks executed 83%
-function _ZSt25__uninitialized_default_aIPiiEvT_S1_RSaIT0_E called 92 returned 100% blocks executed 100%
-       94:  573:    __uninitialized_default_a(_ForwardIterator __first,
+function _ZSt25__uninitialized_default_aISt15_Deque_iteratorIiRiPiEiEvT_S4_RSaIT0_E called 8 returned 100% blocks executed 83%
+function _ZSt25__uninitialized_default_aIPiiEvT_S1_RSaIT0_E called 96 returned 100% blocks executed 100%
+      104:  573:    __uninitialized_default_a(_ForwardIterator __first,
         -:  574:			      _ForwardIterator __last,
         -:  575:			      allocator<_Tp>&)
-       94:  576:    { std::__uninitialized_default(__first, __last); }
+      104:  576:    { std::__uninitialized_default(__first, __last); }
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
