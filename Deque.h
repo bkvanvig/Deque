@@ -747,8 +747,23 @@ class my_deque {
         my_deque& operator = (const my_deque& rhs) {
             // <your code>
             //*this = my_deque(rhs);
+            if (*this == rhs)
+                return *this;
+            if (rhs.size() == size())
+                std::copy(rhs.begin(), rhs.end(), begin());
+            else if (rhs.size() < size()) {
+                std::copy(rhs.begin(), rhs.end(), begin());
+                _size = rhs.size();}
+            else if (rhs.size() <= capacity()) {
+                std::copy(rhs.begin(), rhs.begin() + size(), begin());
+                _e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
+            else {
+                clear();
+                reserve(rhs.size());
+                _e = &*uninitialized_copy(_a, rhs.begin(), rhs.end(), begin());}
             assert(valid());
-            return *this;}
+            return *this;
+}
 
         // -----------
         // operator []
@@ -1117,8 +1132,7 @@ class my_deque {
          */
         void swap (my_deque& rhs) {
             // <your code>
-            my_deque tmp;
-            tmp = *this;
+            my_deque tmp(*this);
             *this = rhs;
             rhs = tmp;
             assert(valid());}

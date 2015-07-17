@@ -1179,13 +1179,13 @@ TYPED_TEST(Deque_Fixture, swap_1){
 
 TYPED_TEST(Deque_Fixture, swap_2){
     typedef typename TestFixture::deque_type deque_type;
-
-    deque_type x(10, 7);
-    deque_type y(5, 3);
-    swap(x, y);
-
-    ASSERT_EQ(x.front(), 3);
-    ASSERT_EQ(y.front(), 7);
+    deque_type x(1, 1);
+    deque_type y(1, 2);
+    ASSERT_EQ(1, *x.begin());
+    ASSERT_EQ(2, *y.begin());
+    x.swap(y);
+    ASSERT_EQ(2, *x.begin());
+    ASSERT_EQ(1, *y.begin());
 }
 
 TYPED_TEST(Deque_Fixture, swap_3){
@@ -1198,6 +1198,7 @@ TYPED_TEST(Deque_Fixture, swap_3){
     ASSERT_EQ(x.front(), y.front());
     ASSERT_EQ(x.back(), y.back());
 }
+
 
 
 
