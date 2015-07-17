@@ -186,6 +186,15 @@ TYPED_TEST(Deque_Fixture, equal_1) {
     y.push_back(3);
     y.push_back(4);
 	y.push_back(5);
+
+    deque_type z(10);
+    z.push_back(1);
+    z.push_back(2);
+    z.push_back(3);
+    z.push_back(4);
+    z.push_back(5);
+
+
     ASSERT_EQ(x.size(), 15);
 
 	ASSERT_TRUE(x==y);}

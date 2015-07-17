@@ -69,6 +69,7 @@ BI uninitialized_fill (A& a, BI b, BI e, const U& v) {
     try {
         while (b != e) {
             a.construct(&*b, v);
+            //std::cout << "v " << v << std::endl;
             ++b;}}
     catch (...) {
         destroy(a, p, b);
@@ -127,6 +128,8 @@ class my_deque {
         friend bool operator < (const my_deque& lhs, const my_deque& rhs) {
             // <your code>
             // you must use std::lexicographical_compare()
+            if (lhs.size() > rhs.size())
+                return std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
             return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
             }
 
@@ -384,7 +387,7 @@ class my_deque {
                  */
                 friend bool operator == (const const_iterator& lhs, const const_iterator& rhs) {
                     // <your code>
-                    if ((lhs._cindex == rhs._cindex) && (*lhs == *rhs)){
+                    if (lhs._cindex == rhs._cindex){
                         return true;
                     }
                     return false;
@@ -560,6 +563,8 @@ class my_deque {
         explicit my_deque (const allocator_type& a = allocator_type()) :
 
                  _a (a) {
+                    _b = 0;
+                    _e = 0;
                     OUTER_SIZE = 1;
                     outer_b = _balloc.allocate(OUTER_SIZE);
                     outer_e = outer_b+OUTER_SIZE;
@@ -569,8 +574,10 @@ class my_deque {
                     _estart = 0;
                     int begin_index = (capacity() - size()) / 2;
                     int end_index = (capacity() + size()) / 2;
-                    int outerbegin = begin_index/capacity();
-                    int outerend = end_index/capacity();
+                    int outerbegin = begin_index/INNER_SIZE;
+                    int outerend = end_index/INNER_SIZE;
+                    // _bstart = outerbegin;
+                    // _estart = outerend;
                     _b = &outer_b[outerbegin][begin_index];
                     _e = &outer_b[outerend][end_index];
                     _offset = begin_index;
@@ -583,39 +590,72 @@ class my_deque {
         explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) :
 
             _a (a) {
+
             OUTER_SIZE = 1;
             outer_b = _balloc.allocate(OUTER_SIZE*sizeof(pointer));
+            outer_e = outer_b+OUTER_SIZE;
+            outer_b[0] = _a.allocate(INNER_SIZE);
+            _size = 0;  
 
-            
-                // We don't want _b at the very beginning of the allocated block,
-                // We want it in the middle
-                // This should be always true
-                outer_b[0] = _a.allocate(INNER_SIZE);
-                _size = 0;               
-                _bstart = 0;
-                _estart = 0;
-
+            // _bstart = 0;
+            // _estart = 0;
+            _offset = 0;
             _b = 0;
             _e = 0;
-            
+
+            // std::cout<<"begin " << *begin() << std::endl;
+            // std::cout<<"end " << *end() << std::endl;
+
+            // std::cout<<"_b " << *_b << std::endl;
+            // std::cout<<"_e " << *_e << std::endl;
             //Need something to handle s being bigger than 100 (aka INNER_SIZE)
 
-            while (s > capacity()){
+            std::cout << "intial size" << s << std::endl;
+
+            while (s >= capacity()){
                  std::cout << "intial capacity" << capacity() << std::endl;
                 resize(3*capacity());
 
             }
+
+            
+
             std::cout << "out of while loop" << std::endl;
             _size = s;  //move below resize calls to avoid issues when resizing
 
+            std::cout<< "s " << size() << std::endl;
+            //std::cout <<"edn" << *end() << std::endl;
+
             //Set _b & _e
-            int begin_index = (capacity() + size()) / 2;
-            int end_index = (capacity() - size()) / 2;
-            int outerbegin = begin_index/capacity();
-            int outerend = end_index/capacity();
-            _b = &outer_b[outerbegin][begin_index];
-            _e = &outer_b[outerend][end_index];
+            int begin_index = (capacity() - size()) / 2;
+            int end_index = (capacity() + size()) / 2;
+
             _offset = begin_index;
+
+            std::cout<<"begin_index " << begin_index << std::endl;
+            std::cout<<"end_index " << end_index << std::endl;
+
+            int outerbegin = begin_index/INNER_SIZE;
+            int outerend = end_index/INNER_SIZE;
+            // _bstart = outerbegin;
+            // _estart = outerend;
+
+            std::cout<<"outerbegin " << outerbegin << std::endl;
+            std::cout<<"outerend " << outerend << std::endl;
+
+            _b = &(*this)[begin_index];
+
+            std::cout<<"_b " << *_b << std::endl;
+            _e = &(*this)[end_index];
+
+            
+            std::cout<<"_e " << *_e << std::endl;
+            
+
+            std::cout<<"offset " << _offset << std::endl;
+
+            std::cout<<"begin " << *begin() << std::endl;
+            std::cout<<"end " << *end() << std::endl;
 
             uninitialized_fill(_a, begin(), end(), v);
             std::cout << "after fill" << std::endl;
@@ -627,12 +667,57 @@ class my_deque {
         my_deque (const my_deque& that) : 
 
             _a (that._a) {
-                OUTER_SIZE = 1;
-            _b = _a.allocate(that.size());
-            _e = _b + that.size();
+
+            OUTER_SIZE = that.OUTER_SIZE;
+
+            std::cout << "outersize " << OUTER_SIZE << std::endl;
+            outer_b = _balloc.allocate(OUTER_SIZE);
+            for (int i = 0; i < OUTER_SIZE; ++i)
+            {
+                outer_b[i] = _a.allocate(INNER_SIZE);
+            }
             _size = that.size();
+
+            std::cout<< "s " << size() << std::endl;
+            //std::cout <<"edn" << *end() << std::endl;
+
+            //Set _b & _e
+            int begin_index = (capacity() - size()) / 2;
+            int end_index = (capacity() + size()) / 2;
+
+            _offset = begin_index;
+
+            std::cout<<"begin_index " << begin_index << std::endl;
+            std::cout<<"end_index " << end_index << std::endl;
+
+            int outerbegin = begin_index/INNER_SIZE;
+            int outerend = end_index/INNER_SIZE;
+            // _bstart = outerbegin;
+            // _estart = outerend;
+
+            std::cout<<"outerbegin " << outerbegin << std::endl;
+            std::cout<<"outerend " << outerend << std::endl;
+
+            _b = &(*this)[begin_index];
+
+            std::cout<<"_b " << *_b << std::endl;
+            _e = &(*this)[end_index];
+
+            
+            std::cout<<"_e " << *_e << std::endl;
+            
+
+            std::cout<<"offset " << _offset << std::endl;
+
+            std::cout<<"begin " << *begin() << std::endl;
+            std::cout<<"end " << *end() << std::endl;
+
+
+
+
             uninitialized_copy(_a, that.begin(), that.end(), begin());
-            assert(valid());}
+            assert(valid());
+        }
 
         // ----------
         // destructor
@@ -661,21 +746,8 @@ class my_deque {
          */
         my_deque& operator = (const my_deque& rhs) {
             // <your code>
-            // if (this == &rhs)
-            //     return *this;
-            // if (rhs.size() == size())
-            //     std::copy(rhs.begin(), rhs.end(), begin());
-            // else if (rhs.size() < size()) {
-            //     std::copy(rhs.begin(), rhs.end(), begin());
-            //     resize(rhs.size());}
-            // else if (rhs.size() <= capacity()) {
-            //     std::copy(rhs.begin(), rhs.begin() + size(), begin());
-            //     _e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
-            // else {
-            //     clear();
-            //     reserve(rhs.size()); 
-            //     _e = &*uninitialized_copy(_a, rhs.begin(), rhs.end(), begin());}
-            // assert(valid());
+            //*this = my_deque(rhs);
+            assert(valid());
             return *this;}
 
         // -----------
@@ -687,12 +759,16 @@ class my_deque {
          */
          reference operator [] (size_type index) {
             // This needs to be capacity - beginning padding
-            if (index >= (capacity()- _offset))
+            //std::cout << "capacity " << capacity() << std::endl;
+            //std::cout << "Index " << index << std::endl;
+            if (index > (_size + _offset) || (index < _offset))
                 throw std::out_of_range("Deque: []");
 
             // Do mod & division to find index, from _b index
-            int outer_b_index = (index+_offset)/INNER_SIZE;
-            int inner_index = (index+_offset)%INNER_SIZE;
+            int outer_b_index = (index)/INNER_SIZE;
+            //std::cout << "outer_b_index " << outer_b_index << std::endl;
+            int inner_index = (index)%INNER_SIZE;
+            //std::cout << "inner_index " << inner_index << std::endl;
 
             return outer_b[outer_b_index][inner_index];}
 
@@ -700,7 +776,7 @@ class my_deque {
         //  * <your documentation>
          
          const_reference operator [] (size_type index) const {
-            if (index >= (capacity()- _offset))
+            if (index > (_size + _offset) || (index < _offset))
                 throw std::out_of_range("Deque: const []");
              return const_cast<my_deque&>(*this)[index];}
 
@@ -747,7 +823,7 @@ class my_deque {
          * <your documentation>
          */
         iterator begin () {
-            return iterator(this, 0);
+            return iterator(this, _offset);
         }
 
         /**
@@ -755,7 +831,7 @@ class my_deque {
          */
         const_iterator begin () const {
             // <your code>
-            return const_iterator(this, 0);}
+            return const_iterator(this, _offset);}
 
 
 
@@ -801,14 +877,14 @@ class my_deque {
          */
         iterator end () {
             // <your code>
-            return iterator(this, _size );}
+            return iterator(this, _offset+_size );}
 
         /**
          * <your documentation>
          */ 
         const_iterator end () const {
             // <your code>
-            return const_iterator(this, _size );}
+            return const_iterator(this, _offset+_size );}
 
         // -----
         // erase
@@ -883,11 +959,13 @@ class my_deque {
          * <your documentation>
          */
         void push_back (const_reference v) {
-            if (_size < capacity()){
+            if (_size+_offset < capacity()){
                 ++_size;
-                ++_e;
                 *_e = v;
+                ++_e;
             }
+            
+
             assert(valid());}
 
         /**
@@ -916,20 +994,46 @@ class my_deque {
             std::cout << capacity() << std::endl;
             // if (s == size())
             //     return;
-            if (s < size())
+            if (s < size()){
                 _e = &*destroy(_a, begin() + s, end());
+                _size = s;
+            }
+                
             else if (s < capacity()){
-                std::cout<<"dfsfsd" <<std::endl;                
-                std::cout<<"begin" << *begin() << std::endl;
-                std::cout <<"edn" << *end() << std::endl;
+                _size = s;
+                int begin_index = (capacity() - size()) / 2;
+                int end_index = (capacity() + size()) / 2;
 
-                _e = &*uninitialized_fill(_a, end(), begin() + s, v);
-                std::cout<<"dfsfsd" <<std::endl;                
+                _offset = begin_index;
+
+                std::cout<<"begin_index " << begin_index << std::endl;
+                std::cout<<"end_index " << end_index << std::endl;
+
+                int outerbegin = begin_index/INNER_SIZE;
+                int outerend = end_index/INNER_SIZE;
+                // _bstart = outerbegin;
+                // _estart = outerend;
+
+                std::cout<<"outerbegin " << outerbegin << std::endl;
+                std::cout<<"outerend " << outerend << std::endl;
+
+                _b = &(*this)[begin_index];
+
+                std::cout<<"_b " << *_b << std::endl;
+                _e = &(*this)[end_index];
+                return;
+                // std::cout<<"dfsfsd" <<std::endl;                
+                // std::cout<<"begin" << *begin() << std::endl;
+                // std::cout <<"edn" << *end() << std::endl;
+
+                // //_e = &*uninitialized_fill(_a, end(), begin() + s, v);
+                // std::cout<<"dfsfsd" <<std::endl;                
             }
             else {
                 std::cout << "else reserve" << std::endl;
                 reserve(std::max(2 * size(), s));
-                resize(s, v);}
+                //resize(s, v);
+            }
             assert(valid());}
 
         //-----------
@@ -960,9 +1064,9 @@ class my_deque {
                 if ((i >= OUTER_SIZE/3) && (i < 2*OUTER_SIZE/3)){
                     continue;
                 }
-                outer_b[i] = tmp[i];
+                outer_b[i] = _a.allocate(INNER_SIZE);
             }
-
+            outer_e = outer_b+OUTER_SIZE;
             
             assert(valid());}
 
