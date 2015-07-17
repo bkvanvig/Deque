@@ -775,15 +775,15 @@ class my_deque {
          reference operator [] (size_type index) {
             // This needs to be capacity - beginning padding
             //std::cout << "capacity " << capacity() << std::endl;
-            //std::cout << "Index " << index << std::endl;
-            if (index > (_size + _offset) || (index < _offset))
+            if (index > (_size) || (index < 0))
                 throw std::out_of_range("Deque: []");
 
             // Do mod & division to find index, from _b index
-            int outer_b_index = (index)/INNER_SIZE;
-            //std::cout << "outer_b_index " << outer_b_index << std::endl;
-            int inner_index = (index)%INNER_SIZE;
-            //std::cout << "inner_index " << inner_index << std::endl;
+            int outer_b_index = (index + _offset )/INNER_SIZE;
+
+            
+            int inner_index = (index + _offset)%INNER_SIZE;
+            
 
             return outer_b[outer_b_index][inner_index];
         }
@@ -792,7 +792,7 @@ class my_deque {
         //  * <your documentation>
          
          const_reference operator [] (size_type index) const {
-            if (index > (_size + _offset) || (index < _offset))
+            if (index > (_size ) || (index < 0))
                 throw std::out_of_range("Deque: const []");
              return const_cast<my_deque&>(*this)[index];}
 
@@ -839,7 +839,7 @@ class my_deque {
          * <your documentation>
          */
         iterator begin () {
-            return iterator(this, _offset);
+            return iterator(this, 0);
         }
 
         /**
@@ -847,7 +847,7 @@ class my_deque {
          */
         const_iterator begin () const {
             // <your code>
-            return const_iterator(this, _offset);}
+            return const_iterator(this,0 );}
 
 
 
@@ -893,14 +893,14 @@ class my_deque {
          */
         iterator end () {
             // <your code>
-            return iterator(this, _offset+_size );}
+            return iterator(this, _size );}
 
         /**
          * <your documentation>
          */ 
         const_iterator end () const {
             // <your code>
-            return const_iterator(this, _offset+_size );}
+            return const_iterator(this, _size );}
 
         // -----
         // erase
@@ -913,7 +913,7 @@ class my_deque {
             // <your code>
             auto curr = it;
             auto next = ++it;
-            auto end = iterator(this, _offset+_size);
+            auto end = iterator(this, _size);
             while(next != end){
                 *curr = *next;
                 ++next;
@@ -951,7 +951,7 @@ class my_deque {
             // <your code>
             auto curr = it;
             auto next = ++it;
-            auto end = iterator(this, _offset+_size);
+            auto end = iterator(this, _size);
             auto tmp = *it;
             while(next != end){
                 tmp = *next;
@@ -963,6 +963,8 @@ class my_deque {
             --it;
             *it = val;
             assert(valid());
+
+
             return it;
 }
 
@@ -1001,6 +1003,7 @@ class my_deque {
             if (_size+_offset < capacity()){
                 ++_size;
                 *_e = v;
+               // std::cout << "pushed value: " << v << std::endl;
                 ++_e;
             }
             else{

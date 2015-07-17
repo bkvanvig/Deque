@@ -1,0 +1,1705 @@
+        -:    0:Source:Deque.h
+        -:    0:Graph:TestDeque.gcno
+        -:    0:Data:TestDeque.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:// --------------------------
+        -:    2:// projects/c++/deque/Deque.h
+        -:    3:// Copyright (C) 2015
+        -:    4:// Glenn P. Downing
+        -:    5:// --------------------------
+        -:    6:
+        -:    7:#ifndef Deque_h
+        -:    8:#define Deque_h
+        -:    9:
+        -:   10:// --------
+        -:   11:// includes
+        -:   12:// --------
+        -:   13:
+        -:   14:#include <algorithm> // copy, equal, lexicographical_compare, max, swap
+        -:   15:#include <iostream>  // cout, endls
+        -:   16:#include <cassert>   // assert
+        -:   17:#include <iterator>  // iterator, bidirectional_iterator_tag
+        -:   18:#include <memory>    // allocator
+        -:   19:#include <stdexcept> // out_of_range
+        -:   20:#include <utility>   // !=, <=, >, >=
+        -:   21:
+        -:   22:// -----
+        -:   23:// using
+        -:   24:// -----
+        -:   25:
+        -:   26:using std::rel_ops::operator!=;
+        -:   27:using std::rel_ops::operator<=;
+        -:   28:using std::rel_ops::operator>;
+        -:   29:using std::rel_ops::operator>=;
+        -:   30:
+        -:   31:
+        -:   32:#define INNER_SIZE 100
+        -:   33:
+        -:   34:// -------
+        -:   35:// destroy
+        -:   36:// -------
+        -:   37:
+        -:   38:template <typename A, typename BI>
+function _Z7destroyISaIiEN8my_dequeIiS0_E8iteratorEET0_RT_S4_S4_ called 8 returned 100% blocks executed 100%
+        8:   39:BI destroy (A& a, BI b, BI e) {
+       44:   40:    while (b != e) {
+call    0 returned 100%
+branch  1 taken 78%
+branch  2 taken 22% (fallthrough)
+       28:   41:        --e;
+call    0 returned 100%
+       28:   42:        a.destroy(&*e);}
+call    0 returned 100%
+call    1 returned 100%
+        8:   43:    return b;}
+        -:   44:
+        -:   45:// ------------------
+        -:   46:// uninitialized_copy
+        -:   47:// ------------------
+        -:   48:
+        -:   49:template <typename A, typename II, typename BI>
+function _Z18uninitialized_copyISaIiEN8my_dequeIiS0_E14const_iteratorENS2_8iteratorEET1_RT_T0_S8_S5_ called 22 returned 100% blocks executed 65%
+       22:   50:BI uninitialized_copy (A& a, II b, II e, BI x) {
+       22:   51:    BI p = x;
+        -:   52:    try {
+     8130:   53:        while (b != e) {
+call    0 returned 100%
+branch  1 taken 99%
+branch  2 taken 1% (fallthrough)
+     8086:   54:            a.construct(&*x, *b);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+     8086:   55:            ++b;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+     8086:   56:            ++x;}}
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+    =====:   57:    catch (...) {
+call    0 never executed
+call    1 never executed
+    =====:   58:        destroy(a, p, x);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    =====:   59:        throw;}
+call    0 never executed
+       22:   60:    return x;}
+        -:   61:
+        -:   62:// ------------------
+        -:   63:// uninitialized_fill
+        -:   64:// ------------------
+        -:   65:
+        -:   66:template <typename A, typename BI, typename U>
+function _Z18uninitialized_fillISaIiEN8my_dequeIiS0_E8iteratorEiET0_RT_S4_S4_RKT1_ called 120 returned 100% blocks executed 60%
+      120:   67:BI uninitialized_fill (A& a, BI b, BI e, const U& v) {
+      120:   68:    BI p = b;
+        -:   69:    try {
+    17886:   70:        while (b != e) {
+call    0 returned 100%
+branch  1 taken 99%
+branch  2 taken 1% (fallthrough)
+    17646:   71:            a.construct(&*b, v);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+        -:   72:            //std::cout << "v " << v << std::endl;
+    17646:   73:            ++b;}}
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+    =====:   74:    catch (...) {
+call    0 never executed
+call    1 never executed
+    =====:   75:        destroy(a, p, b);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    =====:   76:        throw;}
+call    0 never executed
+      120:   77:    return e;}
+        -:   78:
+        -:   79:// -------
+        -:   80:// my_deque
+        -:   81:// -------
+        -:   82:
+        -:   83:template < typename T, typename A = std::allocator<T> >
+        -:   84:class my_deque {
+        -:   85:    public:
+        -:   86:        // --------
+        -:   87:        // typedefs
+        -:   88:        // --------
+        -:   89:
+        -:   90:        typedef A                                        allocator_type;
+        -:   91:        typedef typename allocator_type::value_type      value_type;
+        -:   92:
+        -:   93:        typedef typename allocator_type::size_type       size_type;
+        -:   94:        typedef typename allocator_type::difference_type difference_type;
+        -:   95:
+        -:   96:        typedef typename allocator_type::pointer         pointer;
+        -:   97:        typedef typename allocator_type::const_pointer   const_pointer;
+        -:   98:
+        -:   99:        typedef typename allocator_type::reference       reference;
+        -:  100:        typedef typename allocator_type::const_reference const_reference;
+        -:  101:
+        -:  102:
+        -:  103:        typedef typename A::template rebind<pointer>::other      B;
+        -:  104:
+        -:  105:    public:
+        -:  106:        // -----------
+        -:  107:        // operator ==
+        -:  108:        // -----------
+        -:  109:
+        -:  110:        /**
+        -:  111:         * <your documentation>
+        -:  112:         */
+function _ZeqRK8my_dequeIiSaIiEES3_ called 26 returned 100% blocks executed 100%
+       26:  113:        friend bool operator == (const my_deque& lhs, const my_deque& rhs) {
+        -:  114:            // <your code>
+        -:  115:            // you must use std::equal()
+        -:  116:            // The equals is calling the wrong begin & end
+        -:  117:            //std::cout << lhs.size() << "    " << rhs.size() << std::endl;
+       26:  118:            return (lhs.size() == rhs.size()) && std::equal(lhs.begin(), lhs.end(), rhs.begin());
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 92% (fallthrough)
+branch  3 taken 8%
+call    4 returned 100%
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 67% (fallthrough)
+branch  9 taken 33%
+        -:  119:            }
+        -:  120:
+        -:  121:        // ----------
+        -:  122:        // operator <
+        -:  123:        // ----------
+        -:  124:
+        -:  125:        /**
+        -:  126:         * <your documentation>
+        -:  127:         */
+function _ZltRK8my_dequeIiSaIiEES3_ called 8 returned 100% blocks executed 100%
+        8:  128:        friend bool operator < (const my_deque& lhs, const my_deque& rhs) {
+        -:  129:            // <your code>
+        -:  130:            // you must use std::lexicographical_compare()
+        -:  131:            //std::cout << lhs.size() << "    " << rhs.size() << std::endl;
+        -:  132:            // if (lhs.size() > rhs.size())
+        -:  133:            //     return std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+        8:  134:            return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+        -:  135:            }
+        -:  136:
+        -:  137:    private:
+        -:  138:        // ----
+        -:  139:        // data
+        -:  140:        // ----
+        -:  141:
+        -:  142:        allocator_type _a;
+        -:  143:        int OUTER_SIZE;
+        -:  144:
+        -:  145:        B _balloc; 
+        -:  146:
+        -:  147:        pointer* outer_b;
+        -:  148:        pointer* outer_e;
+        -:  149:        pointer _bstart;
+        -:  150:        pointer _estart;
+        -:  151:        pointer _b;
+        -:  152:        pointer _e;
+        -:  153:        pointer _l;
+        -:  154:
+        -:  155:        int _size;
+        -:  156:        int _offset;
+        -:  157:
+        -:  158:        // <your data>
+        -:  159:
+        -:  160:    private:
+        -:  161:        // -----
+        -:  162:        // valid
+        -:  163:        // -----
+        -:  164:
+function _ZNK8my_dequeIiSaIiEE5validEv called 1650 returned 100% blocks executed 100%
+     1650:  165:        bool valid () const {
+        -:  166:            // <your code>
+     1650:  167:            return true;
+        -:  168:}
+        -:  169:
+        -:  170:    public:
+        -:  171:        // --------
+        -:  172:        // iterator
+        -:  173:        // --------
+        -:  174:
+        -:  175:        class iterator {
+        -:  176:            public:
+        -:  177:                // --------
+        -:  178:                // typedefs
+        -:  179:                // --------
+        -:  180:
+        -:  181:                typedef          std::bidirectional_iterator_tag iterator_category;
+        -:  182:                typedef typename my_deque::value_type            value_type;
+        -:  183:                typedef typename my_deque::difference_type       difference_type;
+        -:  184:                typedef typename my_deque::pointer               pointer;
+        -:  185:                typedef typename my_deque::reference             reference;
+        -:  186:
+        -:  187:            public:
+        -:  188:                // -----------
+        -:  189:                // operator ==
+        -:  190:                // -----------
+        -:  191:
+        -:  192:                /**
+        -:  193:                 * <your documentation>
+        -:  194:                 */
+function _ZeqRKN8my_dequeIiSaIiEE8iteratorES4_ called 18500 returned 100% blocks executed 100%
+    18500:  195:                friend bool operator == (const iterator& lhs, const iterator& rhs) {
+        -:  196:                    // <your code>
+    18500:  197:                    if ((lhs._index == rhs._index))
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+        -:  198:                    {
+      176:  199:                        return true;
+        -:  200:                    }
+    18324:  201:                    return false;}
+        -:  202:
+        -:  203:                /**
+        -:  204:                 * <your documentation>
+        -:  205:                 */
+function _ZneRKN8my_dequeIiSaIiEE8iteratorES4_ called 18468 returned 100% blocks executed 100%
+    18468:  206:                friend bool operator != (const iterator& lhs, const iterator& rhs) {
+    18468:  207:                    return !(lhs == rhs);}
+call    0 returned 100%
+        -:  208:
+        -:  209:                // ----------
+        -:  210:                // operator +
+        -:  211:                // ----------
+        -:  212:
+        -:  213:                /**
+        -:  214:                 * <your documentation>
+        -:  215:                 */
+function _ZplN8my_dequeIiSaIiEE8iteratorEl called 140 returned 100% blocks executed 100%
+      140:  216:                friend iterator operator + (iterator lhs, difference_type rhs) {
+      140:  217:                    return lhs += rhs;}
+call    0 returned 100%
+        -:  218:
+        -:  219:                // ----------
+        -:  220:                // operator -
+        -:  221:                // ----------
+        -:  222:
+        -:  223:                /**
+        -:  224:                 * <your documentation>
+        -:  225:                 */
+function _ZmiN8my_dequeIiSaIiEE8iteratorEl called 26 returned 100% blocks executed 100%
+       26:  226:                friend iterator operator - (iterator lhs, difference_type rhs) {
+       26:  227:                    return lhs -= rhs;}
+call    0 returned 100%
+        -:  228:
+        -:  229:            private:
+        -:  230:                // ----
+        -:  231:                // data
+        -:  232:                // ----
+        -:  233:
+        -:  234:                // <your data>
+        -:  235:                my_deque* _d;
+        -:  236:                size_type _index;
+        -:  237:
+        -:  238:            private:
+        -:  239:                // -----
+        -:  240:                // valid
+        -:  241:                // -----
+        -:  242:
+function _ZNK8my_dequeIiSaIiEE8iterator5validEv called 27294 returned 100% blocks executed 100%
+    27294:  243:                bool valid () const {
+        -:  244:                    // <your code>
+        -:  245:                    if (_index >= 0)
+    27294:  246:                        return true;
+        -:  247:                    return false;
+        -:  248:            }
+        -:  249:
+        -:  250:            public:
+        -:  251:                // -----------
+        -:  252:                // constructor
+        -:  253:                // -----------
+        -:  254:
+        -:  255:                /**
+        -:  256:                 * <your documentation>
+        -:  257:                 */
+function _ZN8my_dequeIiSaIiEE8iteratorC2EPS1_m called 566 returned 100% blocks executed 75%
+      566:  258:                iterator (my_deque* d, size_type s) :
+        -:  259:
+        -:  260:                    _d (d),
+      566:  261:                    _index (s){
+        -:  262:                    // <your code>
+      566:  263:                    assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  264:
+        -:  265:                // Default copy, destructor, and copy assignment.
+        -:  266:                // iterator (const iterator&);
+        -:  267:                // ~iterator ();
+        -:  268:                // iterator& operator = (const iterator&);
+        -:  269:
+        -:  270:                // ----------
+        -:  271:                // operator *
+        -:  272:                // ----------
+        -:  273:
+        -:  274:                /**
+        -:  275:                 * <your documentation>
+        -:  276:                 */
+function _ZNK8my_dequeIiSaIiEE8iteratordeEv called 26708 returned 100% blocks executed 100%
+    26708:  277:                reference operator * () const {
+        -:  278:                    // <your code>
+        -:  279:                    
+    26708:  280:                    return (*_d)[_index];}
+call    0 returned 100%
+        -:  281:
+        -:  282:                // -----------
+        -:  283:                // operator ->
+        -:  284:                // -----------
+        -:  285:
+        -:  286:                /**
+        -:  287:                 * <your documentation>
+        -:  288:                 */
+        -:  289:                pointer operator -> () const {
+        -:  290:                    return &**this;}
+        -:  291:
+        -:  292:                // -----------
+        -:  293:                // operator ++
+        -:  294:                // -----------
+        -:  295:
+        -:  296:                /**
+        -:  297:                 * prefix ++ 
+        -:  298:                 * Doesn't check out of bounds
+        -:  299:                 */
+function _ZN8my_dequeIiSaIiEE8iteratorppEv called 26494 returned 100% blocks executed 80%
+    26494:  300:                iterator& operator ++ () {
+        -:  301:                    // <your code>
+    26494:  302:                    ++_index;
+    26494:  303:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+    26494:  304:                    return *this;}
+        -:  305:
+        -:  306:                /**
+        -:  307:                 * <your documentation>
+        -:  308:                 */
+        -:  309:                iterator operator ++ (int) {
+        -:  310:                    iterator x = *this;
+        -:  311:                    ++(*this);
+        -:  312:                    assert(valid());
+        -:  313:                    return x;}
+        -:  314:
+        -:  315:                // -----------
+        -:  316:                // operator --
+        -:  317:                // -----------
+        -:  318:
+        -:  319:                /**
+        -:  320:                 * Prefix --
+        -:  321:                 * Doesn't check out of bounds
+        -:  322:                 */
+function _ZN8my_dequeIiSaIiEE8iteratormmEv called 56 returned 100% blocks executed 80%
+       56:  323:                iterator& operator -- () {
+        -:  324:                    // <your code>
+       56:  325:                    --_index;
+       56:  326:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       56:  327:                    return *this;}
+        -:  328:
+        -:  329:                /**
+        -:  330:                 * <your documentation>
+        -:  331:                 */
+        -:  332:                iterator operator -- (int) {
+        -:  333:                    iterator x = *this;
+        -:  334:                    --(*this);
+        -:  335:                    assert(valid());
+        -:  336:                    return x;}
+        -:  337:
+        -:  338:                // -----------
+        -:  339:                // operator +=
+        -:  340:                // -----------
+        -:  341:
+        -:  342:                /**
+        -:  343:                 * <your documentation>
+        -:  344:                 */
+function _ZN8my_dequeIiSaIiEE8iteratorpLEl called 146 returned 100% blocks executed 80%
+      146:  345:                iterator& operator += (difference_type d) {
+        -:  346:                    // <your code>
+      146:  347:                    _index += d;
+      146:  348:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+      146:  349:                    return *this;}
+        -:  350:
+        -:  351:                // -----------
+        -:  352:                // operator -=
+        -:  353:                // -----------
+        -:  354:
+        -:  355:                /**
+        -:  356:                 * <your documentation>
+        -:  357:                 */
+function _ZN8my_dequeIiSaIiEE8iteratormIEl called 32 returned 100% blocks executed 80%
+       32:  358:                iterator& operator -= (difference_type d) {
+        -:  359:                    // <your code>
+       32:  360:                    _index -= d;
+       32:  361:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       32:  362:                    return *this;}};
+        -:  363:
+        -:  364:    public:
+        -:  365:        // --------------
+        -:  366:        // const_iterator
+        -:  367:        // --------------
+        -:  368:
+        -:  369:        class const_iterator {
+        -:  370:            public:
+        -:  371:                // --------
+        -:  372:                // typedefs
+        -:  373:                // --------
+        -:  374:
+        -:  375:                typedef          std::bidirectional_iterator_tag iterator_category;
+        -:  376:                typedef typename my_deque::value_type            value_type;
+        -:  377:                typedef typename my_deque::difference_type       difference_type;
+        -:  378:                typedef typename my_deque::const_pointer         pointer;
+        -:  379:                typedef typename my_deque::const_reference       reference;
+        -:  380:
+        -:  381:            public:
+        -:  382:                // -----------
+        -:  383:                // operator ==
+        -:  384:                // -----------
+        -:  385:
+        -:  386:                /**
+        -:  387:                 * <your documentation>
+        -:  388:                 */
+function _ZeqRKN8my_dequeIiSaIiEE14const_iteratorES4_ called 20498 returned 100% blocks executed 100%
+    20498:  389:                friend bool operator == (const const_iterator& lhs, const const_iterator& rhs) {
+        -:  390:                    // <your code>
+    20498:  391:                    if (lhs._cindex == rhs._cindex){
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+       94:  392:                        return true;
+        -:  393:                    }
+    20404:  394:                    return false;
+        -:  395:                }
+        -:  396:
+        -:  397:                /**
+        -:  398:                 * <your documentation>
+        -:  399:                 */
+function _ZneRKN8my_dequeIiSaIiEE14const_iteratorES4_ called 20470 returned 100% blocks executed 100%
+    20470:  400:                friend bool operator != (const const_iterator& lhs, const const_iterator& rhs) {
+    20470:  401:                    return !(lhs == rhs);}
+call    0 returned 100%
+        -:  402:
+        -:  403:                // ----------
+        -:  404:                // operator +
+        -:  405:                // ----------
+        -:  406:
+        -:  407:                /**
+        -:  408:                 * <your documentation>
+        -:  409:                 */
+function _ZplN8my_dequeIiSaIiEE14const_iteratorEl called 8 returned 100% blocks executed 100%
+        8:  410:                friend const_iterator operator + (const_iterator lhs, difference_type rhs) {
+        8:  411:                    return lhs += rhs;}
+call    0 returned 100%
+        -:  412:
+        -:  413:                // ----------
+        -:  414:                // operator -
+        -:  415:                // ----------
+        -:  416:
+        -:  417:                /**
+        -:  418:                 * <your documentation>
+        -:  419:                 */
+function _ZmiN8my_dequeIiSaIiEE14const_iteratorEl called 6 returned 100% blocks executed 100%
+        6:  420:                friend const_iterator operator - (const_iterator lhs, difference_type rhs) {
+        6:  421:                    return lhs -= rhs;}
+call    0 returned 100%
+        -:  422:
+        -:  423:            private:
+        -:  424:                // ----
+        -:  425:                // data
+        -:  426:                // ----
+        -:  427:
+        -:  428:                // <your data>
+        -:  429:                const my_deque* _cd;
+        -:  430:                size_type _cindex;
+        -:  431:
+        -:  432:            private:
+        -:  433:                // -----
+        -:  434:                // valid
+        -:  435:                // -----
+        -:  436:
+function _ZNK8my_dequeIiSaIiEE14const_iterator5validEv called 26952 returned 100% blocks executed 100%
+    26952:  437:                bool valid () const {
+        -:  438:                    // <your code>
+        -:  439:                    if (_cindex >= 0)
+    26952:  440:                        return true;
+        -:  441:                    return false;
+        -:  442:            }
+        -:  443:
+        -:  444:            public:
+        -:  445:                // -----------
+        -:  446:                // constructor
+        -:  447:                // -----------
+        -:  448:
+        -:  449:                /**
+        -:  450:                 * <your documentation>
+        -:  451:                 */
+function _ZN8my_dequeIiSaIiEE14const_iteratorC2EPKS1_m called 264 returned 100% blocks executed 75%
+      264:  452:                const_iterator (const my_deque* d, size_type s)  :
+        -:  453:
+        -:  454:                    _cd (d),
+      264:  455:                    _cindex (s){
+        -:  456:                    // <your code>
+      264:  457:                    assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  458:
+        -:  459:                // Default copy, destructor, and copy assignment.
+        -:  460:                // const_iterator (const const_iterator&);
+        -:  461:                // ~const_iterator ();
+        -:  462:                // const_iterator& operator = (const const_iterator&);
+        -:  463:
+        -:  464:                // ----------
+        -:  465:                // operator *
+        -:  466:                // ----------
+        -:  467:
+        -:  468:                /**
+        -:  469:                 * <your documentation>
+        -:  470:                 */
+function _ZNK8my_dequeIiSaIiEE14const_iteratordeEv called 26700 returned 100% blocks executed 100%
+    26700:  471:                reference operator * () const {
+        -:  472:                    // <your code>
+        -:  473:                    // dummy is just to be able to compile the skeleton, remove it
+    26700:  474:                    return (*_cd)[_cindex];}
+call    0 returned 100%
+        -:  475:
+        -:  476:                // -----------
+        -:  477:                // operator ->
+        -:  478:                // -----------
+        -:  479:
+        -:  480:                /**
+        -:  481:                 * <your documentation>
+        -:  482:                 */
+        -:  483:                pointer operator -> () const {
+        -:  484:                    return &**this;}
+        -:  485:
+        -:  486:                // -----------
+        -:  487:                // operator ++
+        -:  488:                // -----------
+        -:  489:
+        -:  490:                /**
+        -:  491:                 * <your documentation>
+        -:  492:                 */
+function _ZN8my_dequeIiSaIiEE14const_iteratorppEv called 26636 returned 100% blocks executed 80%
+    26636:  493:                const_iterator& operator ++ () {
+        -:  494:                    // <your code>
+    26636:  495:                    ++_cindex;
+    26636:  496:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+    26636:  497:                    return *this;}
+        -:  498:
+        -:  499:                /**
+        -:  500:                 * <your documentation>
+        -:  501:                 */
+        -:  502:                const_iterator operator ++ (int) {
+        -:  503:                    const_iterator x = *this;
+        -:  504:                    ++(*this);
+        -:  505:                    assert(valid());
+        -:  506:                    return x;}
+        -:  507:
+        -:  508:                // -----------
+        -:  509:                // operator --
+        -:  510:                // -----------
+        -:  511:
+        -:  512:                /**
+        -:  513:                 * <your documentation>
+        -:  514:                 */
+function _ZN8my_dequeIiSaIiEE14const_iteratormmEv called 26 returned 100% blocks executed 80%
+       26:  515:                const_iterator& operator -- () {
+        -:  516:                    // <your code>
+       26:  517:                    --_cindex;
+       26:  518:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       26:  519:                    return *this;}
+        -:  520:
+        -:  521:                /**
+        -:  522:                 * <your documentation>
+        -:  523:                 */
+        -:  524:                const_iterator operator -- (int) {
+        -:  525:                    const_iterator x = *this;
+        -:  526:                    --(*this);
+        -:  527:                    assert(valid());
+        -:  528:                    return x;}
+        -:  529:
+        -:  530:                // -----------
+        -:  531:                // operator +=
+        -:  532:                // -----------
+        -:  533:
+        -:  534:                /**
+        -:  535:                 * <your documentation>
+        -:  536:                 */
+function _ZN8my_dequeIiSaIiEE14const_iteratorpLEl called 14 returned 100% blocks executed 80%
+       14:  537:                const_iterator& operator += (difference_type d) {
+        -:  538:                    // <your code>
+       14:  539:                    _cindex+= d;
+       14:  540:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       14:  541:                    return *this;}
+        -:  542:
+        -:  543:                // -----------
+        -:  544:                // operator -=
+        -:  545:                // -----------
+        -:  546:
+        -:  547:                /**
+        -:  548:                 * <your documentation>
+        -:  549:                 */
+function _ZN8my_dequeIiSaIiEE14const_iteratormIEl called 12 returned 100% blocks executed 80%
+       12:  550:                const_iterator& operator -= (difference_type d) {
+        -:  551:                    // <your code>
+       12:  552:                    _cindex-=d;
+       12:  553:                    assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       12:  554:                    return *this;}};
+        -:  555:
+        -:  556:    public:
+        -:  557:        // ------------
+        -:  558:        // constructors
+        -:  559:        // ------------
+        -:  560:
+        -:  561:        /**
+        -:  562:         * Create a my_deque
+        -:  563:         */
+function _ZN8my_dequeIiSaIiEEC2ERKS0_ called 128 returned 100% blocks executed 75%
+      128:  564:        explicit my_deque (const allocator_type& a = allocator_type()) :
+        -:  565:
+      128:  566:                 _a (a) {
+call    0 returned 100%
+call    1 returned 100%
+call    2 never executed
+call    3 never executed
+      128:  567:                    _b = 0;
+      128:  568:                    _e = 0;
+      128:  569:                    OUTER_SIZE = 1;
+      128:  570:                    outer_b = _balloc.allocate(OUTER_SIZE);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+      128:  571:                    outer_e = outer_b+OUTER_SIZE;
+      128:  572:                    outer_b[0] = _a.allocate(INNER_SIZE);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+      128:  573:                    _size = 0;
+      128:  574:                    _bstart = 0;
+      128:  575:                    _estart = 0;
+      128:  576:                    int begin_index = (capacity() - size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+      128:  577:                    int end_index = (capacity() + size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+      128:  578:                    int outerbegin = begin_index/INNER_SIZE;
+      128:  579:                    int outerend = end_index/INNER_SIZE;
+        -:  580:                    // _bstart = outerbegin;
+        -:  581:                    // _estart = outerend;
+      128:  582:                    _b = &outer_b[outerbegin][begin_index];
+      128:  583:                    _e = &outer_b[outerend][end_index];
+      128:  584:                    _offset = begin_index;
+        -:  585:                    
+      128:  586:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  587:
+        -:  588:        /**
+        -:  589:         * <your documentation>
+        -:  590:         */
+function _ZN8my_dequeIiSaIiEEC2EmRKiRKS0_ called 120 returned 100% blocks executed 81%
+      120:  591:        explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) :
+        -:  592:
+      120:  593:            _a (a) {
+call    0 returned 100%
+call    1 returned 100%
+call    2 never executed
+call    3 never executed
+        -:  594:
+      120:  595:            OUTER_SIZE = 1;
+      120:  596:            outer_b = _balloc.allocate(OUTER_SIZE*sizeof(pointer));
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+      120:  597:            outer_e = outer_b+OUTER_SIZE;
+      120:  598:            outer_b[0] = _a.allocate(INNER_SIZE);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+      120:  599:            _size = 0;  
+        -:  600:
+        -:  601:            // _bstart = 0;
+        -:  602:            // _estart = 0;
+      120:  603:            _offset = 0;
+      120:  604:            _b = 0;
+      120:  605:            _e = 0;
+        -:  606:
+        -:  607:            // std::cout<<"begin " << *begin() << std::endl;
+        -:  608:            // std::cout<<"end " << *end() << std::endl;
+        -:  609:
+        -:  610:            // std::cout<<"_b " << *_b << std::endl;
+        -:  611:            // std::cout<<"_e " << *_e << std::endl;
+        -:  612:            //Need something to handle s being bigger than 100 (aka INNER_SIZE)
+        -:  613:
+        -:  614:            //std::cout << "intial size" << s << std::endl;
+        -:  615:
+      288:  616:            while (s >= capacity()){
+call    0 returned 100%
+branch  1 taken 29%
+branch  2 taken 71% (fallthrough)
+        -:  617:                 //std::cout << "intial capacity" << capacity() << std::endl;
+       48:  618:                resize(3*capacity());
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0% (throw)
+        -:  619:
+        -:  620:            }
+        -:  621:
+        -:  622:            
+        -:  623:
+        -:  624:            //std::cout << "out of while loop" << std::endl;
+      120:  625:            _size = s;  //move below resize calls to avoid issues when resizing
+        -:  626:
+        -:  627:            //std::cout<< "s " << size() << std::endl;
+        -:  628:            //std::cout <<"edn" << *end() << std::endl;
+        -:  629:
+        -:  630:            //Set _b & _e
+      120:  631:            int begin_index = (capacity() - size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+      120:  632:            int end_index = (capacity() + size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+        -:  633:
+      120:  634:            _offset = begin_index;
+        -:  635:
+        -:  636:            //std::cout<<"begin_index " << begin_index << std::endl;
+        -:  637:            //std::cout<<"end_index " << end_index << std::endl;
+        -:  638:
+      120:  639:            int outerbegin = begin_index/INNER_SIZE;
+      120:  640:            int outerend = end_index/INNER_SIZE;
+        -:  641:            // _bstart = outerbegin;
+        -:  642:            // _estart = outerend;
+        -:  643:
+        -:  644:            //std::cout<<"outerbegin " << outerbegin << std::endl;
+        -:  645:            //std::cout<<"outerend " << outerend << std::endl;
+        -:  646:
+      120:  647:            _b = &outer_b[outerbegin][begin_index];
+        -:  648:           // std::cout<<"_b " << *_b << std::endl;
+      120:  649:            _e = &outer_b[outerend][end_index];
+        -:  650:
+        -:  651:            
+        -:  652:            
+        -:  653:            
+        -:  654:            //std::cout<<"_e " << *_e << std::endl;
+        -:  655:
+        -:  656:           // std::cout<<"offset " << _offset << std::endl;
+        -:  657:
+        -:  658:           // std::cout<<"begin " << *begin() << std::endl;
+        -:  659:           // std::cout<<"end " << *end() << std::endl;
+        -:  660:
+      120:  661:            uninitialized_fill(_a, begin(), end(), v);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+        -:  662:            //std::cout << "after fill" << std::endl;
+      120:  663:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  664:
+        -:  665:        /**
+        -:  666:         * <your documentation>
+        -:  667:         */
+function _ZN8my_dequeIiSaIiEEC2ERKS1_ called 22 returned 100% blocks executed 83%
+       22:  668:        my_deque (const my_deque& that) : 
+        -:  669:
+       22:  670:            _a (that._a) {
+call    0 returned 100%
+call    1 returned 100%
+call    2 never executed
+call    3 never executed
+        -:  671:
+       22:  672:            OUTER_SIZE = that.OUTER_SIZE;
+        -:  673:
+        -:  674:            //std::cout << "outersize " << OUTER_SIZE << std::endl;
+       22:  675:            outer_b = _balloc.allocate(OUTER_SIZE);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+      252:  676:            for (int i = 0; i < OUTER_SIZE; ++i)
+branch  0 taken 91%
+branch  1 taken 9% (fallthrough)
+        -:  677:            {
+      230:  678:                outer_b[i] = _a.allocate(INNER_SIZE);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        -:  679:            }
+       22:  680:            _size = that.size();
+call    0 returned 100%
+        -:  681:
+        -:  682:            //std::cout<< "s " << size() << std::endl;
+        -:  683:            //std::cout <<"edn" << *end() << std::endl;
+        -:  684:
+        -:  685:            //Set _b & _e
+       22:  686:            int begin_index = (capacity() - size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+       22:  687:            int end_index = (capacity() + size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+        -:  688:
+       22:  689:            _offset = begin_index;
+        -:  690:
+        -:  691:            //std::cout<<"begin_index " << begin_index << std::endl;
+        -:  692:            //std::cout<<"end_index " << end_index << std::endl;
+        -:  693:
+       22:  694:            int outerbegin = begin_index/INNER_SIZE;
+       22:  695:            int outerend = end_index/INNER_SIZE;
+        -:  696:            // _bstart = outerbegin;
+        -:  697:            // _estart = outerend;
+        -:  698:
+        -:  699:            //std::cout<<"outerbegin " << outerbegin << std::endl;
+        -:  700:            //std::cout<<"outerend " << outerend << std::endl;
+        -:  701:
+       22:  702:            _b = &outer_b[outerbegin][begin_index];
+        -:  703:            //std::cout<<"_b " << *_b << std::endl;
+       22:  704:            _e = &outer_b[outerend][end_index];
+        -:  705:
+        -:  706:            
+        -:  707:            //std::cout<<"_e " << *_e << std::endl;
+        -:  708:            
+        -:  709:
+        -:  710:            //std::cout<<"offset " << _offset << std::endl;
+        -:  711:
+        -:  712:            //std::cout<<"begin " << *begin() << std::endl;
+        -:  713:            //std::cout<<"end " << *end() << std::endl;
+        -:  714:
+        -:  715:
+        -:  716:
+        -:  717:
+       22:  718:            uninitialized_copy(_a, that.begin(), that.end(), begin());
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+call    9 returned 100%
+branch 10 taken 100% (fallthrough)
+branch 11 taken 0% (throw)
+       22:  719:            assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       22:  720:        }
+        -:  721:
+        -:  722:        // ----------
+        -:  723:        // destructor
+        -:  724:        // ----------
+        -:  725:
+        -:  726:        /**
+        -:  727:         * <your documentation>
+        -:  728:         */
+function _ZN8my_dequeIiSaIiEED2Ev called 270 returned 100% blocks executed 91%
+      270:  729:        ~my_deque () {
+        -:  730:                // This deallocate is wrong
+        -:  731:                // 
+     1132:  732:            for (int i = 0; i < OUTER_SIZE; ++i)
+branch  0 taken 76%
+branch  1 taken 24% (fallthrough)
+        -:  733:            {
+        -:  734:                /* code */
+      862:  735:                _a.deallocate(outer_b[i], INNER_SIZE);
+call    0 returned 100%
+        -:  736:            }
+      270:  737:            _balloc.deallocate(outer_b, OUTER_SIZE);
+call    0 returned 100%
+      270:  738:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+call    4 returned 100%
+call    5 returned 100%
+        -:  739:
+        -:  740:        // ----------
+        -:  741:        // operator =
+        -:  742:        // ----------
+        -:  743:
+        -:  744:        /**
+        -:  745:         * <your documentation>
+        -:  746:         */
+function _ZN8my_dequeIiSaIiEEaSERKS1_ called 12 returned 100% blocks executed 29%
+       12:  747:        my_deque& operator = (const my_deque& rhs) {
+        -:  748:            // <your code>
+        -:  749:            //*this = my_deque(rhs);
+       12:  750:            if (*this == rhs)
+call    0 returned 100%
+branch  1 taken 33% (fallthrough)
+branch  2 taken 67%
+        4:  751:                return *this;
+        8:  752:            if (rhs.size() == size())
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0%
+        8:  753:                std::copy(rhs.begin(), rhs.end(), begin());
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+    #####:  754:            else if (rhs.size() < size()) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  755:                std::copy(rhs.begin(), rhs.end(), begin());
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:  756:                _size = rhs.size();}
+call    0 never executed
+    #####:  757:            else if (rhs.size() <= capacity()) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  758:                std::copy(rhs.begin(), rhs.begin() + size(), begin());
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    #####:  759:                _e = &*uninitialized_copy(_a, rhs.begin() + size(), rhs.end(), end());}
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+        -:  760:            else {
+    #####:  761:                clear();
+call    0 never executed
+    #####:  762:                reserve(rhs.size());
+call    0 never executed
+call    1 never executed
+    #####:  763:                _e = &*uninitialized_copy(_a, rhs.begin(), rhs.end(), begin());}
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+        8:  764:            assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        8:  765:            return *this;
+        -:  766:}
+        -:  767:
+        -:  768:        // -----------
+        -:  769:        // operator []
+        -:  770:        // -----------
+        -:  771:
+        -:  772:        /**
+        -:  773:         * <your documentation>
+        -:  774:         */
+function _ZN8my_dequeIiSaIiEEixEm called 53414 returned 100% blocks executed 25%
+    53414:  775:         reference operator [] (size_type index) {
+        -:  776:            // This needs to be capacity - beginning padding
+        -:  777:            //std::cout << "capacity " << capacity() << std::endl;
+    53414:  778:            if (index > (_size) || (index < 0))
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:  779:                throw std::out_of_range("Deque: []");
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+call    8 never executed
+call    9 never executed
+call   10 never executed
+call   11 never executed
+call   12 never executed
+call   13 never executed
+        -:  780:
+        -:  781:            // Do mod & division to find index, from _b index
+    53414:  782:            int outer_b_index = (index + _offset )/INNER_SIZE;
+        -:  783:
+        -:  784:            
+    53414:  785:            int inner_index = (index + _offset)%INNER_SIZE;
+        -:  786:            
+        -:  787:
+    53414:  788:            return outer_b[outer_b_index][inner_index];
+        -:  789:        }
+        -:  790:
+        -:  791:        // *
+        -:  792:        //  * <your documentation>
+        -:  793:         
+function _ZNK8my_dequeIiSaIiEEixEm called 26700 returned 100% blocks executed 29%
+    26700:  794:         const_reference operator [] (size_type index) const {
+    26700:  795:            if (index > (_size ) || (index < 0))
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:  796:                throw std::out_of_range("Deque: const []");
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+call    8 never executed
+call    9 never executed
+call   10 never executed
+call   11 never executed
+call   12 never executed
+call   13 never executed
+    26700:  797:             return const_cast<my_deque&>(*this)[index];}
+call    0 returned 100%
+        -:  798:
+        -:  799:        // --
+        -:  800:        // at
+        -:  801:        // --
+        -:  802:
+        -:  803:        /**
+        -:  804:         * <your documentation>
+        -:  805:         */
+function _ZN8my_dequeIiSaIiEE2atEm called 116 returned 100% blocks executed 38%
+      116:  806:        reference at (size_type index) {
+      116:  807:            if (index >= (capacity()- _offset))
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+    #####:  808:                throw std::out_of_range("Deque: at");
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+call    8 never executed
+call    9 never executed
+call   10 never executed
+call   11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+      116:  809:            return *(begin()+index);}
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+        -:  810:
+        -:  811:        /**
+        -:  812:         * <your documentation>
+        -:  813:         */
+        -:  814:        const_reference at (size_type index) const {
+        -:  815:            return const_cast<my_deque*>(this)->at(index);}
+        -:  816:
+        -:  817:        // ----
+        -:  818:        // back
+        -:  819:        // ----
+        -:  820:
+        -:  821:        /**
+        -:  822:         * <your documentation>
+        -:  823:         */
+function _ZN8my_dequeIiSaIiEE4backEv called 16 returned 100% blocks executed 89%
+       16:  824:        reference back () {
+       16:  825:            assert(!empty());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       16:  826:            return *(end() - 1);}
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+        -:  827:
+        -:  828:        /**
+        -:  829:         * <your documentation>
+        -:  830:         */
+        -:  831:        const_reference back () const {
+        -:  832:            return const_cast<my_deque*>(this)->back();}
+        -:  833:
+        -:  834:        // -----
+        -:  835:        // begin
+        -:  836:        // -----
+        -:  837:
+        -:  838:        /**
+        -:  839:         * <your documentation>
+        -:  840:         */
+function _ZN8my_dequeIiSaIiEE5beginEv called 384 returned 100% blocks executed 100%
+      384:  841:        iterator begin () {
+      384:  842:            return iterator(this, 0);
+call    0 returned 100%
+        -:  843:        }
+        -:  844:
+        -:  845:        /**
+        -:  846:         * <your documentation>
+        -:  847:         */
+function _ZNK8my_dequeIiSaIiEE5beginEv called 168 returned 100% blocks executed 100%
+      168:  848:        const_iterator begin () const {
+        -:  849:            // <your code>
+      168:  850:            return const_iterator(this,0 );}
+call    0 returned 100%
+        -:  851:
+        -:  852:
+        -:  853:
+        -:  854:        //----------
+        -:  855:        // capacity
+        -:  856:        // ---------
+        -:  857:
+        -:  858:        /**
+        -:  859:         * Helper function for resize, reserve
+        -:  860:         */
+        -:  861:
+function _ZNK8my_dequeIiSaIiEE8capacityEv called 1894 returned 100% blocks executed 100%
+     1894:  862:        size_type capacity () const {
+        -:  863:            //std::cout << "capacity " << INNER_SIZE*OUTER_SIZE << std::endl;
+     1894:  864:            return INNER_SIZE*OUTER_SIZE;}
+        -:  865:
+        -:  866:        // -----
+        -:  867:        // clear
+        -:  868:        // -----
+        -:  869:
+        -:  870:        /**
+        -:  871:         * <your documentation>
+        -:  872:         */
+function _ZN8my_dequeIiSaIiEE5clearEv called 8 returned 100% blocks executed 83%
+        8:  873:        void clear () {
+        8:  874:            resize(0);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        8:  875:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  876:
+        -:  877:        // -----
+        -:  878:        // empty
+        -:  879:        // -----
+        -:  880:
+        -:  881:        /**
+        -:  882:         * <your documentation>
+        -:  883:         */
+function _ZNK8my_dequeIiSaIiEE5emptyEv called 70 returned 100% blocks executed 100%
+       70:  884:        bool empty () const {
+       70:  885:            return !size();}
+call    0 returned 100%
+        -:  886:
+        -:  887:        // ---
+        -:  888:        // end
+        -:  889:        // ---
+        -:  890:
+        -:  891:        /**
+        -:  892:         * <your documentation>
+        -:  893:         */
+function _ZN8my_dequeIiSaIiEE3endEv called 170 returned 100% blocks executed 100%
+      170:  894:        iterator end () {
+        -:  895:            // <your code>
+      170:  896:            return iterator(this, _size );}
+call    0 returned 100%
+        -:  897:
+        -:  898:        /**
+        -:  899:         * <your documentation>
+        -:  900:         */ 
+function _ZNK8my_dequeIiSaIiEE3endEv called 96 returned 100% blocks executed 100%
+       96:  901:        const_iterator end () const {
+        -:  902:            // <your code>
+       96:  903:            return const_iterator(this, _size );}
+call    0 returned 100%
+        -:  904:
+        -:  905:        // -----
+        -:  906:        // erase
+        -:  907:        // -----
+        -:  908:
+        -:  909:        /**
+        -:  910:         * Change return
+        -:  911:         */
+function _ZN8my_dequeIiSaIiEE5eraseENS1_8iteratorE called 6 returned 100% blocks executed 94%
+        6:  912:        iterator erase (iterator it) {
+        -:  913:            // <your code>
+        6:  914:            auto curr = it;
+        6:  915:            auto next = ++it;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        6:  916:            auto end = iterator(this, _size);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+       20:  917:            while(next != end){
+call    0 returned 100%
+branch  1 taken 57%
+branch  2 taken 43% (fallthrough)
+        8:  918:                *curr = *next;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+        8:  919:                ++next;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        8:  920:                ++curr;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        -:  921:            }
+        6:  922:            pop_back();
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        6:  923:            assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        6:  924:            return curr;}
+        -:  925:
+        -:  926:        // -----
+        -:  927:        // front
+        -:  928:        // -----
+        -:  929:
+        -:  930:        /**
+        -:  931:         * <your documentation>
+        -:  932:         */
+function _ZN8my_dequeIiSaIiEE5frontEv called 20 returned 100% blocks executed 88%
+       20:  933:        reference front () {
+       20:  934:            assert(!empty());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+       20:  935:            return *begin();}
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0% (throw)
+        -:  936:
+        -:  937:        /**
+        -:  938:         * <your documentation>
+        -:  939:         */
+        -:  940:        const_reference front () const {
+        -:  941:            return const_cast<my_deque*>(this)->front();}
+        -:  942:
+        -:  943:        // ------
+        -:  944:        // insert
+        -:  945:        // ------
+        -:  946:
+        -:  947:        /**
+        -:  948:         * Change return
+        -:  949:         */
+function _ZN8my_dequeIiSaIiEE6insertENS1_8iteratorERKi called 6 returned 100% blocks executed 95%
+        6:  950:        iterator insert (iterator it, const_reference val) {
+        -:  951:            // <your code>
+        6:  952:            auto curr = it;
+        6:  953:            auto next = ++it;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        6:  954:            auto end = iterator(this, _size);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        6:  955:            auto tmp = *it;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+       32:  956:            while(next != end){
+call    0 returned 100%
+branch  1 taken 77%
+branch  2 taken 23% (fallthrough)
+       20:  957:                tmp = *next;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+       20:  958:                *next = *curr;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+       20:  959:                ++next;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+       20:  960:                ++curr;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        -:  961:            }
+        6:  962:            push_back(tmp);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        6:  963:            --it;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        6:  964:            *it = val;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        6:  965:            assert(valid());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  966:
+        -:  967:
+        6:  968:            return it;
+        -:  969:}
+        -:  970:
+        -:  971:        // ---
+        -:  972:        // pop
+        -:  973:        // ---
+        -:  974:
+        -:  975:        /**
+        -:  976:         * <your documentation>
+        -:  977:         */
+function _ZN8my_dequeIiSaIiEE8pop_backEv called 14 returned 100% blocks executed 71%
+       14:  978:        void pop_back () {
+       14:  979:            assert(!empty());
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  980:            //resize(size() - 1);
+       14:  981:            --_e;
+       14:  982:            --_size;
+       14:  983:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  984:
+        -:  985:        /**
+        -:  986:         * <your documentation>
+        -:  987:         */
+function _ZN8my_dequeIiSaIiEE9pop_frontEv called 6 returned 100% blocks executed 75%
+        6:  988:        void pop_front () {
+        -:  989:            // <your code>
+        6:  990:            ++_offset;
+        6:  991:            --_b;
+        6:  992:            --_size;
+        6:  993:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -:  994:
+        -:  995:        // ----
+        -:  996:        // push
+        -:  997:        // ----
+        -:  998:
+        -:  999:        /**
+        -: 1000:         * <your documentation>
+        -: 1001:         */
+function _ZN8my_dequeIiSaIiEE9push_backERKi called 898 returned 100% blocks executed 70%
+      898: 1002:        void push_back (const_reference v) {
+      898: 1003:            if (_size+_offset < capacity()){
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0%
+      898: 1004:                ++_size;
+      898: 1005:                *_e = v;
+        -: 1006:               // std::cout << "pushed value: " << v << std::endl;
+      898: 1007:                ++_e;
+        -: 1008:            }
+        -: 1009:            else{
+    #####: 1010:                resize(_size+_offset);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -: 1011:            }
+        -: 1012:
+        -: 1013:
+      898: 1014:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -: 1015:
+        -: 1016:        /**
+        -: 1017:         * <your documentation>
+        -: 1018:         */
+function _ZN8my_dequeIiSaIiEE10push_frontERKi called 58 returned 100% blocks executed 86%
+       58: 1019:        void push_front (const_reference v) {
+        -: 1020:            // <your code>
+       58: 1021:            if (_size < capacity()){
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0%
+       58: 1022:                ++_size;
+       58: 1023:                --_b;
+       58: 1024:                --_offset;
+       58: 1025:                *_b = v;
+        -: 1026:            }
+       58: 1027:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -: 1028:
+        -: 1029:        // ------
+        -: 1030:        // resize
+        -: 1031:        // ------
+        -: 1032:
+        -: 1033:        /**
+        -: 1034:         * <your documentation>
+        -: 1035:         */
+function _ZN8my_dequeIiSaIiEE6resizeEmRKi called 62 returned 100% blocks executed 92%
+       62: 1036:        void resize (size_type s, const_reference v = value_type()) {
+        -: 1037:            //std::cout << size() << std::endl;
+        -: 1038:            //std::cout << s << std::endl;
+        -: 1039:            //std::cout << capacity() << std::endl;
+        -: 1040:            // if (s == size())
+        -: 1041:            //     return;
+       62: 1042:            if (s < size()){
+call    0 returned 100%
+branch  1 taken 13% (fallthrough)
+branch  2 taken 87%
+        8: 1043:                _e = &*destroy(_a, begin() + s, end());
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+branch  5 taken 100% (fallthrough)
+branch  6 taken 0% (throw)
+call    7 never executed
+        8: 1044:                _size = s;
+        -: 1045:            }
+        -: 1046:                
+       54: 1047:            else if (s < capacity()){
+call    0 returned 100%
+branch  1 taken 11% (fallthrough)
+branch  2 taken 89%
+        6: 1048:                _size = s;
+        6: 1049:                int begin_index = (capacity() - size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+        6: 1050:                int end_index = (capacity() + size()) / 2;
+call    0 returned 100%
+call    1 returned 100%
+        -: 1051:
+        6: 1052:                _offset = begin_index;
+        -: 1053:
+        -: 1054:                //std::cout<<"begin_index " << begin_index << std::endl;
+        -: 1055:                //std::cout<<"end_index " << end_index << std::endl;
+        -: 1056:
+        6: 1057:                int outerbegin = begin_index/INNER_SIZE;
+        6: 1058:                int outerend = end_index/INNER_SIZE;
+        -: 1059:                // _bstart = outerbegin;
+        -: 1060:                // _estart = outerend;
+        -: 1061:
+        -: 1062:                //std::cout<<"outerbegin " << outerbegin << std::endl;
+        -: 1063:                //std::cout<<"outerend " << outerend << std::endl;
+        -: 1064:
+        6: 1065:                _b = &outer_b[outerbegin][begin_index];
+        -: 1066:                //std::cout<<"_b " << *_b << std::endl;
+        6: 1067:                _e = &outer_b[outerend][end_index];
+       68: 1068:                return;
+        -: 1069:                // std::cout<<"dfsfsd" <<std::endl;                
+        -: 1070:                // std::cout<<"begin" << *begin() << std::endl;
+        -: 1071:                // std::cout <<"edn" << *end() << std::endl;
+        -: 1072:
+        -: 1073:                // //_e = &*uninitialized_fill(_a, end(), begin() + s, v);
+        -: 1074:                // std::cout<<"dfsfsd" <<std::endl;                
+        -: 1075:            }
+        -: 1076:            else {
+        -: 1077:                //std::cout << "else reserve" << std::endl;
+       48: 1078:                reserve(std::max(2 * size(), s));
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+        -: 1079:                //resize(s, v);
+        -: 1080:            }
+       56: 1081:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -: 1082:
+        -: 1083:        //-----------
+        -: 1084:        // reserve
+        -: 1085:        // ---------
+        -: 1086:
+        -: 1087:        /** 
+        -: 1088:         * Helper function for resize
+        -: 1089:         */
+function _ZN8my_dequeIiSaIiEE7reserveEm called 48 returned 100% blocks executed 94%
+       48: 1090:         void reserve (size_type c) {
+        -: 1091:            //std::cout << "reserve" << std::endl;
+       48: 1092:            pointer* tmp = _balloc.allocate(OUTER_SIZE*3*sizeof(pointer));
+call    0 returned 100%
+      240: 1093:            for(int i = 0; i < OUTER_SIZE; ++i){
+branch  0 taken 80%
+branch  1 taken 20% (fallthrough)
+      192: 1094:                tmp[OUTER_SIZE+i] = outer_b[i];
+        -: 1095:            }
+        -: 1096:
+        -: 1097:            // _bstart = ((_bstart - *outer_b) + OUTER_SIZE);
+        -: 1098:            // _estart = ((_estart - *outer_b) + OUTER_SIZE);
+        -: 1099:
+       48: 1100:            _balloc.deallocate(outer_b, OUTER_SIZE);
+call    0 returned 100%
+        -: 1101:
+       48: 1102:            outer_b = tmp;
+        -: 1103:
+       48: 1104:            OUTER_SIZE*=3;
+        -: 1105:
+      624: 1106:            for (int i = 0; i < OUTER_SIZE; ++i)
+branch  0 taken 92%
+branch  1 taken 8% (fallthrough)
+        -: 1107:            {
+      576: 1108:                if ((i >= OUTER_SIZE/3) && (i < 2*OUTER_SIZE/3)){
+branch  0 taken 67% (fallthrough)
+branch  1 taken 33%
+branch  2 taken 50% (fallthrough)
+branch  3 taken 50%
+      192: 1109:                    continue;
+        -: 1110:                }
+      384: 1111:                outer_b[i] = _a.allocate(INNER_SIZE);
+call    0 returned 100%
+        -: 1112:            }
+       48: 1113:            outer_e = outer_b+OUTER_SIZE;
+        -: 1114:            
+       48: 1115:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+        -: 1116:
+        -: 1117:        // ----
+        -: 1118:        // size
+        -: 1119:        // ----
+        -: 1120:
+        -: 1121:        /**
+        -: 1122:         * <your documentation>
+        -: 1123:         */
+function _ZNK8my_dequeIiSaIiEE4sizeEv called 890 returned 100% blocks executed 100%
+      890: 1124:        size_type size () const {
+        -: 1125:            // <your code>
+        -: 1126:            //std::cout << "size "<< _size << std::endl;
+      890: 1127:            return _size;}
+        -: 1128:
+        -: 1129:        // ----
+        -: 1130:        // swap
+        -: 1131:        // ----
+        -: 1132:
+        -: 1133:        /**
+        -: 1134:         * <your documentation>
+        -: 1135:         */
+function _ZN8my_dequeIiSaIiEE4swapERS1_ called 2 returned 100% blocks executed 73%
+        2: 1136:        void swap (my_deque& rhs) {
+        -: 1137:            // <your code>
+        2: 1138:            my_deque tmp(*this);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        2: 1139:            *this = rhs;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        2: 1140:            rhs = tmp;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        2: 1141:            assert(valid());}
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+call    4 returned 100%
+call    5 never executed
+        -: 1142:
+        -: 1143:
+        -: 1144:            };
+        -: 1145:
+        -: 1146:#endif // Deque_h
