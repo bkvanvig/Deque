@@ -114,7 +114,7 @@ class my_deque {
             // <your code>
             // you must use std::equal()
             // The equals is calling the wrong begin & end
-            std::cout << lhs.size() << "    " << rhs.size() << std::endl;
+            //std::cout << lhs.size() << "    " << rhs.size() << std::endl;
             return (lhs.size() == rhs.size()) && std::equal(lhs.begin(), lhs.end(), rhs.begin());
             }
 
@@ -610,20 +610,20 @@ class my_deque {
             // std::cout<<"_e " << *_e << std::endl;
             //Need something to handle s being bigger than 100 (aka INNER_SIZE)
 
-            std::cout << "intial size" << s << std::endl;
+            //std::cout << "intial size" << s << std::endl;
 
             while (s >= capacity()){
-                 std::cout << "intial capacity" << capacity() << std::endl;
+                 //std::cout << "intial capacity" << capacity() << std::endl;
                 resize(3*capacity());
 
             }
 
             
 
-            std::cout << "out of while loop" << std::endl;
+            //std::cout << "out of while loop" << std::endl;
             _size = s;  //move below resize calls to avoid issues when resizing
 
-            std::cout<< "s " << size() << std::endl;
+            //std::cout<< "s " << size() << std::endl;
             //std::cout <<"edn" << *end() << std::endl;
 
             //Set _b & _e
@@ -632,33 +632,34 @@ class my_deque {
 
             _offset = begin_index;
 
-            std::cout<<"begin_index " << begin_index << std::endl;
-            std::cout<<"end_index " << end_index << std::endl;
+            //std::cout<<"begin_index " << begin_index << std::endl;
+            //std::cout<<"end_index " << end_index << std::endl;
 
             int outerbegin = begin_index/INNER_SIZE;
             int outerend = end_index/INNER_SIZE;
             // _bstart = outerbegin;
             // _estart = outerend;
 
-            std::cout<<"outerbegin " << outerbegin << std::endl;
-            std::cout<<"outerend " << outerend << std::endl;
+            //std::cout<<"outerbegin " << outerbegin << std::endl;
+            //std::cout<<"outerend " << outerend << std::endl;
 
-            _b = &(*this)[begin_index];
-
-            std::cout<<"_b " << *_b << std::endl;
-            _e = &(*this)[end_index];
+            _b = &outer_b[outerbegin][begin_index];
+           // std::cout<<"_b " << *_b << std::endl;
+            _e = &outer_b[outerend][end_index];
 
             
-            std::cout<<"_e " << *_e << std::endl;
+            
+            
+            //std::cout<<"_e " << *_e << std::endl;
             
 
-            std::cout<<"offset " << _offset << std::endl;
+           // std::cout<<"offset " << _offset << std::endl;
 
-            std::cout<<"begin " << *begin() << std::endl;
-            std::cout<<"end " << *end() << std::endl;
+           // std::cout<<"begin " << *begin() << std::endl;
+           // std::cout<<"end " << *end() << std::endl;
 
             uninitialized_fill(_a, begin(), end(), v);
-            std::cout << "after fill" << std::endl;
+            //std::cout << "after fill" << std::endl;
             assert(valid());}
 
         /**
@@ -670,7 +671,7 @@ class my_deque {
 
             OUTER_SIZE = that.OUTER_SIZE;
 
-            std::cout << "outersize " << OUTER_SIZE << std::endl;
+            //std::cout << "outersize " << OUTER_SIZE << std::endl;
             outer_b = _balloc.allocate(OUTER_SIZE);
             for (int i = 0; i < OUTER_SIZE; ++i)
             {
@@ -678,7 +679,7 @@ class my_deque {
             }
             _size = that.size();
 
-            std::cout<< "s " << size() << std::endl;
+            //std::cout<< "s " << size() << std::endl;
             //std::cout <<"edn" << *end() << std::endl;
 
             //Set _b & _e
@@ -687,30 +688,29 @@ class my_deque {
 
             _offset = begin_index;
 
-            std::cout<<"begin_index " << begin_index << std::endl;
-            std::cout<<"end_index " << end_index << std::endl;
+            //std::cout<<"begin_index " << begin_index << std::endl;
+            //std::cout<<"end_index " << end_index << std::endl;
 
             int outerbegin = begin_index/INNER_SIZE;
             int outerend = end_index/INNER_SIZE;
             // _bstart = outerbegin;
             // _estart = outerend;
 
-            std::cout<<"outerbegin " << outerbegin << std::endl;
-            std::cout<<"outerend " << outerend << std::endl;
+            //std::cout<<"outerbegin " << outerbegin << std::endl;
+            //std::cout<<"outerend " << outerend << std::endl;
 
-            _b = &(*this)[begin_index];
-
-            std::cout<<"_b " << *_b << std::endl;
-            _e = &(*this)[end_index];
+            _b = &outer_b[outerbegin][begin_index];
+            //std::cout<<"_b " << *_b << std::endl;
+            _e = &outer_b[outerend][end_index];
 
             
-            std::cout<<"_e " << *_e << std::endl;
+            //std::cout<<"_e " << *_e << std::endl;
             
 
-            std::cout<<"offset " << _offset << std::endl;
+            //std::cout<<"offset " << _offset << std::endl;
 
-            std::cout<<"begin " << *begin() << std::endl;
-            std::cout<<"end " << *end() << std::endl;
+            //std::cout<<"begin " << *begin() << std::endl;
+            //std::cout<<"end " << *end() << std::endl;
 
 
 
@@ -964,7 +964,10 @@ class my_deque {
                 *_e = v;
                 ++_e;
             }
-            
+            else{
+                resize(_size+_offset);
+            }
+
 
             assert(valid());}
 
@@ -989,9 +992,9 @@ class my_deque {
          * <your documentation>
          */
         void resize (size_type s, const_reference v = value_type()) {
-            std::cout << size() << std::endl;
-            std::cout << s << std::endl;
-            std::cout << capacity() << std::endl;
+            //std::cout << size() << std::endl;
+            //std::cout << s << std::endl;
+            //std::cout << capacity() << std::endl;
             // if (s == size())
             //     return;
             if (s < size()){
@@ -1006,21 +1009,20 @@ class my_deque {
 
                 _offset = begin_index;
 
-                std::cout<<"begin_index " << begin_index << std::endl;
-                std::cout<<"end_index " << end_index << std::endl;
+                //std::cout<<"begin_index " << begin_index << std::endl;
+                //std::cout<<"end_index " << end_index << std::endl;
 
                 int outerbegin = begin_index/INNER_SIZE;
                 int outerend = end_index/INNER_SIZE;
                 // _bstart = outerbegin;
                 // _estart = outerend;
 
-                std::cout<<"outerbegin " << outerbegin << std::endl;
-                std::cout<<"outerend " << outerend << std::endl;
+                //std::cout<<"outerbegin " << outerbegin << std::endl;
+                //std::cout<<"outerend " << outerend << std::endl;
 
-                _b = &(*this)[begin_index];
-
-                std::cout<<"_b " << *_b << std::endl;
-                _e = &(*this)[end_index];
+                _b = &outer_b[outerbegin][begin_index];
+                //std::cout<<"_b " << *_b << std::endl;
+                _e = &outer_b[outerend][end_index];
                 return;
                 // std::cout<<"dfsfsd" <<std::endl;                
                 // std::cout<<"begin" << *begin() << std::endl;
@@ -1030,7 +1032,7 @@ class my_deque {
                 // std::cout<<"dfsfsd" <<std::endl;                
             }
             else {
-                std::cout << "else reserve" << std::endl;
+                //std::cout << "else reserve" << std::endl;
                 reserve(std::max(2 * size(), s));
                 //resize(s, v);
             }
@@ -1044,7 +1046,7 @@ class my_deque {
          * Helper function for resize
          */
          void reserve (size_type c) {
-            std::cout << "reserve" << std::endl;
+            //std::cout << "reserve" << std::endl;
             pointer* tmp = _balloc.allocate(OUTER_SIZE*3*sizeof(pointer));
             for(int i = 0; i < OUTER_SIZE; ++i){
                 tmp[OUTER_SIZE+i] = outer_b[i];
@@ -1094,7 +1096,8 @@ class my_deque {
             if (_a == rhs._a) {
                 std::swap(_b, rhs._b);
                 std::swap(_e, rhs._e);
-                std::swap(_l, rhs._l);}
+                //std::swap(_l, rhs._l);
+            }
             else {
                 my_deque x(*this);
                 *this = rhs;

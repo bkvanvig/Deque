@@ -477,14 +477,12 @@ TYPED_TEST(Deque_Fixture, assign_3){
 // -------------------
 TYPED_TEST(Deque_Fixture, access_1){
 	typedef typename TestFixture::deque_type deque_type;
-
+    int i = 0;
     deque_type x;
-    x.push_back(0);
-    x.push_back(1);
-    x.push_back(2);
-    x.push_back(3);
-    x.push_back(4);
-    x.push_back(5);
+    while (i <49){
+        x.push_back(i++);
+    }
+    
 
     ASSERT_EQ(x[2], 2);
 }
@@ -492,26 +490,22 @@ TYPED_TEST(Deque_Fixture, access_1){
 TYPED_TEST(Deque_Fixture, access_2){
     typedef typename TestFixture::deque_type deque_type;
 
+    int i = 0;
     deque_type x;
-    x.push_back(0);
-    x.push_back(1);
-    x.push_back(2);
-    x.push_back(3);
-    x.push_back(4);
-    x.push_back(5);
+    while (i <49){
+        x.push_back(i++);
+    }
 
     ASSERT_EQ(x[5], 5);
 }
 TYPED_TEST(Deque_Fixture, access_3){
 	typedef typename TestFixture::deque_type deque_type;
 
+    int i = 0;
     deque_type x;
-    x.push_back(0);
-    x.push_back(1);
-    x.push_back(2);
-    x.push_back(3);
-    x.push_back(4);
-    x.push_back(5);
+    while (i <49){
+        x.push_back(i++);
+    }
 
     ASSERT_EQ(x[0], 0);
 }
@@ -974,12 +968,16 @@ TYPED_TEST(Deque_Fixture, push_back_1){
     typedef typename TestFixture::deque_type deque_type;
 
     deque_type x;
-    x.push_back(0);
-    x.push_back(1);
-    x.push_back(2);
-    x.push_back(3);
-    x.push_back(4);
-    x.push_back(5);
+    // x.push_back(0);
+    // x.push_back(1);
+    // x.push_back(2);
+    // x.push_back(3);
+    // x.push_back(4);
+    // x.push_back(5);
+    int i = 0;
+    while (i < 40){
+        x.push_back(i++);
+    }
 
     ASSERT_EQ(x.at(0), 0);
     ASSERT_EQ(x.at(1), 1);
@@ -987,7 +985,7 @@ TYPED_TEST(Deque_Fixture, push_back_1){
     ASSERT_EQ(x.at(3), 3);
     ASSERT_EQ(x.at(4), 4);
     ASSERT_EQ(x.at(5), 5);
-    ASSERT_EQ(x.size(), 6);
+    ASSERT_EQ(x.size(), 40);
 }
 
 TYPED_TEST(Deque_Fixture, push_back_2){
