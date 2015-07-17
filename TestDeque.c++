@@ -1950,7 +1950,6 @@ TYPED_TEST(Deque_Fixture, const_it_minuseq_3) {
     typename deque_type::const_iterator z = x.begin();
     z -= -2;
     ASSERT_TRUE(y==z);
-    
 }
 
 
