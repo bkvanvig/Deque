@@ -1,0 +1,236 @@
+commit 8edc040b0dd0895589e8787eb25e306c60e38665
+Merge: b047958 0299d20
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Fri Jul 17 19:10:04 2015 -0500
+
+    Merge branch 'master' of https://github.com/bkvanvig/cs378-deque
+
+commit b04795891973c6e474bd73ad33440603e87fb68b
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Fri Jul 17 19:09:54 2015 -0500
+
+    added gitignore
+
+commit 0299d2014c00f67415b76b9fbe55a68fa3000ae6
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Fri Jul 17 19:09:24 2015 -0500
+
+    updated readme
+
+commit cf61ddd5fe0d02b6ebf752d0e7f5e4b5898fbcf5
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Fri Jul 17 19:06:43 2015 -0500
+
+    created Doxygen documentation, close #18
+
+commit 6820db530167ea4d1d4118417c09c74ab75d1389
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Fri Jul 17 18:54:21 2015 -0500
+
+    fixing commits. fix #11, fix #12, fix #13 fix #22, fix #14
+
+commit 112b8235b4cdd922b412236ba59f139d323d4202
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Fri Jul 17 18:52:16 2015 -0500
+
+    240/240, final
+
+commit d74bf07795837e8657fb47495e3b082189283df8
+Merge: 04e8a76 607c992
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Fri Jul 17 17:40:21 2015 -0500
+
+    Merge branch 'master' of https://github.com/bkvanvig/cs378-deque
+
+commit 04e8a768d5549210e77b5b9deb5bb882a382f724
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Fri Jul 17 17:39:59 2015 -0500
+
+    226/226
+
+commit 607c9927b21e7c88768aead1c0a65699de91d343
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Fri Jul 17 17:27:11 2015 -0500
+
+    added comments, close #8, close #9, close #10, close #17, close #10
+
+commit 73156e539997ddac590e090fb463542ec6a135c1
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Fri Jul 17 13:27:18 2015 -0500
+
+    all but access passing tests
+
+commit 85c01e1bdb3fd8344808702bb8a62708c9840c93
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Fri Jul 17 13:13:57 2015 -0500
+
+    only need to work on swap and access
+
+commit 38d81dd5ff5a6cdaf8cde5cc0f7660b849b0330e
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Thu Jul 16 22:58:30 2015 -0500
+
+    12 errors, access not working because of offset
+
+commit 73d51300610874635e4323a8aa7cfa01ff450462
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Thu Jul 16 21:59:29 2015 -0500
+
+    failing 12 tests, access is wrong because of _offset
+
+commit 7e6338637e2aa2cfac55ac441f6dfbddccae374a
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Thu Jul 16 18:46:19 2015 -0500
+
+    we know there is a problem calling uninitialized fill in resize
+
+commit aa49caa692e5dee06bc271213eded98b90cb4efa
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Thu Jul 16 17:06:20 2015 -0500
+
+    edited destructor
+
+commit b8f16f79bdb34208740cd0b632b3aac13fed9135
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Wed Jul 15 21:44:51 2015 -0500
+
+    semi functional constructors, throwing segfault
+
+commit eeae33570d68bdac952315b2330e36420f5a20ef
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Wed Jul 15 18:33:03 2015 -0500
+
+    editing constructors
+
+commit 7c832d3343ff5a81a9f9e1b389c8181e272f8d07
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Wed Jul 15 16:22:15 2015 -0500
+
+    updated time log
+
+commit b76fb5428556888569f416560f22280fa9b9f17f
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Wed Jul 15 16:20:34 2015 -0500
+
+    fixed outer array access errors, still has size 0
+
+commit dcf290415bef83dd1bbe401b86b16302c5edcecc
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Tue Jul 14 20:45:41 2015 -0500
+
+    changed constructors, allocate error
+
+commit 0757c2dd4a683f962321f9b6130c6e1eeec618c8
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Tue Jul 14 17:41:52 2015 -0500
+
+    testing resize, capacity
+
+commit 7d221c949abb0b5c36e61c5e70ed838022801a28
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Tue Jul 14 15:14:33 2015 -0500
+
+    finished unit tests. begin to write functions in deque.h
+
+commit 2445221938c7dbaa906a7a59ef255c9164860eab
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Mon Jul 13 21:57:31 2015 -0500
+
+    changed [] calls
+
+commit 2bf29defc7d73aca2b2028dacf50e3645365781c
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Mon Jul 13 21:03:46 2015 -0500
+
+    fixed const iterator unit tests
+
+commit 2a095de38188bbc73da2ba96a5f48b594fe9254e
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Mon Jul 13 20:57:00 2015 -0500
+
+    updated const_iterator tests to pass, may need to make more difficult
+
+commit ed2e54c5046cf5bfeb9f2821ec32aabbeffad946
+Merge: 602a17c 963501b
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Mon Jul 13 20:21:34 2015 -0500
+
+    Merge branch 'master' of https://github.com/bkvanvig/cs378-deque
+
+commit 602a17cca0ba6adef7cf56c4cd82bac42cb63646
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Mon Jul 13 20:21:26 2015 -0500
+
+    small changes
+
+commit 963501b8e3bec6c9da10518cc64126542aa56308
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Mon Jul 13 19:57:38 2015 -0500
+
+    all test cases present, but need to fix iterator and const iterator
+
+commit 85b74872de20f93e856af00df84794e4871b898a
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Mon Jul 13 16:54:06 2015 -0500
+
+    added iterator tests. need to add const_iterator still
+
+commit 7d999942195c5da04548191a8053af76c43c135f
+Author: joshuagutierrez <joshuagutierrez@utexas.edu>
+Date:   Sun Jul 12 17:51:31 2015 -0500
+
+    adding more unit tests
+
+commit 9421dbcf3b52bb072e82c9d99657c4f7b521e9ed
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sun Jul 12 16:47:52 2015 -0500
+
+    added test cases, close #7
+
+commit ffdb709db91db20a811981be728301cac2447cf3
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sat Jul 11 18:30:39 2015 -0500
+
+    editing to pass travis
+
+commit cd46792f8ae692676655f96bd92914e855277c3d
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sat Jul 11 18:24:00 2015 -0500
+
+    updated makefile
+
+commit 74cca9ab4481f30ac489cd5c84e17a6a806f3cc1
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sat Jul 11 18:22:47 2015 -0500
+
+    updated makefile
+
+commit c9842f610671728fe40ced5bb2524d8c84983fd0
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sat Jul 11 18:10:38 2015 -0500
+
+    travis file
+
+commit c113e0e77c6537b2ecb77b96b612b63efba82ec4
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sat Jul 11 18:10:01 2015 -0500
+
+    close #6
+
+commit 0ef499fdbbb5010e596f42b28023c4a18a6cae87
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sat Jul 11 18:02:30 2015 -0500
+
+     close #5
+
+commit ecd128040bd073dc76acaab5657f14e2d6d44aa3
+Author: bkvanvig <bkvanvig104@yahoo.com>
+Date:   Sat Jul 11 17:58:59 2015 -0500
+
+    Initial readme. close #1, close #2, close #3, close #4
+
+commit 96b295452d04e70eb388b964a3a1b0e93c8d3792
+Author: Brittany Kvanvig <brittany.kvanvig@utexas.edu>
+Date:   Sat Jul 11 17:46:13 2015 -0500
+
+    initial commit
