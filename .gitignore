@@ -4,4 +4,5 @@ latex/
 deque-tests/
 .DS_Store
 Doxyfile
+Deque
 TestDeque
