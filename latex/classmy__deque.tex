@@ -1,0 +1,625 @@
+\hypertarget{classmy__deque}{\section{my\-\_\-deque$<$ T, A $>$ Class Template Reference}
+\label{classmy__deque}\index{my\-\_\-deque$<$ T, A $>$@{my\-\_\-deque$<$ T, A $>$}}
+}
+
+
+{\ttfamily \#include $<$Deque.\-h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classmy__deque_1_1const__iterator}{const\-\_\-iterator}
+\item 
+class \hyperlink{classmy__deque_1_1iterator}{iterator}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef A \hyperlink{classmy__deque_a34236f0fef930decd11dc683f40a38be}{allocator\-\_\-type}
+\item 
+typedef allocator\-\_\-type\-::value\-\_\-type \hyperlink{classmy__deque_ae9c156c405acc57623a4601ce755596f}{value\-\_\-type}
+\item 
+typedef allocator\-\_\-type\-::size\-\_\-type \hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type}
+\item 
+typedef \\*
+allocator\-\_\-type\-::difference\-\_\-type \hyperlink{classmy__deque_ac85676cb2492fbc9bbc6f1a30e9d3c73}{difference\-\_\-type}
+\item 
+typedef allocator\-\_\-type\-::pointer \hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer}
+\item 
+typedef \\*
+allocator\-\_\-type\-::const\-\_\-pointer \hyperlink{classmy__deque_a8fea5edeb2b2cf3dd1246dc3abf9b71b}{const\-\_\-pointer}
+\item 
+typedef allocator\-\_\-type\-::reference \hyperlink{classmy__deque_a4c34c14f397b7676445b37c87003116b}{reference}
+\item 
+typedef \\*
+allocator\-\_\-type\-::const\-\_\-reference \hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference}
+\item 
+typedef A\-::template rebind\\*
+$<$ \hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} $>$\-::other \hyperlink{classmy__deque_a1a55c016646bba79086d90d3cccde143}{B}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy__deque_ad2ac9d80048c55fcc045d2861c73aa1a}{my\-\_\-deque} (const \hyperlink{classmy__deque_a34236f0fef930decd11dc683f40a38be}{allocator\-\_\-type} \&a=\hyperlink{classmy__deque_a34236f0fef930decd11dc683f40a38be}{allocator\-\_\-type}())
+\item 
+\hyperlink{classmy__deque_aeaf4c625438497a7cd6a670da6c2c08b}{my\-\_\-deque} (\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} s, \hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} v=\hyperlink{classmy__deque_ae9c156c405acc57623a4601ce755596f}{value\-\_\-type}(), const \hyperlink{classmy__deque_a34236f0fef930decd11dc683f40a38be}{allocator\-\_\-type} \&a=\hyperlink{classmy__deque_a34236f0fef930decd11dc683f40a38be}{allocator\-\_\-type}())
+\item 
+\hyperlink{classmy__deque_a59015bc46e6096555d631d69dc8fd7e7}{my\-\_\-deque} (const \hyperlink{classmy__deque}{my\-\_\-deque} \&that)
+\item 
+\hyperlink{classmy__deque_ae22194ee436865a59a7475c339a9c1ca}{$\sim$my\-\_\-deque} ()
+\item 
+\hyperlink{classmy__deque}{my\-\_\-deque} \& \hyperlink{classmy__deque_aaa103f2058854bb98e500de6305b1564}{operator=} (const \hyperlink{classmy__deque}{my\-\_\-deque} \&rhs)
+\item 
+\hyperlink{classmy__deque_a4c34c14f397b7676445b37c87003116b}{reference} \hyperlink{classmy__deque_a489b77decf4d424f43092e194d69444f}{operator\mbox{[}$\,$\mbox{]}} (\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} index)
+\item 
+\hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} \hyperlink{classmy__deque_ad79fcd9e94dfc5566e1cd0ce606cf208}{operator\mbox{[}$\,$\mbox{]}} (\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} index) const 
+\item 
+\hyperlink{classmy__deque_a4c34c14f397b7676445b37c87003116b}{reference} \hyperlink{classmy__deque_a75106748e6ff8735e40560e7335bd500}{at} (\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} index)
+\item 
+\hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} \hyperlink{classmy__deque_a9642816a10e6a6ee1f8a5367987b8ee8}{at} (\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} index) const 
+\item 
+\hyperlink{classmy__deque_a4c34c14f397b7676445b37c87003116b}{reference} \hyperlink{classmy__deque_a1d9aadb5bedc29da86d4323587cd5e4d}{back} ()
+\item 
+\hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} \hyperlink{classmy__deque_ac273f9574a95af619b9f0dcc0d2e89d0}{back} () const 
+\item 
+\hyperlink{classmy__deque_1_1iterator}{iterator} \hyperlink{classmy__deque_aef8cac69d47cb1c274896b82ba8f453a}{begin} ()
+\item 
+\hyperlink{classmy__deque_1_1const__iterator}{const\-\_\-iterator} \hyperlink{classmy__deque_a8612539eff4ee446f85ffb30abf91a69}{begin} () const 
+\item 
+\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} \hyperlink{classmy__deque_a6402ba96543ef0e121dc72e4429b048f}{capacity} () const 
+\item 
+void \hyperlink{classmy__deque_aa29f90c63cde532f5fc169e8e66b514c}{clear} ()
+\item 
+bool \hyperlink{classmy__deque_a2b4f029c47afbdbf057639c5a6816d6c}{empty} () const 
+\item 
+\hyperlink{classmy__deque_1_1iterator}{iterator} \hyperlink{classmy__deque_a2576ee71790ebe55ac4200c506540bb5}{end} ()
+\item 
+\hyperlink{classmy__deque_1_1const__iterator}{const\-\_\-iterator} \hyperlink{classmy__deque_af465c3f8483634e4e656d90f8d0d88fb}{end} () const 
+\item 
+\hyperlink{classmy__deque_1_1iterator}{iterator} \hyperlink{classmy__deque_a08d9ba017ff4874a682d1cb58dd46cb7}{erase} (\hyperlink{classmy__deque_1_1iterator}{iterator} it)
+\item 
+\hyperlink{classmy__deque_a4c34c14f397b7676445b37c87003116b}{reference} \hyperlink{classmy__deque_a0eae28af0ffdd813d1f94f57d393fdf8}{front} ()
+\item 
+\hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} \hyperlink{classmy__deque_a0f1239043b7339b8237a0c8bc663be6b}{front} () const 
+\item 
+\hyperlink{classmy__deque_1_1iterator}{iterator} \hyperlink{classmy__deque_acce29d6597777d85a6745bd937d9b353}{insert} (\hyperlink{classmy__deque_1_1iterator}{iterator} it, \hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} val)
+\item 
+void \hyperlink{classmy__deque_a63cc9691ee90701693e948246311c498}{pop\-\_\-back} ()
+\item 
+void \hyperlink{classmy__deque_a85c322cdc4f629e44abdcf369fdd3dab}{pop\-\_\-front} ()
+\item 
+void \hyperlink{classmy__deque_a15867a8b57c321dcc8ebb4cfa785d7ca}{push\-\_\-back} (\hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} v)
+\item 
+void \hyperlink{classmy__deque_af8d66a7ed1fd51476ec785228ac76996}{push\-\_\-front} (\hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} v)
+\item 
+void \hyperlink{classmy__deque_a80369f549dcd0a2ea9bc086fc97c8e25}{resize} (\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} s, \hyperlink{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{const\-\_\-reference} v=\hyperlink{classmy__deque_ae9c156c405acc57623a4601ce755596f}{value\-\_\-type}())
+\item 
+void \hyperlink{classmy__deque_ae9b535414a0575bc30f8a90b894adfac}{reserve} (\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} c)
+\item 
+\hyperlink{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{size\-\_\-type} \hyperlink{classmy__deque_a3100498f22d2dfa480b141f8ef7990ca}{size} () const 
+\item 
+void \hyperlink{classmy__deque_a22e1c253ac010e4327c87293b6cfbe5c}{swap} (\hyperlink{classmy__deque}{my\-\_\-deque} \&rhs)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classmy__deque_ac48856ffa58fe0d4d21852c503d7ff73}{valid} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy__deque_a34236f0fef930decd11dc683f40a38be}{allocator\-\_\-type} \hyperlink{classmy__deque_ab2ba2e14114a27b2f91e47dfccabc639}{\-\_\-a}
+\item 
+int \hyperlink{classmy__deque_a27647dca34c708d1b4705ede6d46fd7e}{O\-U\-T\-E\-R\-\_\-\-S\-I\-Z\-E}
+\item 
+\hyperlink{classmy__deque_a1a55c016646bba79086d90d3cccde143}{B} \hyperlink{classmy__deque_aff09be5225ab5c67ce40d4876a3afbe7}{\-\_\-balloc}
+\item 
+\hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} $\ast$ \hyperlink{classmy__deque_afe69687aa94aa63dbb23e147a90db3d1}{outer\-\_\-b}
+\item 
+\hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} $\ast$ \hyperlink{classmy__deque_a4d7496e28dd1a7bda7df4c6861b1f5c1}{outer\-\_\-e}
+\item 
+\hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} \hyperlink{classmy__deque_abb765edbf3d947df440a760c5e1eb810}{\-\_\-bstart}
+\item 
+\hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} \hyperlink{classmy__deque_ae0e648a3abb9594093b50eaaf09d1e0d}{\-\_\-estart}
+\item 
+\hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} \hyperlink{classmy__deque_aaa73de3a597f551851ec4a79c7100dac}{\-\_\-b}
+\item 
+\hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} \hyperlink{classmy__deque_aa9adebd4257de224e119b91ef209abca}{\-\_\-e}
+\item 
+\hyperlink{classmy__deque_a58e82fc365a3b086367479515e1515be}{pointer} \hyperlink{classmy__deque_a3d540bafe793c6ae6ceee0bd78d59a9c}{\-\_\-l}
+\item 
+int \hyperlink{classmy__deque_a9d27e92833c2e24410dae3b329ebc5da}{\-\_\-size}
+\item 
+int \hyperlink{classmy__deque_a8f70b94005db4d4780bfd0947568c730}{\-\_\-offset}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classmy__deque_aca1e37552707f9d7710a6af82cf1262e}{operator==} (const \hyperlink{classmy__deque}{my\-\_\-deque} \&lhs, const \hyperlink{classmy__deque}{my\-\_\-deque} \&rhs)
+\item 
+bool \hyperlink{classmy__deque_abd32df1d76a0ab0c1519f65cc4fa1363}{operator$<$} (const \hyperlink{classmy__deque}{my\-\_\-deque} \&lhs, const \hyperlink{classmy__deque}{my\-\_\-deque} \&rhs)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classmy__deque_a34236f0fef930decd11dc683f40a38be}{\index{my\-\_\-deque@{my\-\_\-deque}!allocator\-\_\-type@{allocator\-\_\-type}}
+\index{allocator\-\_\-type@{allocator\-\_\-type}!my_deque@{my\-\_\-deque}}
+\subsubsection[{allocator\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef A {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf allocator\-\_\-type}}}\label{classmy__deque_a34236f0fef930decd11dc683f40a38be}
+\hypertarget{classmy__deque_a1a55c016646bba79086d90d3cccde143}{\index{my\-\_\-deque@{my\-\_\-deque}!B@{B}}
+\index{B@{B}!my_deque@{my\-\_\-deque}}
+\subsubsection[{B}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef A\-::template rebind$<${\bf pointer}$>$\-::other {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf B}}}\label{classmy__deque_a1a55c016646bba79086d90d3cccde143}
+\hypertarget{classmy__deque_a8fea5edeb2b2cf3dd1246dc3abf9b71b}{\index{my\-\_\-deque@{my\-\_\-deque}!const\-\_\-pointer@{const\-\_\-pointer}}
+\index{const\-\_\-pointer@{const\-\_\-pointer}!my_deque@{my\-\_\-deque}}
+\subsubsection[{const\-\_\-pointer}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef allocator\-\_\-type\-::const\-\_\-pointer {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf const\-\_\-pointer}}}\label{classmy__deque_a8fea5edeb2b2cf3dd1246dc3abf9b71b}
+\hypertarget{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}{\index{my\-\_\-deque@{my\-\_\-deque}!const\-\_\-reference@{const\-\_\-reference}}
+\index{const\-\_\-reference@{const\-\_\-reference}!my_deque@{my\-\_\-deque}}
+\subsubsection[{const\-\_\-reference}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef allocator\-\_\-type\-::const\-\_\-reference {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf const\-\_\-reference}}}\label{classmy__deque_ad50d8b378580088cf77fa43f0640e49c}
+\hypertarget{classmy__deque_ac85676cb2492fbc9bbc6f1a30e9d3c73}{\index{my\-\_\-deque@{my\-\_\-deque}!difference\-\_\-type@{difference\-\_\-type}}
+\index{difference\-\_\-type@{difference\-\_\-type}!my_deque@{my\-\_\-deque}}
+\subsubsection[{difference\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef allocator\-\_\-type\-::difference\-\_\-type {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf difference\-\_\-type}}}\label{classmy__deque_ac85676cb2492fbc9bbc6f1a30e9d3c73}
+\hypertarget{classmy__deque_a58e82fc365a3b086367479515e1515be}{\index{my\-\_\-deque@{my\-\_\-deque}!pointer@{pointer}}
+\index{pointer@{pointer}!my_deque@{my\-\_\-deque}}
+\subsubsection[{pointer}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef allocator\-\_\-type\-::pointer {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf pointer}}}\label{classmy__deque_a58e82fc365a3b086367479515e1515be}
+\hypertarget{classmy__deque_a4c34c14f397b7676445b37c87003116b}{\index{my\-\_\-deque@{my\-\_\-deque}!reference@{reference}}
+\index{reference@{reference}!my_deque@{my\-\_\-deque}}
+\subsubsection[{reference}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef allocator\-\_\-type\-::reference {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf reference}}}\label{classmy__deque_a4c34c14f397b7676445b37c87003116b}
+\hypertarget{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}{\index{my\-\_\-deque@{my\-\_\-deque}!size\-\_\-type@{size\-\_\-type}}
+\index{size\-\_\-type@{size\-\_\-type}!my_deque@{my\-\_\-deque}}
+\subsubsection[{size\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef allocator\-\_\-type\-::size\-\_\-type {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf size\-\_\-type}}}\label{classmy__deque_a61e5e5317fe72a381ce4d45f09544b02}
+\hypertarget{classmy__deque_ae9c156c405acc57623a4601ce755596f}{\index{my\-\_\-deque@{my\-\_\-deque}!value\-\_\-type@{value\-\_\-type}}
+\index{value\-\_\-type@{value\-\_\-type}!my_deque@{my\-\_\-deque}}
+\subsubsection[{value\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ typedef allocator\-\_\-type\-::value\-\_\-type {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf value\-\_\-type}}}\label{classmy__deque_ae9c156c405acc57623a4601ce755596f}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmy__deque_ad2ac9d80048c55fcc045d2861c73aa1a}{\index{my\-\_\-deque@{my\-\_\-deque}!my\-\_\-deque@{my\-\_\-deque}}
+\index{my\-\_\-deque@{my\-\_\-deque}!my_deque@{my\-\_\-deque}}
+\subsubsection[{my\-\_\-deque}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf my\-\_\-deque} (
+\begin{DoxyParamCaption}
+\item[{const {\bf allocator\-\_\-type} \&}]{a = {\ttfamily {\bf allocator\-\_\-type}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{classmy__deque_ad2ac9d80048c55fcc045d2861c73aa1a}
+\hyperlink{classmy__deque}{my\-\_\-deque} constructor 
+\begin{DoxyParams}{Parameters}
+{\em allocator\-\_\-type} & a, optional specification of an allocator for specific types of elements \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classmy__deque}{my\-\_\-deque}, empty 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_aeaf4c625438497a7cd6a670da6c2c08b}{\index{my\-\_\-deque@{my\-\_\-deque}!my\-\_\-deque@{my\-\_\-deque}}
+\index{my\-\_\-deque@{my\-\_\-deque}!my_deque@{my\-\_\-deque}}
+\subsubsection[{my\-\_\-deque}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf my\-\_\-deque} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{s, }
+\item[{{\bf const\-\_\-reference}}]{v = {\ttfamily {\bf value\-\_\-type}()}, }
+\item[{const {\bf allocator\-\_\-type} \&}]{a = {\ttfamily {\bf allocator\-\_\-type}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{classmy__deque_aeaf4c625438497a7cd6a670da6c2c08b}
+\hyperlink{classmy__deque}{my\-\_\-deque} constructor 
+\begin{DoxyParams}{Parameters}
+{\em size\-\_\-type} & s, the size of \hyperlink{classmy__deque}{my\-\_\-deque} \\
+\hline
+{\em const\-\_\-reference} & v, an optional value to be written in each index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classmy__deque}{my\-\_\-deque} containing size s, and optional value v 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a59015bc46e6096555d631d69dc8fd7e7}{\index{my\-\_\-deque@{my\-\_\-deque}!my\-\_\-deque@{my\-\_\-deque}}
+\index{my\-\_\-deque@{my\-\_\-deque}!my_deque@{my\-\_\-deque}}
+\subsubsection[{my\-\_\-deque}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf my\-\_\-deque}$<$ T, A $>$\-::{\bf my\-\_\-deque} (
+\begin{DoxyParamCaption}
+\item[{const {\bf my\-\_\-deque}$<$ T, A $>$ \&}]{that}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a59015bc46e6096555d631d69dc8fd7e7}
+\hyperlink{classmy__deque}{my\-\_\-deque} constructor 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classmy__deque}{my\-\_\-deque}} & that, the object to be assigned to $\ast$this \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classmy__deque}{my\-\_\-deque} containing a copy of that 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_ae22194ee436865a59a7475c339a9c1ca}{\index{my\-\_\-deque@{my\-\_\-deque}!$\sim$my\-\_\-deque@{$\sim$my\-\_\-deque}}
+\index{$\sim$my\-\_\-deque@{$\sim$my\-\_\-deque}!my_deque@{my\-\_\-deque}}
+\subsubsection[{$\sim$my\-\_\-deque}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf my\-\_\-deque}$<$ T, A $>$\-::$\sim${\bf my\-\_\-deque} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_ae22194ee436865a59a7475c339a9c1ca}
+Destroys the \hyperlink{classmy__deque}{my\-\_\-deque} element 
+
+\subsection{Member Function Documentation}
+\hypertarget{classmy__deque_a75106748e6ff8735e40560e7335bd500}{\index{my\-\_\-deque@{my\-\_\-deque}!at@{at}}
+\index{at@{at}!my_deque@{my\-\_\-deque}}
+\subsubsection[{at}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::at (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a75106748e6ff8735e40560e7335bd500}
+
+\begin{DoxyParams}{Parameters}
+{\em size\-\_\-type} & index, the index requested \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the reference to that index 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a9642816a10e6a6ee1f8a5367987b8ee8}{\index{my\-\_\-deque@{my\-\_\-deque}!at@{at}}
+\index{at@{at}!my_deque@{my\-\_\-deque}}
+\subsubsection[{at}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf const\-\_\-reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::at (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a9642816a10e6a6ee1f8a5367987b8ee8}
+
+\begin{DoxyParams}{Parameters}
+{\em size\-\_\-type} & index, the index requested \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the const\-\_\-reference to that index 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a1d9aadb5bedc29da86d4323587cd5e4d}{\index{my\-\_\-deque@{my\-\_\-deque}!back@{back}}
+\index{back@{back}!my_deque@{my\-\_\-deque}}
+\subsubsection[{back}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::back (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a1d9aadb5bedc29da86d4323587cd5e4d}
+\begin{DoxyReturn}{Returns}
+reference, the last element of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_ac273f9574a95af619b9f0dcc0d2e89d0}{\index{my\-\_\-deque@{my\-\_\-deque}!back@{back}}
+\index{back@{back}!my_deque@{my\-\_\-deque}}
+\subsubsection[{back}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf const\-\_\-reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::back (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_ac273f9574a95af619b9f0dcc0d2e89d0}
+\begin{DoxyReturn}{Returns}
+const\-\_\-reference, the last element of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_aef8cac69d47cb1c274896b82ba8f453a}{\index{my\-\_\-deque@{my\-\_\-deque}!begin@{begin}}
+\index{begin@{begin}!my_deque@{my\-\_\-deque}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf iterator} {\bf my\-\_\-deque}$<$ T, A $>$\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_aef8cac69d47cb1c274896b82ba8f453a}
+\begin{DoxyReturn}{Returns}
+iterator to begining of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a8612539eff4ee446f85ffb30abf91a69}{\index{my\-\_\-deque@{my\-\_\-deque}!begin@{begin}}
+\index{begin@{begin}!my_deque@{my\-\_\-deque}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf const\-\_\-iterator} {\bf my\-\_\-deque}$<$ T, A $>$\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a8612539eff4ee446f85ffb30abf91a69}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classmy__deque_1_1const__iterator}{const\-\_\-iterator} to beginning of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a6402ba96543ef0e121dc72e4429b048f}{\index{my\-\_\-deque@{my\-\_\-deque}!capacity@{capacity}}
+\index{capacity@{capacity}!my_deque@{my\-\_\-deque}}
+\subsubsection[{capacity}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf size\-\_\-type} {\bf my\-\_\-deque}$<$ T, A $>$\-::capacity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a6402ba96543ef0e121dc72e4429b048f}
+\begin{DoxyReturn}{Returns}
+the full capacity of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_aa29f90c63cde532f5fc169e8e66b514c}{\index{my\-\_\-deque@{my\-\_\-deque}!clear@{clear}}
+\index{clear@{clear}!my_deque@{my\-\_\-deque}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_aa29f90c63cde532f5fc169e8e66b514c}
+Removes all elements of \hyperlink{classmy__deque}{my\-\_\-deque} Does not deallocate pointer to \hyperlink{classmy__deque}{my\-\_\-deque} \hypertarget{classmy__deque_a2b4f029c47afbdbf057639c5a6816d6c}{\index{my\-\_\-deque@{my\-\_\-deque}!empty@{empty}}
+\index{empty@{empty}!my_deque@{my\-\_\-deque}}
+\subsubsection[{empty}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ bool {\bf my\-\_\-deque}$<$ T, A $>$\-::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a2b4f029c47afbdbf057639c5a6816d6c}
+\begin{DoxyReturn}{Returns}
+true if size is 0, aka \hyperlink{classmy__deque}{my\-\_\-deque} is empty 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a2576ee71790ebe55ac4200c506540bb5}{\index{my\-\_\-deque@{my\-\_\-deque}!end@{end}}
+\index{end@{end}!my_deque@{my\-\_\-deque}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf iterator} {\bf my\-\_\-deque}$<$ T, A $>$\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a2576ee71790ebe55ac4200c506540bb5}
+\begin{DoxyReturn}{Returns}
+iterator to end of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_af465c3f8483634e4e656d90f8d0d88fb}{\index{my\-\_\-deque@{my\-\_\-deque}!end@{end}}
+\index{end@{end}!my_deque@{my\-\_\-deque}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf const\-\_\-iterator} {\bf my\-\_\-deque}$<$ T, A $>$\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_af465c3f8483634e4e656d90f8d0d88fb}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classmy__deque_1_1const__iterator}{const\-\_\-iterator} to end of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a08d9ba017ff4874a682d1cb58dd46cb7}{\index{my\-\_\-deque@{my\-\_\-deque}!erase@{erase}}
+\index{erase@{erase}!my_deque@{my\-\_\-deque}}
+\subsubsection[{erase}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf iterator} {\bf my\-\_\-deque}$<$ T, A $>$\-::erase (
+\begin{DoxyParamCaption}
+\item[{{\bf iterator}}]{it}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a08d9ba017ff4874a682d1cb58dd46cb7}
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & it, the position of element to be removed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+iterator to current position of updated element 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a0eae28af0ffdd813d1f94f57d393fdf8}{\index{my\-\_\-deque@{my\-\_\-deque}!front@{front}}
+\index{front@{front}!my_deque@{my\-\_\-deque}}
+\subsubsection[{front}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::front (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a0eae28af0ffdd813d1f94f57d393fdf8}
+\begin{DoxyReturn}{Returns}
+refrence of the beginning of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a0f1239043b7339b8237a0c8bc663be6b}{\index{my\-\_\-deque@{my\-\_\-deque}!front@{front}}
+\index{front@{front}!my_deque@{my\-\_\-deque}}
+\subsubsection[{front}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf const\-\_\-reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::front (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a0f1239043b7339b8237a0c8bc663be6b}
+\begin{DoxyReturn}{Returns}
+const\-\_\-reference of the beginning of \hyperlink{classmy__deque}{my\-\_\-deque} 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_acce29d6597777d85a6745bd937d9b353}{\index{my\-\_\-deque@{my\-\_\-deque}!insert@{insert}}
+\index{insert@{insert}!my_deque@{my\-\_\-deque}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf iterator} {\bf my\-\_\-deque}$<$ T, A $>$\-::insert (
+\begin{DoxyParamCaption}
+\item[{{\bf iterator}}]{it, }
+\item[{{\bf const\-\_\-reference}}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_acce29d6597777d85a6745bd937d9b353}
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & it, the position \\
+\hline
+{\em const\-\_\-reference} & v, reference to be inserted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+iterator to new element 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_aaa103f2058854bb98e500de6305b1564}{\index{my\-\_\-deque@{my\-\_\-deque}!operator=@{operator=}}
+\index{operator=@{operator=}!my_deque@{my\-\_\-deque}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf my\-\_\-deque}\& {\bf my\-\_\-deque}$<$ T, A $>$\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf my\-\_\-deque}$<$ T, A $>$ \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_aaa103f2058854bb98e500de6305b1564}
+Assigns rhs to $\ast$this 
+\begin{DoxyParams}{Parameters}
+{\em my\-\_\-deque\&} & rhs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classmy__deque}{my\-\_\-deque} $\ast$this, which was previously \hyperlink{classmy__deque}{my\-\_\-deque} rhs 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a489b77decf4d424f43092e194d69444f}{\index{my\-\_\-deque@{my\-\_\-deque}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!my_deque@{my\-\_\-deque}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a489b77decf4d424f43092e194d69444f}
+
+\begin{DoxyParams}{Parameters}
+{\em size\-\_\-type} & index, the index requested \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the reference to that index 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_ad79fcd9e94dfc5566e1cd0ce606cf208}{\index{my\-\_\-deque@{my\-\_\-deque}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!my_deque@{my\-\_\-deque}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf const\-\_\-reference} {\bf my\-\_\-deque}$<$ T, A $>$\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_ad79fcd9e94dfc5566e1cd0ce606cf208}
+
+\begin{DoxyParams}{Parameters}
+{\em size\-\_\-type} & index, the index requested \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the const\-\_\-reference to that index 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a63cc9691ee90701693e948246311c498}{\index{my\-\_\-deque@{my\-\_\-deque}!pop\-\_\-back@{pop\-\_\-back}}
+\index{pop\-\_\-back@{pop\-\_\-back}!my_deque@{my\-\_\-deque}}
+\subsubsection[{pop\-\_\-back}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::pop\-\_\-back (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a63cc9691ee90701693e948246311c498}
+Removes last element of \hyperlink{classmy__deque}{my\-\_\-deque} \hypertarget{classmy__deque_a85c322cdc4f629e44abdcf369fdd3dab}{\index{my\-\_\-deque@{my\-\_\-deque}!pop\-\_\-front@{pop\-\_\-front}}
+\index{pop\-\_\-front@{pop\-\_\-front}!my_deque@{my\-\_\-deque}}
+\subsubsection[{pop\-\_\-front}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::pop\-\_\-front (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a85c322cdc4f629e44abdcf369fdd3dab}
+Removes the first element of \hyperlink{classmy__deque}{my\-\_\-deque} \hypertarget{classmy__deque_a15867a8b57c321dcc8ebb4cfa785d7ca}{\index{my\-\_\-deque@{my\-\_\-deque}!push\-\_\-back@{push\-\_\-back}}
+\index{push\-\_\-back@{push\-\_\-back}!my_deque@{my\-\_\-deque}}
+\subsubsection[{push\-\_\-back}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::push\-\_\-back (
+\begin{DoxyParamCaption}
+\item[{{\bf const\-\_\-reference}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a15867a8b57c321dcc8ebb4cfa785d7ca}
+
+\begin{DoxyParams}{Parameters}
+{\em const\-\_\-reference} & v, a reference to be added to the back of deque \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmy__deque_af8d66a7ed1fd51476ec785228ac76996}{\index{my\-\_\-deque@{my\-\_\-deque}!push\-\_\-front@{push\-\_\-front}}
+\index{push\-\_\-front@{push\-\_\-front}!my_deque@{my\-\_\-deque}}
+\subsubsection[{push\-\_\-front}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::push\-\_\-front (
+\begin{DoxyParamCaption}
+\item[{{\bf const\-\_\-reference}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_af8d66a7ed1fd51476ec785228ac76996}
+
+\begin{DoxyParams}{Parameters}
+{\em const\-\_\-reference} & v, a reference to be added to the front of deque \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmy__deque_ae9b535414a0575bc30f8a90b894adfac}{\index{my\-\_\-deque@{my\-\_\-deque}!reserve@{reserve}}
+\index{reserve@{reserve}!my_deque@{my\-\_\-deque}}
+\subsubsection[{reserve}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::reserve (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_ae9b535414a0575bc30f8a90b894adfac}
+Allocates new space for resize method 
+\begin{DoxyParams}{Parameters}
+{\em size\-\_\-type} & c \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmy__deque_a80369f549dcd0a2ea9bc086fc97c8e25}{\index{my\-\_\-deque@{my\-\_\-deque}!resize@{resize}}
+\index{resize@{resize}!my_deque@{my\-\_\-deque}}
+\subsubsection[{resize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::resize (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{s, }
+\item[{{\bf const\-\_\-reference}}]{v = {\ttfamily {\bf value\-\_\-type}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a80369f549dcd0a2ea9bc086fc97c8e25}
+
+\begin{DoxyParams}{Parameters}
+{\em size\-\_\-type} & s \\
+\hline
+{\em const\-\_\-reference} & v, an optional value to be written, which we do not utilize \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmy__deque_a3100498f22d2dfa480b141f8ef7990ca}{\index{my\-\_\-deque@{my\-\_\-deque}!size@{size}}
+\index{size@{size}!my_deque@{my\-\_\-deque}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf size\-\_\-type} {\bf my\-\_\-deque}$<$ T, A $>$\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a3100498f22d2dfa480b141f8ef7990ca}
+\begin{DoxyReturn}{Returns}
+the size of \hyperlink{classmy__deque}{my\-\_\-deque} object 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_a22e1c253ac010e4327c87293b6cfbe5c}{\index{my\-\_\-deque@{my\-\_\-deque}!swap@{swap}}
+\index{swap@{swap}!my_deque@{my\-\_\-deque}}
+\subsubsection[{swap}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ void {\bf my\-\_\-deque}$<$ T, A $>$\-::swap (
+\begin{DoxyParamCaption}
+\item[{{\bf my\-\_\-deque}$<$ T, A $>$ \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classmy__deque_a22e1c253ac010e4327c87293b6cfbe5c}
+Assigns all elements rhs to lhs and vice versa 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classmy__deque}{my\-\_\-deque}} & rhs \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmy__deque_ac48856ffa58fe0d4d21852c503d7ff73}{\index{my\-\_\-deque@{my\-\_\-deque}!valid@{valid}}
+\index{valid@{valid}!my_deque@{my\-\_\-deque}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ bool {\bf my\-\_\-deque}$<$ T, A $>$\-::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}}\label{classmy__deque_ac48856ffa58fe0d4d21852c503d7ff73}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classmy__deque_abd32df1d76a0ab0c1519f65cc4fa1363}{\index{my\-\_\-deque@{my\-\_\-deque}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!my_deque@{my\-\_\-deque}}
+\subsubsection[{operator$<$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ bool operator$<$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf my\-\_\-deque}$<$ T, A $>$ \&}]{lhs, }
+\item[{const {\bf my\-\_\-deque}$<$ T, A $>$ \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classmy__deque_abd32df1d76a0ab0c1519f65cc4fa1363}
+Compares two my\-\_\-deques for less than operator 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classmy__deque}{my\-\_\-deque}} & lhs \\
+\hline
+{\em \hyperlink{classmy__deque}{my\-\_\-deque}} & rhs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean if lhs $<$ rhs 
+\end{DoxyReturn}
+\hypertarget{classmy__deque_aca1e37552707f9d7710a6af82cf1262e}{\index{my\-\_\-deque@{my\-\_\-deque}!operator==@{operator==}}
+\index{operator==@{operator==}!my_deque@{my\-\_\-deque}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ bool operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf my\-\_\-deque}$<$ T, A $>$ \&}]{lhs, }
+\item[{const {\bf my\-\_\-deque}$<$ T, A $>$ \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classmy__deque_aca1e37552707f9d7710a6af82cf1262e}
+Compares two my\-\_\-deques for equality 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classmy__deque}{my\-\_\-deque}} & lhs \\
+\hline
+{\em \hyperlink{classmy__deque}{my\-\_\-deque}} & rhs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmy__deque_ab2ba2e14114a27b2f91e47dfccabc639}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-a@{\-\_\-a}}
+\index{\-\_\-a@{\-\_\-a}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-a}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf allocator\-\_\-type} {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-a\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_ab2ba2e14114a27b2f91e47dfccabc639}
+\hypertarget{classmy__deque_aaa73de3a597f551851ec4a79c7100dac}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-b@{\-\_\-b}}
+\index{\-\_\-b@{\-\_\-b}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-b}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf pointer} {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-b\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_aaa73de3a597f551851ec4a79c7100dac}
+\hypertarget{classmy__deque_aff09be5225ab5c67ce40d4876a3afbe7}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-balloc@{\-\_\-balloc}}
+\index{\-\_\-balloc@{\-\_\-balloc}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-balloc}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf B} {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-balloc\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_aff09be5225ab5c67ce40d4876a3afbe7}
+\hypertarget{classmy__deque_abb765edbf3d947df440a760c5e1eb810}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-bstart@{\-\_\-bstart}}
+\index{\-\_\-bstart@{\-\_\-bstart}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-bstart}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf pointer} {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-bstart\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_abb765edbf3d947df440a760c5e1eb810}
+\hypertarget{classmy__deque_aa9adebd4257de224e119b91ef209abca}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-e@{\-\_\-e}}
+\index{\-\_\-e@{\-\_\-e}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-e}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf pointer} {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-e\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_aa9adebd4257de224e119b91ef209abca}
+\hypertarget{classmy__deque_ae0e648a3abb9594093b50eaaf09d1e0d}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-estart@{\-\_\-estart}}
+\index{\-\_\-estart@{\-\_\-estart}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-estart}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf pointer} {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-estart\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_ae0e648a3abb9594093b50eaaf09d1e0d}
+\hypertarget{classmy__deque_a3d540bafe793c6ae6ceee0bd78d59a9c}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-l@{\-\_\-l}}
+\index{\-\_\-l@{\-\_\-l}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-l}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf pointer} {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-l\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_a3d540bafe793c6ae6ceee0bd78d59a9c}
+\hypertarget{classmy__deque_a8f70b94005db4d4780bfd0947568c730}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-offset@{\-\_\-offset}}
+\index{\-\_\-offset@{\-\_\-offset}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-offset}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ int {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-offset\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_a8f70b94005db4d4780bfd0947568c730}
+\hypertarget{classmy__deque_a9d27e92833c2e24410dae3b329ebc5da}{\index{my\-\_\-deque@{my\-\_\-deque}!\-\_\-size@{\-\_\-size}}
+\index{\-\_\-size@{\-\_\-size}!my_deque@{my\-\_\-deque}}
+\subsubsection[{\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ int {\bf my\-\_\-deque}$<$ T, A $>$\-::\-\_\-size\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_a9d27e92833c2e24410dae3b329ebc5da}
+\hypertarget{classmy__deque_afe69687aa94aa63dbb23e147a90db3d1}{\index{my\-\_\-deque@{my\-\_\-deque}!outer\-\_\-b@{outer\-\_\-b}}
+\index{outer\-\_\-b@{outer\-\_\-b}!my_deque@{my\-\_\-deque}}
+\subsubsection[{outer\-\_\-b}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf pointer}$\ast$ {\bf my\-\_\-deque}$<$ T, A $>$\-::outer\-\_\-b\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_afe69687aa94aa63dbb23e147a90db3d1}
+\hypertarget{classmy__deque_a4d7496e28dd1a7bda7df4c6861b1f5c1}{\index{my\-\_\-deque@{my\-\_\-deque}!outer\-\_\-e@{outer\-\_\-e}}
+\index{outer\-\_\-e@{outer\-\_\-e}!my_deque@{my\-\_\-deque}}
+\subsubsection[{outer\-\_\-e}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ {\bf pointer}$\ast$ {\bf my\-\_\-deque}$<$ T, A $>$\-::outer\-\_\-e\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_a4d7496e28dd1a7bda7df4c6861b1f5c1}
+\hypertarget{classmy__deque_a27647dca34c708d1b4705ede6d46fd7e}{\index{my\-\_\-deque@{my\-\_\-deque}!O\-U\-T\-E\-R\-\_\-\-S\-I\-Z\-E@{O\-U\-T\-E\-R\-\_\-\-S\-I\-Z\-E}}
+\index{O\-U\-T\-E\-R\-\_\-\-S\-I\-Z\-E@{O\-U\-T\-E\-R\-\_\-\-S\-I\-Z\-E}!my_deque@{my\-\_\-deque}}
+\subsubsection[{O\-U\-T\-E\-R\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename A  = std\-::allocator$<$\-T$>$$>$ int {\bf my\-\_\-deque}$<$ T, A $>$\-::O\-U\-T\-E\-R\-\_\-\-S\-I\-Z\-E\hspace{0.3cm}{\ttfamily [private]}}}\label{classmy__deque_a27647dca34c708d1b4705ede6d46fd7e}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Deque_8h}{Deque.\-h}\end{DoxyCompactItemize}
